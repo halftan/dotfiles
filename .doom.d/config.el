@@ -89,6 +89,10 @@
       :n "w/" #'evil-window-vsplit
       :n "w-" #'evil-window-decrease-height)
 
+(map! :leader
+      :n "gs" #'magit-status
+      :desc "Magit status")
+
 (map! :m "<up>" #'evil-window-up
       :m "<down>" #'evil-window-down
       :m "<left>" #'evil-window-left
@@ -109,7 +113,7 @@
       :m "<mouse-5>" #'evil-scroll-line-down
       :i "<backtab>" #'evil-shift-left-line)
 
-(map! :m "gs=" #'evilem-motion-next-line-first-non-blank)
+(map! :prefix "g" :m "s=" #'evilem-motion-next-line-first-non-blank)
 
 (map! :leader
       :prefix ("SPC" . "Custom jump")
@@ -130,7 +134,7 @@
        :n "9" #'winum-select-window-9
        :n "0" #'treemacs-select-window))
 
-(global-subword-mode 1)
+(global-subword-mode -1)
 (global-display-fill-column-indicator-mode 1)
 
 (after! ivy
@@ -149,36 +153,8 @@
     (exit-minibuffer))
   (map! :map ivy-minibuffer-map
         "C-t" #'+ivy/find-file-other-window-action
-        "<C-return>" #'+ivy/find-file-other-window-action)
-  (after! ivy-hydra
-
-    (defhydra+ hydra-ivy (:hint nil :color pink)
-      "
- Move     ^^^^^^^^^^ | Call         ^^^^ | Cancel^^ | Options^^ | Action _w_/_s_/_a_: %s(ivy-action-name)
-----------^^^^^^^^^^-+--------------^^^^-+-------^^-+--------^^-+---------------------------------
- _g_ ^ ^ _k_ ^ ^ _u_ | _f_orward _o_ccur | _i_nsert | _c_alling: %-7s(if ivy-calling \"on\" \"off\") _C_ase-fold: %-10`ivy-case-fold-search
- ^↨^ _h_ ^+^ _l_ ^↕^ | _RET_ done     ^^ | _q_uit   | _m_atcher: %-7s(ivy--matcher-desc) _t_runcate: %-11`truncate-lines
- _G_ ^ ^ _j_ ^ ^ _d_ | _TAB_ alt-done ^^ | ^ ^      | _<_/_>_: shrink/grow
-"
-      ;; arrows
-      ("l" ivy-alt-done)
-      ("h" ivy-backward-delete-char)
-      ("g" ivy-beginning-of-buffer)
-      ("G" ivy-end-of-buffer)
-      ("d" ivy-scroll-up-command)
-      ("u" ivy-scroll-down-command)
-      ("e" ivy-scroll-down-command)
-      ;; actions
-      ("q" keyboard-escape-quit :exit t)
-      ("<escape>" keyboard-escape-quit :exit t)
-      ("TAB" ivy-alt-done :exit nil)
-      ("RET" ivy-done :exit t)
-      ("C-SPC" ivy-call-and-recenter :exit nil)
-      ("f" ivy-call)
-      ("c" ivy-toggle-calling)
-      ("m" ivy-toggle-fuzzy)
-      ("t" (setq truncate-lines (not truncate-lines)))
-      ("o" ivy-occur :exit t))))
+        "C-M-l" #'ivy-immediate-done
+        "<C-return>" #'+ivy/find-file-other-window-action))
 
 (map! :map magit-status-mode-map
       :prefix "g"
@@ -218,12 +194,17 @@
 ;; (add-to-list 'auto-mode-alist '("/authorized_keys2?\\'" . ssh-authorized-keys-mode))
 ;; (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
 
-;; (add-hook 'python-mode-hook #'(lambda () (require 'smartparens-python)))
+(after! smartparens
+  (sp-local-pair '(python-mode) "f\"" "\"")
+  (sp-local-pair '(python-mode) "f'" "'")
+  (sp-local-pair '(python-mode) "r\"" "\"")
+  (sp-local-pair '(python-mode) "r'" "'"))
 
-(setq +lsp-company-backends '(:separate
-                               company-capf
-                               company-tabnine))
-(setq company-backends '(company-capf (company-dabbrev-code company-keywords company-yasnippet)))
+;; (setq +lsp-company-backends '(:separate
+;;                                company-capf
+;;                                company-tabnine))
+;; (setq company-backends '((:separate company-capf company-tabnine) (company-dabbrev-code company-keywords)))
+(setq company-backends '((:separate company-capf) (company-dabbrev-code company-keywords)))
 
 (winum-mode 1)
 (setq vc-ignore-dir-regexp
@@ -247,3 +228,26 @@
 
 (add-hook 'doom-switch-window-hook #'adaptive-relative-line-number)
 (add-hook 'find-file-hook #'(lambda () (set-line-number-type 'relative)))
+(add-to-list 'auto-mode-alist '("\\.ya?ml\\.gotmpl" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.mdx" . markdown-mode))
+;; (add-hook 'yaml-mode-hook #'(lambda () (spell-fu-mode -1)))
+(add-hook 'yaml-mode-hook #'(lambda () (flycheck-mode -1)))
+
+(defun doom/ediff-init-and-example ()
+  "ediff the current `init.el' with the example in doom-emacs-dir"
+  (interactive)
+  (ediff-files (concat doom-private-dir "init.el")
+               (concat doom-emacs-dir "init.example.el")))
+
+(map! :map help-map "di" #'doom/ediff-init-and-example)
+
+(after! evil-goggles
+  (custom-set-faces
+   '(evil-goggles-default-face ((t (:inherit 'nav-flash-face)))))
+  (setq evil-goggles-duration 0.2))
+(setq projectile-files-cache-expire 30)
+(setq-default word-wrap nil)
+
+(setq url-proxy-services
+   '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
+     ("http" . "127.0.0.1:7890")))

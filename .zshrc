@@ -63,7 +63,7 @@ alias zshconfig="${EDITOR} ~/.zshrc"
 # DISABLE_CORRECTION="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment following line if you want to disable marking untracked files under
 # VCS as dirty. This makes repository status check for large repositories much,
@@ -97,7 +97,7 @@ fi
 
 if [ $commands[sw_vers] ]; then
     # Mac OS X
-    export JAVA_HOME=$(/usr/libexec/java_home)
+    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
     export ON_MAC_OS=1
     # export PATH="$(brew --prefix homebrew/php/php70)/bin:$PATH"
     # PATH="$(brew --prefix vim)/bin:$PATH"
