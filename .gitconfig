@@ -18,15 +18,19 @@
 	excludesfile = 
 	ignorecase = false
 [merge]
-  tool = nvim
+	tool = vscode
 [mergetool]
-  prompt = true
+	prompt = true
 [mergetool "nvim"]
-  cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
+	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
 [difftool]
-  prompt = true
+	prompt = true
 [diff]
-  tool = nvim
+	tool = vscode
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
 [http]
 	# proxy = http://127.0.0.1:18080
 [pager]

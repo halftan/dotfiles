@@ -83,6 +83,7 @@
         evil-vsplit-window-right t))
 
 (map! :leader
+      :desc "Auto format" :n "ta" #'format-all-mode
       :n "sc" #'evil-ex-nohighlight
       :desc "No search highlight" "/" #'evil-ex-nohighlight
       :g "SPC" nil
@@ -90,8 +91,7 @@
       :n "w-" #'evil-window-decrease-height)
 
 (map! :leader
-      :n "gs" #'magit-status
-      :desc "Magit status")
+      :desc "Magit status" :n "gs" #'magit-status)
 
 (map! :m "<up>" #'evil-window-up
       :m "<down>" #'evil-window-down
@@ -113,7 +113,8 @@
       :m "<mouse-5>" #'evil-scroll-line-down
       :i "<backtab>" #'evil-shift-left-line)
 
-(map! :prefix "g" :m "s=" #'evilem-motion-next-line-first-non-blank)
+(after! evil-easymotion
+  (map! :prefix "g" :m "s=" #'evilem-motion-next-line-first-non-blank))
 
 (map! :leader
       :prefix ("SPC" . "Custom jump")
@@ -137,24 +138,24 @@
 (global-subword-mode -1)
 (global-display-fill-column-indicator-mode 1)
 
-(after! ivy
-  ;; TODO move these to autoload
-  (defun +ivy-find-file-other-window-action (x)
-    "Opens the current candidate in another window."
-    (select-window
-     (with-ivy-window
-       (find-file-other-window (expand-file-name x))
-       (selected-window))))
-  (defun +ivy/find-file-other-window-action ()
-    "Open the current counsel-{ag,rg,git-grep} candidate in other-window."
-    (interactive)
-    (ivy-set-action #'+ivy-find-file-other-window-action)
-    (setq ivy-exit 'done)
-    (exit-minibuffer))
-  (map! :map ivy-minibuffer-map
-        "C-t" #'+ivy/find-file-other-window-action
-        "C-M-l" #'ivy-immediate-done
-        "<C-return>" #'+ivy/find-file-other-window-action))
+;; (after! ivy
+;;   ;; TODO move these to autoload
+;;   (defun +ivy-find-file-other-window-action (x)
+;;     "Opens the current candidate in another window."
+;;     (select-window
+;;      (with-ivy-window
+;;        (find-file-other-window (expand-file-name x))
+;;        (selected-window))))
+;;   (defun +ivy/find-file-other-window-action ()
+;;     "Open the current counsel-{ag,rg,git-grep} candidate in other-window."
+;;     (interactive)
+;;     (ivy-set-action #'+ivy-find-file-other-window-action)
+;;     (setq ivy-exit 'done)
+;;     (exit-minibuffer))
+;;   (map! :map ivy-minibuffer-map
+;;         "C-t" #'+ivy/find-file-other-window-action
+;;         "C-M-l" #'ivy-immediate-done
+;;         "<C-return>" #'+ivy/find-file-other-window-action))
 
 (map! :map magit-status-mode-map
       :prefix "g"
@@ -246,8 +247,16 @@
    '(evil-goggles-default-face ((t (:inherit 'nav-flash-face)))))
   (setq evil-goggles-duration 0.2))
 (setq projectile-files-cache-expire 30)
-(setq-default word-wrap nil)
+
+(setq-default word-wrap nil
+              fill-column 100)
 
 (setq url-proxy-services
    '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
      ("http" . "127.0.0.1:7890")))
+
+(set-formatter! 'yapf "yapf" :modes '(python-mode))
+(setq-hook! 'python-mode-hook +format-with-lsp nil)
+(setq-hook! 'python-mode-hook +format-with 'yapf)
+;; (add-hook 'python-mode-hook #'format-all-mode)
+(setq-hook! 'python-mode-hook fill-column 130)

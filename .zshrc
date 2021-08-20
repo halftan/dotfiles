@@ -140,9 +140,9 @@ if [[ -e "$HOME/.emacs.d" ]]; then
 fi
 
 # oc
-if [[ -e "$HOME/.crc/bin/oc" ]]; then
-    PATH="/Users/fengmzhang/.crc/bin/oc:$PATH"
-fi
+# if [[ -e "$HOME/.crc/bin/oc" ]]; then
+#     PATH="/Users/fengmzhang/.crc/bin/oc:$PATH"
+# fi
 
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
