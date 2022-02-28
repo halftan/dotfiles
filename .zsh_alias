@@ -32,7 +32,7 @@ alias sl="ls"
 
 alias glglr="git log --oneline --graph --left-right"
 
-alias zrestart="exec $SHELL"
+alias zrestart="exec $SHELL -l"
 alias mt="multitail --mergeall"
 alias ptest="phpunit --verbose --bootstrap tests/bootstrap.php"
 
