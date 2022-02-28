@@ -10,12 +10,12 @@ export ENHANCD_COMMAND=cdd
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
-zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
-
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:2
 zplug "zsh-users/zsh-autosuggestions"
+
+zplug "robbyrussell/oh-my-zsh", as:plugin, use:"oh-my-zsh.sh"
 
 zplug "plugins/extract", from:oh-my-zsh
 zplug "plugins/sudo", from:oh-my-zsh
@@ -58,7 +58,7 @@ if ! zplug check --verbose; then
 fi
 
 # Then, source plugins and add commands to $PATH
-zplug load
+zplug load # --verbose
 
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/git/dotfiles/starship.toml"
@@ -108,7 +108,7 @@ alias zshconfig="${EDITOR} ~/.zshrc"
 # CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how often before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
@@ -117,7 +117,7 @@ alias zshconfig="${EDITOR} ~/.zshrc"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want to disable command autocorrection
 # DISABLE_CORRECTION="true"
