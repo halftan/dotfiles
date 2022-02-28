@@ -97,7 +97,7 @@ fi
 
 if [ $commands[sw_vers] ]; then
     # Mac OS X
-    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+    # export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
     export ON_MAC_OS=1
     # export PATH="$(brew --prefix homebrew/php/php70)/bin:$PATH"
     # PATH="$(brew --prefix vim)/bin:$PATH"
@@ -139,6 +139,10 @@ if [[ -e "$HOME/.emacs.d" ]]; then
     PATH="$HOME/.emacs.d/bin":$PATH
 fi
 
+if [[ -e "/usr/local/opt/ansible@2.9/bin" ]]; then
+    PATH="/usr/local/opt/ansible@2.9/bin:$PATH"
+fi
+
 # oc
 # if [[ -e "$HOME/.crc/bin/oc" ]]; then
 #     PATH="/Users/fengmzhang/.crc/bin/oc:$PATH"
@@ -149,6 +153,11 @@ test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_in
 if [[ -e "$HOME/.terminfo" ]]; then
     export TERM=xterm-24bits
 fi
+
+if [ $commands[kubecm] ]; then
+    source <(kubecm completion zsh)
+fi
+
 export -U PATH
 export -U MANPATH
 

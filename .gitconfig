@@ -10,11 +10,12 @@
 	ui = true
 [user]
 	name = Andy Zhang
-	email = fengmzhang@paypal.com
+	email = andyzhang@apple.com
+	signingkey = 0BA933C49DE554E6
 [push]
 	default = upstream
 [core]
-	editor = nvim
+	editor = vim
 	excludesfile = 
 	ignorecase = false
 [merge]
