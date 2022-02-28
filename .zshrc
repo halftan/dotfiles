@@ -1,7 +1,10 @@
 # Path to your oh-my-zsh configuration.
 # ZSH=$HOME/.oh-my-zsh
 
-export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/opt/go/libexec/bin:$HOME/bin:/usr/local/sbin
+export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/opt/go/libexec/bin:/usr/local/sbin
+[[ :$PATH: == *:$HOME/bin:* ]] || PATH=$HOME/bin:$PATH
+
+export ENHANCD_COMMAND=cdd
 
 # zplug
 export ZPLUG_HOME=/usr/local/opt/zplug
@@ -37,6 +40,7 @@ zplug "plugins/fzf", from:oh-my-zsh
 zplug "denysdovhan/gitio-zsh"
 zplug "Tarrasch/zsh-autoenv"
 zplug "paulirish/git-open"
+zplug "b4b4r07/enhancd", use:init.sh
 
 zplug "b4b4r07/httpstat", \
     as:command, \
