@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Andy Zhang"
-      user-mail-address "fengmzhang@paypal.com")
+      user-mail-address "***REMOVED***")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -19,8 +19,8 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "FantasqueSansMono Nerd Font" :size 14)
-      doom-variable-pitch-font (font-spec :family "PingFang SC" :size 14 :weight 'light))
+(setq doom-font (font-spec :family "Iosevka Nerd Font Mono" :size 14 :width 'expanded)
+      doom-variable-pitch-font (font-spec :family "Iosevka Nerd Font Mono" :size 14 :width 'expanded))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -44,7 +44,7 @@
              (cons tramp-file-name-regexp nil))
 
 (setq scroll-margin 5
-      tab-always-indent t
+      tab-always-indent 'complete
       ;; start gzip when in tramp-mode from 4MB
       tramp-inline-compress-start-size 40960
       tramp-inline-compress-commands '(("bzip2" "bzip2 -d")
@@ -222,7 +222,7 @@
   (let ((buffer-in-this-window (current-buffer)))
     (if display-line-numbers
         (set-line-number-type 'relative))
-    (if (and doom--last-window (window-valid-p doom--last-window))
+    (if (and (boundp 'doom--last-window) doom--last-window (window-valid-p doom--last-window))
         (with-selected-window doom--last-window
           (unless (eq buffer-in-this-window (current-buffer))
             (set-line-number-type t))))))
@@ -231,6 +231,7 @@
 (add-hook 'find-file-hook #'(lambda () (set-line-number-type 'relative)))
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\.gotmpl" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.mdx" . markdown-mode))
+(add-to-list 'auto-mode-alist '("/inventory/.+" . conf-windows-mode))
 ;; (add-hook 'yaml-mode-hook #'(lambda () (spell-fu-mode -1)))
 (add-hook 'yaml-mode-hook #'(lambda () (flycheck-mode -1)))
 
@@ -260,3 +261,5 @@
 (setq-hook! 'python-mode-hook +format-with 'yapf)
 ;; (add-hook 'python-mode-hook #'format-all-mode)
 (setq-hook! 'python-mode-hook fill-column 130)
+
+(use-package! poly-yaml)

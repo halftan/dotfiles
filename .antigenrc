@@ -18,9 +18,10 @@ pip
 pyenv
 docker
 kubectl
+minikube
 helm
-terraform
-rbenv
+# terraform
+# rbenv
 urltools
 fzf
 

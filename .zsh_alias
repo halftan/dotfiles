@@ -86,3 +86,11 @@ alias emt="emacs -nw"
 alias ec="emacsclient -t -a ''"
 alias ect="emacsclient -t -a ''"
 alias ecc="emacsclient -n -c -a ''"
+
+alias kcm="kubecm"
+alias kns="kubens"
+alias kctx="kubectx"
+
+if [ $commands[vctl] -a ! $commands[docker] ]; then
+    alias docker="vctl"
+fi
