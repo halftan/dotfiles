@@ -3,20 +3,76 @@
 
 export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/opt/go/libexec/bin:$HOME/bin:/usr/local/sbin
 
-# Load antigen
-ANTIGEN_PATH=''
-if [[ -f  /usr/local/share/antigen/antigen.zsh ]]; then
-    ANTIGEN_PATH="/usr/local/share/antigen/antigen.zsh"
-elif [[ -f /usr/share/antigen/share/antigen.zsh ]]; then
-    ANTIGEN_PATH="/usr/share/antigen/share/antigen.zsh"
-elif [[ -f $HOME/.antigen.zsh ]]; then
-    ANTIGEN_PATH="$HOME/.antigen.zsh"
+# zplug
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-history-substring-search", defer:2
+zplug "zsh-users/zsh-autosuggestions"
+
+zplug "plugins/extract", from:oh-my-zsh
+zplug "plugins/sudo", from:oh-my-zsh
+zplug "plugins/history", from:oh-my-zsh
+zplug "plugins/autojump", from:oh-my-zsh
+zplug "plugins/emacs", from:oh-my-zsh
+zplug "plugins/golang", from:oh-my-zsh
+zplug "plugins/tig", from:oh-my-zsh
+zplug "plugins/gitignore", from:oh-my-zsh
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/npm", from:oh-my-zsh
+zplug "plugins/nvm", from:oh-my-zsh
+zplug "plugins/pip", from:oh-my-zsh
+zplug "plugins/pyenv", from:oh-my-zsh
+zplug "plugins/docker", from:oh-my-zsh
+zplug "plugins/kubectl", from:oh-my-zsh
+zplug "plugins/minikube", from:oh-my-zsh
+# zplug "plugins/helm", from:oh-my-zsh
+zplug "plugins/urltools", from:oh-my-zsh
+zplug "plugins/fzf", from:oh-my-zsh
+
+zplug "denysdovhan/gitio-zsh"
+zplug "Tarrasch/zsh-autoenv"
+zplug "paulirish/git-open"
+
+zplug "b4b4r07/httpstat", \
+    as:command, \
+    use:'(*).sh', \
+    rename-to:'$1'
+
+# zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
 fi
 
-if [[ -n "$ANTIGEN_PATH" ]]; then
-    source "$ANTIGEN_PATH"
-    antigen init ~/.antigenrc
-fi
+# Then, source plugins and add commands to $PATH
+zplug load
+
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG="$HOME/git/dotfiles/starship.toml"
+
+# # Load antigen
+# ANTIGEN_PATH=''
+# if [[ -f  /usr/local/share/antigen/antigen.zsh ]]; then
+#     ANTIGEN_PATH="/usr/local/share/antigen/antigen.zsh"
+# elif [[ -f /usr/share/antigen/share/antigen.zsh ]]; then
+#     ANTIGEN_PATH="/usr/share/antigen/share/antigen.zsh"
+# elif [[ -f $HOME/.antigen.zsh ]]; then
+#     ANTIGEN_PATH="$HOME/.antigen.zsh"
+# fi
+
+# if [[ -n "$ANTIGEN_PATH" ]]; then
+#     source "$ANTIGEN_PATH"
+#     antigen init ~/.antigenrc
+# fi
 
 if [ $commands[nvim] ]; then
     export EDITOR=nvim
@@ -107,10 +163,6 @@ else
     # plugins=($plugins systemd)
 fi
 
-if [[ -e ~/.zsh_alias ]]; then
-    . ~/.zsh_alias
-fi
-
 if [[ $ON_MAC_OS ]]; then
     # LUNCHY_DIR=$(dirname `gem which lunchy`)/../extras
     # if [ -f $LUNCHY_DIR/lunchy-completion.zsh ]; then
@@ -119,15 +171,6 @@ if [[ $ON_MAC_OS ]]; then
     if [[ -e /usr/local/opt/coreutils ]]; then
         PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
         MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-        # unalias ls
-        alias ls="ls --color=auto"
-        alias find="gfind"
-        alias xargs="gxargs"
-        alias locate="glocate"
-    fi
-
-    if [ $commands[gtar] ]; then
-        alias tar="gtar"
     fi
 else
     if [ $commands[yarn] ]; then
@@ -141,6 +184,10 @@ fi
 
 if [[ -e "/usr/local/opt/ansible@2.9/bin" ]]; then
     PATH="/usr/local/opt/ansible@2.9/bin:$PATH"
+fi
+
+if [[ -e ~/.zsh_alias ]]; then
+    . ~/.zsh_alias
 fi
 
 # oc

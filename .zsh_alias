@@ -1,19 +1,36 @@
 # -*- mode:shell-script; -*-
-alias ll="ls -lh"
-alias la="ls -lAh"
-alias sl="ls"
-alias glglr="git log --oneline --graph --left-right"
 
 if [[ $ON_MAC_OS ]]; then
+  if [[ -e /usr/local/opt/coreutils ]]; then
+    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+    # unalias ls
+    alias ls="ls --color=auto"
+    alias find="gfind"
+    alias xargs="gxargs"
+    alias locate="glocate"
+  fi
+
+  if [ $commands[gtar] ]; then
+    alias tar="gtar"
+  fi
 
   alias flushdns="sudo dscacheutil -flushcache"
   alias routes="netstat -nrfinet"
   alias eclimd="~/eclipse/php-neon/Eclipse.app/Contents/Eclipse/eclimd"
   alias ldd="otool -L"
-
 else
   alias open="xdg-open"
 fi
+
+if [[ $commands[lsd] ]]; then
+  alias ls="lsd"
+fi
+alias ll="ls -lh"
+alias la="ls -lAh"
+alias sl="ls"
+
+alias glglr="git log --oneline --graph --left-right"
 
 alias zrestart="exec $SHELL"
 alias mt="multitail --mergeall"
