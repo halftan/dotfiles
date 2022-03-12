@@ -1,4 +1,4 @@
-
+export COLORTERM=truecolor
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export LC_COLLATE="C"
@@ -6,6 +6,8 @@ export LC_COLLATE="C"
 export XMODIFIERS=@im=fcitx
 export QT_IM_MODULE=fcitx
 export GTK_IM_MODULE=fcitx
+
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
