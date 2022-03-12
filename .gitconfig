@@ -15,7 +15,7 @@
 [push]
 	default = upstream
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = 
 	ignorecase = false
 [merge]

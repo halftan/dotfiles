@@ -263,3 +263,6 @@
 (setq-hook! 'python-mode-hook fill-column 130)
 
 (use-package! poly-yaml)
+
+;; Magit
+(remove-hook 'server-switch-hook 'magit-commit-diff)
