@@ -1,0 +1,27 @@
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character] # The name of the module we are configuring is "character"
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red) "
+
+[status]
+# style = "bg:blue"
+symbol = "🔴"
+sigint_symbol = "🈲"
+format = '[\[$symbol $common_meaning$signal_name:$int\]]($style) '
+map_symbol = true
+disabled = false
+
+[time]
+disabled = false
+format = '🕙 [\[$time\]]($style) '
+time_format = "%T"
+utc_time_offset = "local"
+time_range = "-"
+
+[localip]
+ssh_only = false
+format = "@[$localipv4](bold red) "
+disabled = false
