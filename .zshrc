@@ -18,6 +18,9 @@ alias zshconfig="${EDITOR} ~/.zshrc"
 # Comment this out to disable bi-weekly auto-update checks
 DISABLE_AUTO_UPDATE="true"
 
+# Disable zsh magic functions like url-quote-magic
+DISABLE_MAGIC_FUNCTIONS="true"
+
 # Uncomment to change how often before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
 

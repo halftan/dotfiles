@@ -37,7 +37,7 @@
 [pager]
 	branch = false
 [commit]
-	# gpgsign = true
+	gpgsign = true
 [pull]
 	rebase = true
 [init]

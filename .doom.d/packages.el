@@ -56,7 +56,7 @@
 (package! polymode)
 (package! poly-ansible)
 (package! jinja2-mode)
-(package! poly-yaml
-  :recipe (:host github :repo "halftan/poly-yaml"
-           :files ("poly-yaml.el")))
+;; (package! poly-yaml
+;;   :recipe (:host github :repo "halftan/poly-yaml"
+;;            :files ("poly-yaml.el")))
 ;; (package! company-tabnine)
