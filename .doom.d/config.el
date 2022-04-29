@@ -255,6 +255,9 @@
 (setq url-proxy-services
    '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
      ("http" . "127.0.0.1:7890")))
+(setq lsp-file-watch-threshold nil)
+(setq which-key-idle-delay 0.6)
+(setq which-key-idle-secondary-delay 0.2)
 
 (set-formatter! 'yapf "yapf" :modes '(python-mode))
 (setq-hook! 'python-mode-hook +format-with-lsp nil)
@@ -262,7 +265,7 @@
 ;; (add-hook 'python-mode-hook #'format-all-mode)
 (setq-hook! 'python-mode-hook fill-column 130)
 
-(use-package! poly-yaml)
+;; (use-package! poly-yaml)
 
 ;; Magit
 (remove-hook 'server-switch-hook 'magit-commit-diff)
