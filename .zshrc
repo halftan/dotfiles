@@ -132,6 +132,10 @@ if [[ -f "/usr/local/etc/openssl@1.1/cert.pem" ]]; then
     export SSL_CERT_FILE="/usr/local/etc/openssl@1.1/cert.pem"
 fi
 
+if [[ -n "WSL_DISTRO_NAME" ]]; then
+    export GPG_TTY=$(tty)
+fi
+
 function pyenv_prompt_info() {
     echo "$(pyenv version-name)"
 }
