@@ -42,7 +42,11 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # zplug
-export ZPLUG_HOME=/usr/local/opt/zplug
+if [[ -e /usr/local/opt/zplug ]]; then
+    export ZPLUG_HOME=/usr/local/opt/zplug
+else
+    export ZPLUG_HOME=$HOME/.zplug
+fi
 source $ZPLUG_HOME/init.zsh
 
 zplug "zsh-users/zsh-completions"
@@ -96,7 +100,9 @@ fi
 zplug load # --verbose
 
 eval "$(starship init zsh)"
-export STARSHIP_CONFIG="$HOME/git/dotfiles/starship.toml"
+if [[ -f "$HOME/git/dotfiles/starship.toml" ]]; then
+    export STARSHIP_CONFIG="$HOME/git/dotfiles/starship.toml"
+fi
 
 # # Load antigen
 # ANTIGEN_PATH=''
@@ -121,8 +127,10 @@ fi
 
 export LANG="en_US.UTF-8"
 export LESS=-Ri
-export NODE_EXTRA_CA_CERTS="/usr/local/etc/openssl@1.1/cert.pem"
-export SSL_CERT_FILE="/usr/local/etc/openssl@1.1/cert.pem"
+if [[ -f "/usr/local/etc/openssl@1.1/cert.pem" ]]; then
+    export NODE_EXTRA_CA_CERTS="/usr/local/etc/openssl@1.1/cert.pem"
+    export SSL_CERT_FILE="/usr/local/etc/openssl@1.1/cert.pem"
+fi
 
 function pyenv_prompt_info() {
     echo "$(pyenv version-name)"

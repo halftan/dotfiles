@@ -108,6 +108,6 @@ alias kcm="kubecm"
 alias kns="kubens"
 alias kctx="kubectx"
 
-if [ $commands[vctl] -a ! $commands[docker] ]; then
+if [[ $commands[vctl] && -n $commands[docker] ]]; then
     alias docker="vctl"
 fi
