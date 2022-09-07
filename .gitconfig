@@ -18,8 +18,10 @@
 	editor = nvim
 	excludesfile = 
 	ignorecase = false
+	pager = delta
 [merge]
 	tool = vscode
+	conflictstyle = diff3
 [mergetool]
 	prompt = true
 [mergetool "nvim"]
@@ -30,6 +32,7 @@
 	prompt = true
 [diff]
 	tool = vscode
+	colorMoved = default
 [difftool "vscode"]
 	cmd = code --wait --diff $LOCAL $REMOTE
 [http]
@@ -42,3 +45,9 @@
 	rebase = true
 [init]
 	defaultBranch = master
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	line-numbers = true
+	# side-by-side = true
