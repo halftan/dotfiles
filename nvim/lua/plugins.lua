@@ -2,15 +2,43 @@
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup {
+        plugins = {
+          spelling = { enabled = true },
+        },
+        window = { border = 'single' },
+      }
+    end
+  }
   use 'neovim/nvim-lspconfig'
+  use {
+    'ms-jpq/coq_nvim', branch = 'coq',
+    requires  = {
+      {'ms-jpq/coq.artifacts', branch = 'artifacts'},
+      {'ms-jpq/coq.thirdparty', branch = '3p'},
+      {'kristijanhusak/vim-dadbod-completion'},
+      {'folke/lua-dev.nvim'},
+    },
+    config = function()
+      require('my_lsp_config').setup()
+    end,
+    setup = function()
+      vim.g.coq_settings = {
+        auto_start = true,
+      }
+    end
+  }
 
   use 'tpope/vim-sensible'
   use 'tpope/vim-surround'
   use 'tpope/vim-endwise'
-  use 'tpope/vim-unimpaired'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
   use 'tpope/vim-repeat'
+  use 'lambdalisue/suda.vim'
   use 'mbbill/undotree'
   use 'jeffkreeftmeijer/vim-numbertoggle'
   use 'tomtom/tcomment_vim'
@@ -27,7 +55,19 @@ return require('packer').startup(function(use)
     cmd = 'ALEEnable',
     config = 'vim.cmd[[ALEEnable]]'
   }
-  use 'nvim-treesitter/nvim-treesitter'
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    requires = {
+      {'nvim-treesitter/nvim-treesitter-textobjects'},
+      {'RRethy/nvim-treesitter-endwise'},
+      {'p00f/nvim-ts-rainbow'},
+      {'nvim-treesitter/nvim-treesitter-context'},
+      {'nvim-treesitter/nvim-treesitter-refactor'},
+    },
+    config = function()
+      require('my_treesitter_config').setup()
+    end
+  }
 
   use {
     "max397574/better-escape.nvim",
@@ -46,9 +86,30 @@ return require('packer').startup(function(use)
   }
   use {
     'nvim-telescope/telescope.nvim', branch = '0.1.x',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = {
+      {'nvim-lua/plenary.nvim'},
+      {'ahmedkhalf/project.nvim'},
+      {'nvim-telescope/telescope-live-grep-args.nvim'},
+      {'nvim-telescope/telescope-packer.nvim'},
+      {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+    },
+    config = function()
+      require('my_telescope_config').setup()
+    end,
   }
   use 'justinmk/vim-sneak'
+  use {
+    's1n7ax/nvim-window-picker',
+    tag = 'v1.*',
+    config = function()
+      local picker = require'window-picker'
+      picker.setup()
+      vim.keymap.set("n", "<leader>w", function()
+        local picked_window_id = picker.pick_window() or vim.api.nvim_get_current_win()
+        vim.api.nvim_set_current_win(picked_window_id)
+      end, { desc = "Pick a window" })
+    end,
+  }
   use {
     'phaazon/hop.nvim',
     branch = 'v2', -- optional but strongly recommended
@@ -83,23 +144,46 @@ return require('packer').startup(function(use)
     end
   }
   use {
-    'ahmedkhalf/project.nvim',
-    config = function()
-      require('project_nvim').setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
+    'kana/vim-textobj-user',
+    requires = {
+      'kana/vim-textobj-indent',
+      'kana/vim-textobj-entire',
+      'lucapette/vim-textobj-underscore',
+    }
   }
-  use {
-    {'kana/vim-textobj-indent', requires = {'kana/vim-textobj-user'}},
-    'kana/vim-textobj-entire',
-    'lucapette/vim-textobj-underscore',
-  }
+  use 'wellle/targets.vim'
   use 'Yggdroot/indentLine'
-  use 'kien/rainbow_parentheses.vim'
-  use 'sheerun/vim-polyglot'
+  use 'pearofducks/ansible-vim'
   use 'vim-airline/vim-airline'
   use 'joshdick/onedark.vim'
+  use {
+    'rrethy/vim-hexokinase',
+    cmd = {
+      'HexokinaseToggle',
+      'HexokinaseTurnOn',
+      'HexokinaseTurnOff',
+    },
+    run = 'make hexokinase',
+  }
+  use 'editorconfig/editorconfig-vim'
+
+  use {
+    'tpope/vim-dadbod',
+    cmd = {'DB'},
+  }
+  use {
+    'kristijanhusak/vim-dadbod-ui',
+    cmd = {
+      'DBUI',
+      'DBUIToggle',
+      'DBUIAddConnection',
+      'DBUIFindBuffer',
+      'DBUIRenameBuffer',
+      'DBUILastQueryInfo',
+    },
+    after = 'vim-dadbod',
+  }
+  
+  use 'sheerun/vim-polyglot'
+  use 'fatih/vim-go'
 end)

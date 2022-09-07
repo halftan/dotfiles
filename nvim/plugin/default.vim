@@ -7,13 +7,16 @@ if maparg('<c-g>', 'n') == ''
   nnoremap <silent> <c-g> :<c-u>call ctrlg#display()<cr>
 endif
 
-nnoremap <expr> <Leader>p "+p
+nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+nnoremap <Leader>y "+y
+xnoremap <Leader>y "+y
+nnoremap <Leader>Y "+Y
+xnoremap <Leader>Y "+Y
+nnoremap <space>` <cmd>try \| b# \| catch \| endtry<cr>
 
 " Start new line
 inoremap <S-Return> <C-o>o
-
-" Paste and indent
-nnoremap =p p'[v']=
 
 " Improve scroll, credits: https://github.com/Shougo
 nnoremap <expr> zz (winline() == (winheight(0)+1) / 2) ?
