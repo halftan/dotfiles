@@ -7,13 +7,12 @@ if maparg('<c-g>', 'n') == ''
   nnoremap <silent> <c-g> :<c-u>call ctrlg#display()<cr>
 endif
 
-nnoremap <Leader>p "+p
-nnoremap <Leader>P "+P
-nnoremap <Leader>y "+y
-xnoremap <Leader>y "+y
-nnoremap <Leader>Y "+Y
-xnoremap <Leader>Y "+Y
-nnoremap <space>` <cmd>try \| b# \| catch \| endtry<cr>
+" nnoremap <Leader>p "+p
+" nnoremap <Leader>P "+P
+" nnoremap <Leader>y "+y
+" xnoremap <Leader>y "+y
+" nnoremap <Leader>Y "+Y
+" xnoremap <Leader>Y "+Y
 
 " Start new line
 inoremap <S-Return> <C-o>o
@@ -29,8 +28,8 @@ xnoremap > >gv|
 " Use tab for indenting in visual mode
 xnoremap <Tab> >gv|
 xnoremap <S-Tab> <gv
-nnoremap > >>_
-nnoremap < <<_
+" nnoremap > >>_
+" nnoremap < <<_
 
 " smart up and down
 nnoremap <silent><Down> gj
