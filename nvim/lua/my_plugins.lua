@@ -137,7 +137,12 @@ return { setup = function(use)
       require('my_telescope_config').setup()
     end,
   }
-  use 'justinmk/vim-sneak'
+  use {
+    'ggandor/leap.nvim',
+    config = function()
+      require('leap').set_default_keymaps()
+    end
+  }
   use {
     's1n7ax/nvim-window-picker',
     tag = 'v1.*',

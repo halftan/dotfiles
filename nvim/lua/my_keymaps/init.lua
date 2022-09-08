@@ -9,8 +9,20 @@ local utils = require('my_utils')
 
 wk.register({
   ['<c-p>'] = {'<cmd>Telescope find_files hidden=true<cr>', 'Find files'},
-  ['H'] = {"(tabpagenr('$') > 1) ? 'gT' : '<cmd>bprevious<cr>'", 'Previous tab'},
-  ['L'] = {"(tabpagenr('$') > 1) ? 'gt' : '<cmd>bnext<cr>'", 'Next tab'},
+  ['H'] = {function()
+    if vim.fn.tabpagenr('$') > 1 then
+      vim.cmd('normal gT')
+    else
+      vim.cmd('bprevious')
+    end
+  end, 'Previous tab'},
+  ['L'] = {function()
+    if vim.fn.tabpagenr('$') > 1 then
+      vim.cmd('normal gt')
+    else
+      vim.cmd('bnext')
+    end
+  end, 'Next tab'},
 })
 
 return {}
