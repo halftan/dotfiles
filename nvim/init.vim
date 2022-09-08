@@ -60,10 +60,10 @@ set shiftround
 
 " Set change point to prevent <C-U> <C-W> wipes undo history
 if empty(mapcheck('<C-U>', 'i'))
-  inoremap <C-U> <C-G>u<C-U>
+  imap <C-U> <C-G>u<C-U>
 endif
 if empty(mapcheck('<C-W>', 'i'))
-  inoremap <C-W> <C-G>u<C-W>
+  imap <C-W> <C-G>u<C-W>
 endif
 
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")

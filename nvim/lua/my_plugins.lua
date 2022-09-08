@@ -10,12 +10,17 @@ return { setup = function(use)
           spelling = { enabled = true },
         },
         window = { border = 'single' },
+        operators = {
+          gc = 'Comments',
+          gb = 'BlockComments',
+        },
       }
     end
   }
   use 'neovim/nvim-lspconfig'
   use {
     'ms-jpq/coq_nvim', branch = 'coq',
+    after = 'nvim-lspconfig',
     requires  = {
       {'ms-jpq/coq.artifacts', branch = 'artifacts'},
       {'ms-jpq/coq.thirdparty', branch = '3p'},
@@ -29,12 +34,21 @@ return { setup = function(use)
     setup = function()
       vim.g.coq_settings = {
         auto_start = true,
+        keymap = {
+          recommended = false,
+        },
       }
     end
   }
 
-  use 'tpope/vim-surround'
-  use 'tpope/vim-endwise'
+  -- use 'tpope/vim-surround'
+  use {
+    'kylechui/nvim-surround',
+    config = function()
+      require('nvim-surround').setup {}
+    end
+  }
+  -- use 'tpope/vim-endwise'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
   use 'tpope/vim-repeat'
@@ -46,13 +60,25 @@ return { setup = function(use)
     requires = {'xolox/vim-misc'},
   }
   use 'jeffkreeftmeijer/vim-numbertoggle'
-  use 'tomtom/tcomment_vim'
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  }
   use 'AndrewRadev/splitjoin.vim'
-  use 'jiangmiao/auto-pairs'
+  -- use 'jiangmiao/auto-pairs'
+  use {
+    'windwp/nvim-autopairs',
+    after = 'coq_nvim',
+    config = function()
+      require('my_completion_config').npairs_setup()
+    end
+  }
   use {
     'lewis6991/gitsigns.nvim',
     config = function()
-      require('gitsigns').setup {}
+      require('gitsigns').setup()
     end
   }
   use 'rcarriga/nvim-notify'
@@ -81,10 +107,10 @@ return { setup = function(use)
     'nvim-treesitter/nvim-treesitter',
     requires = {
       {'nvim-treesitter/nvim-treesitter-textobjects'},
-      {'RRethy/nvim-treesitter-endwise'},
       {'p00f/nvim-ts-rainbow'},
       {'nvim-treesitter/nvim-treesitter-context'},
       {'nvim-treesitter/nvim-treesitter-refactor'},
+      {'RRethy/nvim-treesitter-endwise'},
     },
     config = function()
       require('my_treesitter_config').setup()
