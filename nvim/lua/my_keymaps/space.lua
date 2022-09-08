@@ -7,7 +7,7 @@ wk.register({
   ['/'] = {'<cmd>nohlsearch<cr>', 'No search highlight'},
   ['.'] = {'<cmd>Telescope buffers<cr>', 'Find buffer'},
   [':'] = {'<cmd>Telescope commands __hide_previewer=true<cr>', 'List commands'},
-  ['`'] = {'<cmd>try \\| b# \\| catch \\| endtry<cr>', 'Switch last buffer'},
+  ['`'] = {function() vim.cmd('try | b# | catch | endtry') end, 'Switch last buffer'},
 
   ['<space>'] = {
     name = 'Hop',
@@ -70,6 +70,8 @@ wk.register({
     name = 'Search & Syntax',
     ['/'] = {'<cmd>Telescope live_grep_args<cr>', 'Search in project'},
     ['P'] = {'<cmd>Telescope grep_string<cr>', 'Search word under cursor'},
+    ['s'] = {'<cmd>Telescope lsp_document_symbols<cr>', 'Search symbols in buffer'},
+    ['S'] = {'<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', 'Search symbols in buffer'},
   },
 
   ['h'] = {
