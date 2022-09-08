@@ -3,7 +3,7 @@ return {
     require'nvim-treesitter.configs'.setup {
     -- A list of parser names, or "all"
     ensure_installed = {
-      "go", "gomod", "bash", "dockerfile", "make", "lua",
+      "go", "gomod", "bash", "dockerfile", "make", "lua", "org",
       "vim", "help", "comment", "python", "json", "yaml", "toml",
     },
 
@@ -34,7 +34,7 @@ return {
       -- Using this option may slow down your editor, and you may see some duplicate highlights.
       -- Instead of true it can also be a list of languages
       additional_vim_regex_highlighting = {
-        "vim",
+        "vim", "org",
       },
     },
 

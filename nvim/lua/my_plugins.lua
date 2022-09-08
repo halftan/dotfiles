@@ -1,6 +1,6 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
-return require('packer').startup(function(use)
+return { setup = function(use)
   use 'wbthomason/packer.nvim'
   use {
     "folke/which-key.nvim",
@@ -24,6 +24,7 @@ return require('packer').startup(function(use)
     },
     config = function()
       require('my_lsp_config').setup()
+      require('my_completion_config').setup()
     end,
     setup = function()
       vim.g.coq_settings = {
@@ -32,7 +33,6 @@ return require('packer').startup(function(use)
     end
   }
 
-  use 'tpope/vim-sensible'
   use 'tpope/vim-surround'
   use 'tpope/vim-endwise'
   use 'tpope/vim-fugitive'
@@ -40,11 +40,33 @@ return require('packer').startup(function(use)
   use 'tpope/vim-repeat'
   use 'lambdalisue/suda.vim'
   use 'mbbill/undotree'
+  use 'dhruvasagar/vim-table-mode'
+  use {
+    'xolox/vim-session',
+    requires = {'xolox/vim-misc'},
+  }
   use 'jeffkreeftmeijer/vim-numbertoggle'
   use 'tomtom/tcomment_vim'
   use 'AndrewRadev/splitjoin.vim'
   use 'jiangmiao/auto-pairs'
-  use 'airblade/vim-gitgutter'
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup {}
+    end
+  }
+  use 'rcarriga/nvim-notify'
+  use {
+    'michaelb/sniprun',
+    opt = true,
+    after = 'nvim-notify',
+    config = function()
+      require('sniprun').setup {
+        display = {'NvimNotify'},
+      }
+    end,
+    run = 'bash ./install.sh',
+  }
   use {'andymass/vim-matchup', event = 'VimEnter'}
   use {
     'w0rp/ale',
@@ -67,6 +89,24 @@ return require('packer').startup(function(use)
     config = function()
       require('my_treesitter_config').setup()
     end
+  }
+  use {
+    'nvim-orgmode/orgmode',
+    config = function()
+      require('orgmode').setup_ts_grammar()
+      require('orgmode').setup {
+        org_agenda_files = {'~/my-orgs/**/*'},
+        org_default_notes_file = '~/my-orgs/notes.org',
+        org_todo_keywords = {
+          'TODO', 'NEXT', 'HOLD', '|', 'DONE', 'ARCHIVED',
+        },
+        org_todo_keyword_faces = {
+          NEXT = ':background #61C6F2 :foreground #EC6238 :weight bold :slant italic',
+          HOLD = ':background #FFFFFF :foreground #F64E59 :underline on',
+        }
+      }
+    end,
+    after = {'nvim-treesitter'},
   }
 
   use {
@@ -183,7 +223,11 @@ return require('packer').startup(function(use)
     },
     after = 'vim-dadbod',
   }
-  
+
   use 'sheerun/vim-polyglot'
   use 'fatih/vim-go'
-end)
+  use {
+    'rafcamlet/nvim-luapad',
+    cmd = {'Luapad', 'LuaRun'}
+  }
+end}
