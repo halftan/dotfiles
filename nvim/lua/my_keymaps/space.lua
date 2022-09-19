@@ -34,6 +34,12 @@ wk.register({
     ['s'] = {'<cmd>sp<cr>', 'Split horizontally'},
     ['f'] = {'<cmd>NvimTreeFocus<cr>', 'Focus nvim-tree'},
 		['d'] = {'<cmd>close<cr>', 'Close window'},
+		['D'] = {'<cmd>close!<cr>', 'Close window'},
+  },
+
+  ['g'] = {
+    name = 'Git',
+    ['s'] = {'<cmd>Git<cr>', 'Git status'},
   },
 
   ['p'] = {
@@ -63,7 +69,16 @@ wk.register({
     name = 'Buffer',
     ['b'] = {'<cmd>Telescope buffers<cr>', 'Find buffer'},
     ['d'] = {'<cmd>bd<cr>', 'Unload buffer'},
+    ['D'] = {'<cmd>bd!<cr>', 'Unload buffer'},
     ['/'] = {'<cmd>Telescope current_buffer_fuzzy_find<cr>', 'Search in buffer'},
+  },
+
+  ['c'] = {
+    name = 'Code',
+    ['r'] = {
+      name = 'Run',
+      ['f'] = {'<cmd>SnipRun<cr>', 'Run file'},
+    },
   },
 
   ['s'] = {
@@ -102,6 +117,12 @@ wk.register({
       ['c'] = {'<cmd>PackerCompile<cr>', 'PackerCompile'},
       ['C'] = {'<cmd>PackerClean<cr>', 'PackerClean'},
     },
+    ['e'] = {
+      name = 'Eval',
+      ['f'] = {'<cmd>LuaRun<cr>', 'Run current lua file in nvim'},
+      ['p'] = {'<cmd>Luapad<cr>', 'Open Luapad'},
+    },
+
     ['f'] = {
       name = 'Vim config',
       ['d'] = {'<cmd>tabe $MYVIMRC<cr>', 'Edit init.vim'},
@@ -109,7 +130,7 @@ wk.register({
         require('telescope.builtin').find_files({search_dirs = {utils.conf_dir}})
       end, 'Find file in config dir'},
       ['p'] = {string.format('<cmd>tabe %s<cr>', utils.file_in_conf_dir('lua/my_plugins.lua')), 'Edit plugins'},
-    }
+    },
   },
 
   [','] = {

@@ -22,9 +22,13 @@ M.setup = function()
     { src = 'orgmode', short_name = 'ORG' },
   }
 
-  -- vim.g.coq_settings.clients = {
-  --
-  -- }
+  if _G.packer_plugins['vim-snippets'] ~= nil then
+    vim.g.coq_settings = {
+      ['clients.snippets.user_path'] = _G.packer_plugins['vim-snippets'].path .. '/UltiSnips',
+    }
+  else
+    vim.notify_once('vim-snippets not loaded.', vim.log.levels.WARN)
+  end
 end
 
 M.npairs_setup = function()

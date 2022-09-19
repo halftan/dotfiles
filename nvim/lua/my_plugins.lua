@@ -22,7 +22,8 @@ return { setup = function(use)
     'ms-jpq/coq_nvim', branch = 'coq',
     after = 'nvim-lspconfig',
     requires  = {
-      {'ms-jpq/coq.artifacts', branch = 'artifacts'},
+      -- {'ms-jpq/coq.artifacts', branch = 'artifacts'},
+      -- {'honza/vim-snippets'},
       {'ms-jpq/coq.thirdparty', branch = '3p'},
       {'kristijanhusak/vim-dadbod-completion'},
       {'folke/lua-dev.nvim'},
@@ -84,7 +85,6 @@ return { setup = function(use)
   use 'rcarriga/nvim-notify'
   use {
     'michaelb/sniprun',
-    opt = true,
     after = 'nvim-notify',
     config = function()
       require('sniprun').setup {
@@ -92,6 +92,7 @@ return { setup = function(use)
       }
     end,
     run = 'bash ./install.sh',
+    cmd = {'SnipRun', 'SnipInfo'},
   }
   use {'andymass/vim-matchup', event = 'VimEnter'}
   use {
