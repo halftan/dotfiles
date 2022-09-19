@@ -60,7 +60,8 @@ zplug "plugins/extract", from:oh-my-zsh
 zplug "plugins/sudo", from:oh-my-zsh
 zplug "plugins/history", from:oh-my-zsh
 zplug "plugins/autojump", from:oh-my-zsh
-zplug "plugins/emacs", from:oh-my-zsh
+# zplug "plugins/emacs", from:oh-my-zsh
+# 
 zplug "plugins/golang", from:oh-my-zsh
 zplug "plugins/tig", from:oh-my-zsh
 zplug "plugins/gitignore", from:oh-my-zsh
@@ -70,21 +71,23 @@ zplug "plugins/nvm", from:oh-my-zsh
 zplug "plugins/pip", from:oh-my-zsh
 zplug "plugins/pyenv", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/kubectl", from:oh-my-zsh
-zplug "plugins/minikube", from:oh-my-zsh
+zplug "plugins/docker-compose", from:oh-my-zsh
+
+# zplug "plugins/kubectl", from:oh-my-zsh
+# zplug "plugins/minikube", from:oh-my-zsh
 # zplug "plugins/helm", from:oh-my-zsh
-zplug "plugins/urltools", from:oh-my-zsh
+# zplug "plugins/urltools", from:oh-my-zsh
 zplug "plugins/fzf", from:oh-my-zsh
 
 zplug "denysdovhan/gitio-zsh"
 zplug "Tarrasch/zsh-autoenv"
 zplug "paulirish/git-open"
-zplug "b4b4r07/enhancd", use:init.sh
+# zplug "b4b4r07/enhancd", use:init.sh
 
-zplug "b4b4r07/httpstat", \
-    as:command, \
-    use:'(*).sh', \
-    rename-to:'$1'
+# zplug "b4b4r07/httpstat", \
+#     as:command, \
+#     use:'(*).sh', \
+#     rename-to:'$1'
 
 # zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 
@@ -162,7 +165,6 @@ if [ $commands[sw_vers] ]; then
     # PATH="$(brew --prefix vim)/bin:$PATH"
 else
     # Linux
-    ngvim() { gvim > /dev/null 2>&1 $@ }
     # plugins=($plugins systemd)
 fi
 
@@ -193,19 +195,10 @@ if [[ -e ~/.zsh_alias ]]; then
     . ~/.zsh_alias
 fi
 
-# oc
-# if [[ -e "$HOME/.crc/bin/oc" ]]; then
-#     PATH="/Users/fengmzhang/.crc/bin/oc:$PATH"
-# fi
-
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
 if [[ -e "$HOME/.terminfo" ]]; then
     export TERM=xterm-24bits
-fi
-
-if [ $commands[kubecm] ]; then
-    source <(kubecm completion zsh)
 fi
 
 export -U PATH
