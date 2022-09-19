@@ -30,7 +30,7 @@ return { setup = function(use)
     },
     config = function()
       require('my_lsp_config').setup()
-      require('my_completion_config').setup()
+      require('my_configs.coq').setup()
     end,
     setup = function()
       vim.g.coq_settings = {
@@ -57,6 +57,12 @@ return { setup = function(use)
   use 'mbbill/undotree'
   use 'dhruvasagar/vim-table-mode'
   use {
+    'romgrk/barbar.nvim',
+    config = function()
+      require('my_configs.bufferline').setup()
+    end
+  }
+  use {
     'xolox/vim-session',
     requires = {'xolox/vim-misc'},
   }
@@ -71,7 +77,6 @@ return { setup = function(use)
   -- use 'jiangmiao/auto-pairs'
   use {
     'windwp/nvim-autopairs',
-    after = 'coq_nvim',
     config = function()
       require('my_completion_config').npairs_setup()
     end
