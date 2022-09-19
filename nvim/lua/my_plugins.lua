@@ -18,27 +18,39 @@ return { setup = function(use)
     end
   }
   use 'neovim/nvim-lspconfig'
+
+  if vim.g.completion_engine ~= nil then
+    local loaded, engine = pcall(require, 'my_completion_engine.' .. vim.g.completion_engine)
+    if loaded then
+      engine.setup(use)
+    else
+      vim.notify("Completion engine " .. vim.g.completion_engine .. " not found!", vim.log.levels.ERROR)
+    end
+  end
+  -- use 'jiangmiao/auto-pairs'
   use {
-    'ms-jpq/coq_nvim', branch = 'coq',
-    after = 'nvim-lspconfig',
-    requires  = {
-      -- {'ms-jpq/coq.artifacts', branch = 'artifacts'},
-      -- {'honza/vim-snippets'},
-      {'ms-jpq/coq.thirdparty', branch = '3p'},
-      {'kristijanhusak/vim-dadbod-completion'},
-      {'folke/lua-dev.nvim'},
-    },
+    'windwp/nvim-autopairs',
     config = function()
-      require('my_lsp_config').setup()
-      require('my_configs.coq').setup()
-    end,
-    setup = function()
-      vim.g.coq_settings = {
-        auto_start = true,
-        keymap = {
-          recommended = false,
-        },
-      }
+      local loaded, engine = pcall(require, 'my_completion_engine.' .. vim.g.completion_engine)
+      if loaded then
+        engine.autopairs_setup()
+      end
+    end
+  }
+
+  use {
+    'folke/lua-dev.nvim',
+    config = function()
+      require('lua-dev').setup({
+        override = function(root_dir, library)
+          if root_dir:find('dotfiles', 1, true) ~= nil then
+            library.enabled = true
+            library.runtime = true
+            library.types   = true
+            library.plugins = true
+          end
+        end,
+      })
     end
   }
 
@@ -74,13 +86,6 @@ return { setup = function(use)
     end
   }
   use 'AndrewRadev/splitjoin.vim'
-  -- use 'jiangmiao/auto-pairs'
-  use {
-    'windwp/nvim-autopairs',
-    config = function()
-      require('my_completion_config').npairs_setup()
-    end
-  }
   use {
     'lewis6991/gitsigns.nvim',
     config = function()
@@ -179,12 +184,7 @@ return { setup = function(use)
     's1n7ax/nvim-window-picker',
     tag = 'v1.*',
     config = function()
-      local picker = require'window-picker'
-      picker.setup()
-      vim.keymap.set("n", "<leader>w", function()
-        local picked_window_id = picker.pick_window() or vim.api.nvim_get_current_win()
-        vim.api.nvim_set_current_win(picked_window_id)
-      end, { desc = "Pick a window" })
+      require('window-picker').setup()
     end,
   }
   use {

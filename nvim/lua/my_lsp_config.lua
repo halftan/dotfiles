@@ -1,40 +1,32 @@
 return {
-  setup = function()
+  setup = function(ensure_capabilities)
     local lsp = require 'lspconfig'
-    local coq = require 'coq'
 
     local lspconfigs = {
       --{{{ sumneko_lua
-      ['sumneko_lua'] = require('lua-dev').setup({
-        library = {
-          vimruntime = true,
-          types = true,
-          plugins = true,
-        },
-        lspconfig = {
-          settings = {
-            Lua = {
-              runtime = {
-                version = 'LuaJIT',
-              },
-              diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = {'vim', 'packer_plugins'},
-              },
-              workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
-                maxPreload = 100000,
-                preloadFileSize = 10000,
-              },
-              -- Do not send telemetry data containing a randomized but unique identifier
-              telemetry = {
-                enable = false,
-              },
+      ['sumneko_lua'] = {
+        settings = {
+          Lua = {
+            runtime = {
+              version = 'LuaJIT',
+            },
+            diagnostics = {
+              -- Get the language server to recognize the `vim` global
+              globals = {'vim', 'packer_plugins'},
+            },
+            workspace = {
+              -- Make the server aware of Neovim runtime files
+              library = vim.api.nvim_get_runtime_file("", true),
+              maxPreload = 100000,
+              preloadFileSize = 10000,
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+              enable = false,
             },
           },
         },
-      }),
+      },
       --}}}
 --{{{ yamlls
       yamlls = {
@@ -55,9 +47,9 @@ return {
 
     for lang, lspconf in pairs(lspconfigs) do
       if type(lspconf) == 'string' then
-        lsp[lspconf].setup(coq.lsp_ensure_capabilities({}))
+        lsp[lspconf].setup(ensure_capabilities({}))
       else
-        lsp[lang].setup(coq.lsp_ensure_capabilities(lspconf))
+        lsp[lang].setup(ensure_capabilities(lspconf))
       end
     end
   end

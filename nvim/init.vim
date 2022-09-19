@@ -5,6 +5,8 @@ if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'
   set shell=/usr/bin/env\ bash
 endif
 
+let g:completion_engine = 'nvim_cmp' " Available options: coq, nvim_cmp
+
 " Load packer.nvim
 lua <<EOF
   local fn = vim.fn

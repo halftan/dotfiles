@@ -5,6 +5,10 @@ wk.register({
   ['P'] = {'"+P', 'Paste from system clipboard'},
   ['y'] = {'"+y', 'Yank to system clipboard'},
   ['Y'] = {'"+Y', 'Yank to system clipboard'},
+  ['w'] = {function()
+    local picked_window_id = require('window-picker').pick_window() or vim.api.nvim_get_current_win()
+    vim.api.nvim_set_current_win(picked_window_id)
+  end, 'Pick a window'}
 }, {prefix = '<leader>'})
 
 wk.register({
