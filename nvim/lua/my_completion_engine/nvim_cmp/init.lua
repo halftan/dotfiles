@@ -14,11 +14,13 @@ M.setup = function(use)
       {'saadparwaiz1/cmp_luasnip'},
       {'kristijanhusak/vim-dadbod-completion'},
       {'rafamadriz/friendly-snippets'},
+      {'onsails/lspkind.nvim'},
     },
     config = function()
       vim.cmd [[set completeopt=menu,menuone,noselect]]
 
-      local cmp = require'cmp'
+      local cmp = require('cmp')
+      local lspkind = require('lspkind')
 
       local global_sources = {
         {
@@ -29,7 +31,19 @@ M.setup = function(use)
           -- { name = 'snippy' }, -- For snippy users.
         },
         {
-          { name = 'buffer' },
+          {
+            name = 'buffer',
+            option = {
+              get_bufnrs = function()
+                local buf = vim.api.nvim_get_current_buf()
+                local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+                if byte_size > 2 * 1024 * 1024 then -- 2 Megabyte max
+                  return {}
+                end
+                return { buf }
+              end
+            }
+          },
           { name = 'path' },
         },
       }
@@ -50,10 +64,10 @@ M.setup = function(use)
             -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
           end,
         },
-        -- window = {
-        --   completion = cmp.config.window.bordered(),
-        --   documentation = cmp.config.window.bordered(),
-        -- },
+        window = {
+          completion = cmp.config.window.bordered(),
+          -- documentation = cmp.config.window.bordered(),
+        },
         mapping = cmp.mapping.preset.insert({
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
@@ -80,7 +94,30 @@ M.setup = function(use)
             end
           end, { "i", "s" }),
         }),
-        sources = cmp.config.sources(unpack(global_sources))
+
+        sources = cmp.config.sources(unpack(global_sources)),
+
+        formatting = {
+          format = lspkind.cmp_format({
+            mode = 'symbol_text', -- show only symbol annotations
+            maxwidth = 60, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+            menu = {
+              buffer = '[buf]',
+              nvim_lsp = '[LSP]',
+              path = '[path]',
+              ['vim-dadbod-completion'] = 'DB',
+              orgmode = '[org]',
+              cmdline = '[cmd]',
+              luasnip = '[SNIP]',
+            },
+
+            -- The function below will be called before any actual modifications from lspkind
+            -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+            -- before = function (entry, vim_item)
+            --   return vim_item
+            -- end
+          })
+        },
       })
 
       -- Set configuration for specific filetype.
@@ -96,11 +133,11 @@ M.setup = function(use)
         })
       })
 
-      cmp.setup.filetype('lua', {
-        sources = cmp.config.sources(unpack(global_sources), {
-          { name = 'nvim_lua' },
-        })
-      })
+      -- cmp.setup.filetype('lua', {
+      --   sources = cmp.config.sources(unpack(global_sources), {
+      --     { name = 'nvim_lua' },
+      --   })
+      -- })
 
       cmp.setup.filetype('org', {
         sources = cmp.config.sources(unpack(global_sources), {
