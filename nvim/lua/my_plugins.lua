@@ -232,7 +232,12 @@ return { setup = function(use)
   use 'wellle/targets.vim'
   use 'Yggdroot/indentLine'
   use 'pearofducks/ansible-vim'
-  use 'vim-airline/vim-airline'
+  use {
+    'vim-airline/vim-airline',
+    config = function()
+      require'my_statusline'
+    end
+  }
   use 'joshdick/onedark.vim'
   use {
     'rrethy/vim-hexokinase',

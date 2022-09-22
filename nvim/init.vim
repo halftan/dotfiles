@@ -81,20 +81,10 @@ let g:AutoPairsMapCh=v:false
 let g:sneak#s_next=1
 let g:sneak#use_ic_scs=1
 
-" Airline Here -------------
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#default#section_use_groupitems=0
-let g:airline#extensions#tabline#fnametruncate=20
-let g:airline_theme="onedark"
-
 let g:camelcasemotion_key=','
 
 " editorconfig
 let g:EditorConfig_exclude_patterns=['fugitive://.*', 'scp://.*']
-
-" fugitive
-let g:airline#extensions#fugitiveline#enabled=1
 
 " FileType specifies Here -------
 
