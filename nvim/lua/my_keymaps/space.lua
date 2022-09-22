@@ -2,12 +2,32 @@ local wk = require('which-key')
 
 local utils = require('my_utils')
 
+local function focus_winnr(nr)
+  if vim.api.nvim_buf_get_option(vim.fn.winbufnr(1), 'filetype') == 'NvimTree' then
+    nr = nr + 1
+  end
+
+  if vim.fn.winnr('$') > nr then
+    vim.api.nvim_command(nr .. 'wincmd w')
+  end
+end
+
 wk.register({
   ['0'] = {'<cmd>NvimTreeFocus<cr>', 'Focus nvim-tree'},
+  ['1'] = {focus_winnr(1), 'Focus window 1'},
+  ['2'] = {focus_winnr(2), 'Focus window 2'},
+  ['3'] = {focus_winnr(3), 'Focus window 3'},
+  ['4'] = {focus_winnr(4), 'Focus window 4'},
+  ['5'] = {focus_winnr(5), 'Focus window 5'},
+  ['6'] = {focus_winnr(6), 'Focus window 6'},
+  ['7'] = {focus_winnr(7), 'Focus window 7'},
+  ['8'] = {focus_winnr(8), 'Focus window 8'},
+  ['9'] = {focus_winnr(9), 'Focus window 9'},
   ['/'] = {'<cmd>nohlsearch<cr>', 'No search highlight'},
   ['.'] = {'<cmd>Telescope buffers<cr>', 'Find buffer'},
   [':'] = {'<cmd>Telescope commands __hide_previewer=true<cr>', 'List commands'},
   ['`'] = {function() vim.cmd('try | b# | catch | endtry') end, 'Switch last buffer'},
+  ['<TAB>'] = {'<cmd>wincmd p<cr>', 'Switch last window'},
 
   ['<space>'] = {
     name = 'Hop',
@@ -107,6 +127,12 @@ wk.register({
     ['/'] = {'<cmd>Telescope help_tags<cr>', 'Search for help'},
   },
 
+  ['o'] = {
+    name = 'Other',
+    ['p'] = {function() require'nvim-tree'.focus() end, 'Open nvim-tree'},
+    ['P'] = {function() require'nvim-tree'.find_file(vim.fn.expand('%:p')) end, 'Find current file in nvim-tree'},
+  },
+
   ['q'] = {
     name = 'Quit',
     ['q'] = {'<cmd>quit<cr>', 'Quit'},
@@ -116,7 +142,6 @@ wk.register({
   ['t'] = {
     name = 'Toggles',
     ['i'] = {'<cmd>IndentLinesToggle<cr>', 'Toggle indent guide'},
-    ['t'] = {'<cmd>NvimTreeToggle<cr>', 'Toggle nvim-tree'},
     ['u'] = {'<cmd>UndotreeToggle<cr>', 'Toggle Undotree'},
     ['T'] = {'<cmd>TableModeToggle<cr>', 'Toggle table mode'},
   },

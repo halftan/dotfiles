@@ -53,6 +53,7 @@ return { setup = function(use)
       })
     end
   }
+  use 'mhinz/vim-startify'
 
   -- use 'tpope/vim-surround'
   use {

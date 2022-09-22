@@ -45,6 +45,8 @@ return {
       'gopls', 'pyright', 'bashls', 'ansiblels',
     }
 
+    -- TODO: customize on_attach function to register buffer keymaps with wk
+    -- see :h lspconfig-keybindings
     for lang, lspconf in pairs(lspconfigs) do
       if type(lspconf) == 'string' then
         lsp[lspconf].setup(ensure_capabilities({}))

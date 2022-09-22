@@ -22,6 +22,20 @@ M.setup = function(use)
       local cmp = require('cmp')
       local lspkind = require('lspkind')
 
+      local source_buffer = {
+        name = 'buffer',
+        {
+          get_bufnrs = function()
+            local buf = vim.api.nvim_get_current_buf()
+            local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+            if byte_size > 2 * 1024 * 1024 then -- 2 Megabyte max
+              return {}
+            end
+            return { buf }
+          end
+        },
+        max_item_count = 10,
+      }
       local global_sources = {
         {
           { name = 'nvim_lsp' },
@@ -31,20 +45,11 @@ M.setup = function(use)
           -- { name = 'snippy' }, -- For snippy users.
         },
         {
+          source_buffer,
           {
-            name = 'buffer',
-            option = {
-              get_bufnrs = function()
-                local buf = vim.api.nvim_get_current_buf()
-                local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
-                if byte_size > 2 * 1024 * 1024 then -- 2 Megabyte max
-                  return {}
-                end
-                return { buf }
-              end
-            }
+            name = 'path',
+            trigger_characters = {'.', '/'},
           },
-          { name = 'path' },
         },
       }
       local has_words_before = function()
@@ -55,6 +60,12 @@ M.setup = function(use)
       local luasnip = require("luasnip")
 
       cmp.setup({
+        matching = {
+          disallow_prefix_unmatching = true,
+        },
+        -- sorting = {
+        --   comparators = nil,
+        -- },
         snippet = {
           -- REQUIRED - you must specify a snippet engine
           expand = function(args)
@@ -66,9 +77,37 @@ M.setup = function(use)
         },
         window = {
           completion = cmp.config.window.bordered(),
-          -- documentation = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
+          ['<C-u>'] = function(fallback)
+            if cmp.visible() then
+              cmp.mapping.scroll_docs(-4)
+            else
+              fallback()
+            end
+          end,
+          ['<C-d>'] = function(fallback)
+            if cmp.visible() then
+              cmp.mapping.scroll_docs(4)
+            else
+              fallback()
+            end
+          end,
+          ['<C-j>'] = function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end,
+          ['<C-k>'] = function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            else
+              fallback()
+            end
+          end,
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -83,7 +122,6 @@ M.setup = function(use)
               fallback()
             end
           end, { "i", "s" }),
-
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
@@ -93,6 +131,14 @@ M.setup = function(use)
               fallback()
             end
           end, { "i", "s" }),
+
+          ['<C-s>'] = cmp.mapping.complete({
+            config = {
+              sources = {
+                { name = 'luasnip' }
+              }
+            }
+          })
         }),
 
         sources = cmp.config.sources(unpack(global_sources)),
@@ -103,9 +149,9 @@ M.setup = function(use)
             maxwidth = 60, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
             menu = {
               buffer = '[buf]',
-              nvim_lsp = '[LSP]',
+              nvim_lsp = '[λ]',
               path = '[path]',
-              ['vim-dadbod-completion'] = 'DB',
+              ['vim-dadbod-completion'] = '[DB]',
               orgmode = '[org]',
               cmdline = '[cmd]',
               luasnip = '[SNIP]',
@@ -123,7 +169,7 @@ M.setup = function(use)
       -- Set configuration for specific filetype.
       cmp.setup.filetype('gitcommit', {
         sources = cmp.config.sources({
-          { name = 'buffer' },
+          source_buffer,
         })
       })
 
@@ -149,7 +195,7 @@ M.setup = function(use)
       cmp.setup.cmdline('/', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-          { name = 'buffer' }
+          source_buffer,
         }
       })
 
