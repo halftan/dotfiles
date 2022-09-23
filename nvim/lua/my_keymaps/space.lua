@@ -163,11 +163,11 @@ wk.register({
 
     ['f'] = {
       name = 'Vim config',
-      ['d'] = {'<cmd>tabe $MYVIMRC<cr>', 'Edit init.vim'},
+      ['d'] = {'<cmd>edit $MYVIMRC<cr>', 'Edit init.vim'},
       ['s'] = {function()
         require('telescope.builtin').find_files({search_dirs = {utils.conf_dir}})
       end, 'Find file in config dir'},
-      ['p'] = {string.format('<cmd>tabe %s<cr>', utils.file_in_conf_dir('lua/my_plugins.lua')), 'Edit plugins'},
+      ['p'] = {string.format('<cmd>edit %s<cr>', utils.file_in_conf_dir('lua/my_plugins.lua')), 'Edit plugins'},
     },
   },
 

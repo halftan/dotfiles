@@ -4,11 +4,7 @@ local lga_actions = require "telescope-live-grep-args.actions"
 
 return {
   setup = function()
-    ts = require("telescope")
-    ts.load_extension "live_grep_args"
-    ts.load_extension 'projects'
-    ts.load_extension 'fzf'
-    ts.load_extension "packer"
+    local ts = require("telescope")
 
     local theme_conf = {
       commands = {theme = 'dropdown'},
@@ -54,13 +50,18 @@ return {
       pickers = pickers_conf,
       extensions = {
         live_grep_args = {
-          mappings = {
+          default_mappings = {
             i = {
-              ['<C-q>'] = lga_actions.quote_prompt(),
+              ['<C-S-K>'] = lga_actions.quote_prompt(),
             }
           }
         }
       }
     }
+
+    ts.load_extension "live_grep_args"
+    ts.load_extension 'projects'
+    ts.load_extension 'fzf'
+    ts.load_extension "packer"
   end
 }
