@@ -116,6 +116,3 @@ augroup END
 
 lua require 'my_keymaps'
 
-command! W SudaWrite
-cnoremap w!! W
-
