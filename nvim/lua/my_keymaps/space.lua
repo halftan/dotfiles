@@ -70,15 +70,15 @@ wk.register({
 
   ['f'] = {
     name = 'File & Fuzzy',
-    ['s'] = {'<cmd>w<cr>', 'Save file'},
-    ['S'] = {'<cmd>SudaWrite<cr>', 'Sudo save file'},
+    ['`'] = {'<cmd>Telescope resume<cr>', 'Resume last find'},
+    ['"'] = {'<cmd>Telescope registers<cr>', 'Find registers'},
     ['/'] = {'<cmd>Telescope builtin include_extensions=true __hide_previewer=true<cr>', 'Telescope extensions'},
     ['f'] = {'<cmd>Telescope find_files<cr>', 'Find files'},
     ['F'] = {'<cmd>Telescope find_files hidden=true<cr>', 'Find hidden files'},
     ['t'] = {'<cmd>Telescope tags<cr>', 'Find tags'},
     ['c'] = {'<cmd>Telescope colorscheme __hide_previewer=true<cr>', 'Find colorscheme'},
-    ['"'] = {'<cmd>Telescope registers<cr>', 'Find registers'},
-    ['r'] = {'<cmd>Telescope resume<cr>', 'Resume last find'},
+    ['s'] = {'<cmd>w<cr>', 'Save file'},
+    ['S'] = {'<cmd>SudaWrite<cr>', 'Sudo save file'},
     ['p'] = {'<cmd>Telescope packer __hide_previewer=true<cr>', 'Find packages'},
     ['o'] = {'<cmd>NvimTreeFindFile<cr>', 'Find current buffer in nvim-tree'},
     ['y'] = {function() vim.fn.setreg('+', vim.fn.expand('%')) end, "Copy current buffer's relative path"},
@@ -120,6 +120,9 @@ wk.register({
     ['P'] = {'<cmd>Telescope grep_string<cr>', 'Search word under cursor'},
     ['s'] = {'<cmd>Telescope lsp_document_symbols<cr>', 'Search symbols in buffer'},
     ['S'] = {'<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', 'Search symbols in buffer'},
+    ['r'] = {'<cmd>Telescope lsp_references<cr>', 'Search references'},
+    ['d'] = {'<cmd>Telescope lsp_definitions<cr>', 'Search definitions'},
+    ['i'] = {'<cmd>Telescope lsp_implementations<cr>', 'Search definitions'},
   },
 
   ['h'] = {
@@ -175,5 +178,12 @@ wk.register({
     name = 'Current lang',
   },
 }, { prefix = '<space>' })
+
+wk.register({
+  ['e'] = {
+    name = 'Edit/Eval',
+    ['e'] = {"<cmd>'<,'>SnipRun<cr>", "SnipRun selected"}
+  },
+}, { prefix = '<space>', mode = 'x' })
 
 return {}
