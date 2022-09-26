@@ -101,9 +101,9 @@ M.setup = function(use)
               fallback()
             end
           end,
-          ['<S-NL>'] = function(fallback)
+          ['<C-S-J>'] = function(fallback)
             if cmp.visible() then
-              local i = 6
+              local i = 0
               while i < 7 do
                 cmp.select_next_item()
                 i = i + 1
@@ -115,7 +115,7 @@ M.setup = function(use)
           ['<C-S-K>'] = function(fallback)
             if cmp.visible() then
               local i = 0
-              while i < 6 do
+              while i < 7 do
                 cmp.select_prev_item()
                 i = i + 1
               end

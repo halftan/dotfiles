@@ -8,10 +8,10 @@ return {
 
     local theme_conf = {
       commands = {theme = 'dropdown'},
-      builtin = {theme = 'dropdown'},
+      -- builtin = {theme = 'dropdown'},
     }
 
-    for k, v in pairs(require "telescope.builtin") do
+    for k, _ in pairs(require "telescope.builtin") do
       if theme_conf[k] == nil then
         theme_conf[k] = {
           theme = 'ivy'
@@ -19,10 +19,19 @@ return {
       end
     end
 
-    for ext, funcs in pairs(require("telescope").extensions) do
+    for ext, _ in pairs(require("telescope").extensions) do
       theme_conf[ext] = {
         theme = 'ivy'
       }
+    end
+
+    -- Configure lsp pickers
+    for ext, _ in pairs(theme_conf) do
+      if ext:find('lsp') == 1 then
+        theme_conf[ext] = {
+          theme = 'ivy'
+        }
+      end
     end
 
     local pickers_conf = {}

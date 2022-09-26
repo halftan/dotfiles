@@ -27,6 +27,14 @@ return { setup = function(use)
       vim.notify("Completion engine " .. vim.g.completion_engine .. " not found!", vim.log.levels.ERROR)
     end
   end
+
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      require('null_ls_config').setup()
+    end
+  }
+  
   -- use 'jiangmiao/auto-pairs'
   use {
     'windwp/nvim-autopairs',
@@ -99,22 +107,23 @@ return { setup = function(use)
     after = 'nvim-notify',
     config = function()
       require('sniprun').setup {
-        display = {'NvimNotify'},
+        show_no_output = {'TempFloatingWindow'},
+        display = {'VirtualTextOk', 'VirtualTextErr', 'TempFloatingWindow', 'LongTempFloatingWindow'},
       }
     end,
     run = 'bash ./install.sh',
     cmd = {'SnipRun', 'SnipInfo'},
   }
   use {'andymass/vim-matchup', event = 'VimEnter'}
-  use {
-    'w0rp/ale',
-    ft = {
-      'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'html', 'markdown',
-      'racket', 'vim', 'tex', 'python', 'ruby',
-    },
-    cmd = 'ALEEnable',
-    config = 'vim.cmd[[ALEEnable]]'
-  }
+  -- use {
+  --   'w0rp/ale',
+  --   ft = {
+  --     'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'html', 'markdown',
+  --     'racket', 'vim', 'tex', 'python', 'ruby', 'lua', 'javascript', 'yaml',
+  --   },
+  --   cmd = {'ALEEnable', 'ALEInfo'},
+  --   config = 'vim.cmd[[ALEEnable]]'
+  -- }
   use {
     'nvim-treesitter/nvim-treesitter',
     requires = {

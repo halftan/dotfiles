@@ -27,6 +27,8 @@ wk.register({
   --     vim.cmd('bnext')
   --   end
   -- end, 'Next tab'},
+  ['[d'] = {vim.diagnostic.goto_prev, 'Previous error'},
+  [']d'] = {vim.diagnostic.goto_next, 'Next error'},
 })
 
 return {}
