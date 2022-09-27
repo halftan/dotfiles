@@ -85,7 +85,7 @@ return {
 
     refactor = {
       highlight_definitions = {
-        clear_on_cursor_move = false,
+        clear_on_cursor_move = true,
         enable = true,
       },
       highlight_current_scope = { enable = true },
@@ -101,8 +101,8 @@ return {
           goto_definition = "gnd",
           list_definitions = "gnD",
           list_definitions_toc = "gO",
-          goto_next_usage = "<a-*>",
-          goto_previous_usage = "<a-#>",
+          goto_next_usage = "<a-8>",
+          goto_previous_usage = "<a-3>",
         },
       },
     },

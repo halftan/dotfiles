@@ -18,6 +18,7 @@ return { setup = function(use)
     end
   }
   use 'neovim/nvim-lspconfig'
+  use 'b0o/SchemaStore.nvim'
 
   if vim.g.completion_engine ~= nil then
     local loaded, engine = pcall(require, 'my_completion_engine.' .. vim.g.completion_engine)
@@ -34,7 +35,14 @@ return { setup = function(use)
       require('null_ls_config').setup()
     end
   }
-  
+
+  use {
+    'folke/trouble.nvim',
+    config = function()
+      require('trouble').setup()
+    end
+  }
+
   -- use 'jiangmiao/auto-pairs'
   use {
     'windwp/nvim-autopairs',
@@ -212,7 +220,7 @@ return { setup = function(use)
         respect_buf_cwd = true,
         update_focused_file = {
           enable = true,
-          update_root = true,
+          update_root = false,
         },
         renderer = {
           group_empty = true,
