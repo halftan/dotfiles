@@ -3,7 +3,7 @@ local M = {}
 M.setup = function(use)
   use {
     'hrsh7th/nvim-cmp',
-    after = 'nvim-lspconfig',
+    after = {'nvim-lspconfig', 'SchemaStore.nvim'},
     requires = {
       {'hrsh7th/cmp-nvim-lsp'},
       {'hrsh7th/cmp-buffer'},

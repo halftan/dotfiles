@@ -33,48 +33,30 @@ local lspconfigs = {
           -- ["../path/relative/to/file.yml"] = "/.github/workflows/*"
           -- ["/path/from/root/of/project"] = "/.github/workflows/*"
         },
+        schemaStore = {
+          enable = true
+        },
       },
     }
   },
   --}}}
+--{{{ jsonls
+  jsonls = {
+    settings = {
+      json = {
+        schemas = require('schemastore').json.schemas(),
+        validate = { enable = true },
+      }
+    }
+  },
+  --}}}
 
-  'gopls', 'pyright', 'bashls', 'ansiblels',
+  'jsonls', 'gopls', 'pyright', 'bashls', 'ansiblels',
 }
 
 local on_attach_func = function(client, bufnr)
-  local wk = require('which-key')
-  wk.register({
-    ['d'] = {
-      name = 'Diagnostics',
-    },
-    ['l'] = {
-      name = 'LSP',
-      ['g'] {
-        name = 'Goto',
-        ['d'] = {require'telescope.builtin'.lsp_definitions, 'Goto definition'},
-        ['D'] = {vim.lsp.buf.declaration, 'Goto declaration'},
-        ['r'] = {require'telescope.builtin'.lsp_references, 'Find references'},
-      },
-      ['r'] = {
-        name = 'Refactoring',
-        ['n'] = {vim.lsp.buf.rename, 'Rename'},
-      },
-      ['a'] = {vim.lsp.buf.code_action, 'Code action'},
-      ['='] = {vim.lsp.buf.formatting, 'Format'},
-      ['S'] = {function() vim.lsp.stop_client(vim.lsp.get_active_clients()) end, 'Stop LSP client'},
-    },
-  }, {
-      prefix = '<space>',
-      buffer = bufnr,
-    })
-
-  wk.register({
-    ['gd'] = {vim.lsp.buf.definition, 'Goto definition'},
-    ['gD'] = {vim.lsp.buf.declaration, 'Goto declaration'},
-    ['K'] = {vim.lsp.buf.hover, 'Hover action'},
-  }, {
-      buffer = bufnr,
-    })
+  require'my_keymaps'.local_keymaps(client, bufnr)
+  require'my_keymaps.space.d'.local_keymaps(client, bufnr)
 end
 
 local default_conf = {
@@ -92,8 +74,6 @@ return {
   setup = function(ensure_capabilities)
     local lsp = require 'lspconfig'
 
-    -- TODO: customize on_attach function to register buffer keymaps with wk
-    -- see :h lspconfig-keybindings
     for lang, lspconf in pairs(lspconfigs) do
       if type(lspconf) == 'string' then
         lsp[lspconf].setup(ensure_capabilities(default_conf))

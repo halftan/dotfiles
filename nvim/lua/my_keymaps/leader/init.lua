@@ -15,3 +15,5 @@ wk.register({
   ['y'] = {'"+y', 'Yank to system clipboard', mode = 'x'},
   ['Y'] = {'"+Y', 'Yank to system clipboard', mode = 'x'},
 }, {prefix = '<leader>'})
+
+return {}

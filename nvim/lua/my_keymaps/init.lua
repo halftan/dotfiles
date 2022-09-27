@@ -1,7 +1,10 @@
-sub_keymaps = {'space', 'leader'}
+local sub_keymaps = {'space', 'leader', 'g'}
 
 for _, v in pairs(sub_keymaps) do
-  pcall(require, 'my_keymaps.' .. v)
+  local ok, keydef = pcall(require, 'my_keymaps.' .. v)
+  if ok and type(keydef) == 'table' and keydef.setup ~= nil then
+    keydef.setup()
+  end
 end
 
 local wk = require('which-key')
@@ -29,6 +32,43 @@ wk.register({
   -- end, 'Next tab'},
   ['[d'] = {vim.diagnostic.goto_prev, 'Previous error'},
   [']d'] = {vim.diagnostic.goto_next, 'Next error'},
+  ['[c'] = {require'gitsigns'.prev_hunk, 'Previous error'},
+  [']c'] = {require'gitsigns'.next_hunk, 'Next error'},
+
+  [','] = {
+    name = 'LSP',
+  },
 })
 
-return {}
+local M = {}
+
+function M.local_keymaps(client, bufnr)
+  wk.register({
+    [','] = {
+      name = 'LSP',
+      ['g'] = {
+        name = 'Goto',
+        ['d'] = {require'telescope.builtin'.lsp_definitions, 'Goto definition'},
+        ['D'] = {vim.lsp.buf.declaration, 'Goto declaration'},
+        ['r'] = {require'telescope.builtin'.lsp_references, 'Find references'},
+      },
+      ['r'] = {
+        name = 'Refactoring',
+        ['n'] = {vim.lsp.buf.rename, 'Rename'},
+      },
+      ['a'] = {vim.lsp.buf.code_action, 'Code action'},
+      ['='] = {vim.lsp.buf.formatting, 'Format'},
+      ['S'] = {function() vim.lsp.stop_client(vim.lsp.get_active_clients()) end, 'Stop LSP client'},
+    },
+  })
+
+  wk.register({
+    ['gd'] = {vim.lsp.buf.definition, 'Goto definition'},
+    ['gD'] = {vim.lsp.buf.declaration, 'Goto declaration'},
+    ['K'] = {vim.lsp.buf.hover, 'Hover action'},
+  }, {
+      buffer = bufnr,
+    })
+end
+
+return M
