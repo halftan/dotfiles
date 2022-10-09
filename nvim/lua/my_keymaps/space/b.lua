@@ -21,6 +21,8 @@ wk.register({
     ['D'] = {'<cmd>BufferClose!<cr>', 'Force unload buffer'},
     ['p'] = {'<cmd>BufferPin<cr>', 'Pin current buffer'},
     ['/'] = {'<cmd>Telescope current_buffer_fuzzy_find<cr>', 'Search in buffer'},
+
+    ['n'] = {'<cmd>enew<cr>', 'Create buffer'},
   },
 }, { prefix = '<space>' })
 

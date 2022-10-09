@@ -20,6 +20,7 @@ M.setup = function(use)
       vim.cmd [[set completeopt=menu,menuone,noselect]]
 
       local cmp = require('cmp')
+      local types = require('cmp.types')
       local lspkind = require('lspkind')
 
       local source_buffer = {
@@ -79,63 +80,41 @@ M.setup = function(use)
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-        mapping = cmp.mapping.preset.insert({
-          ['<C-u>'] = function(fallback)
-            if cmp.visible() then
-              cmp.mapping.scroll_docs(-4)
-            else
-              fallback()
-            end
-          end,
-          ['<C-d>'] = function(fallback)
-            if cmp.visible() then
-              cmp.mapping.scroll_docs(4)
-            else
-              fallback()
-            end
-          end,
-          ['<C-j>'] = function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            else
-              fallback()
-            end
-          end,
+        mapping = {
+          ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-d>'] = cmp.mapping.scroll_docs(4),
           ['<C-S-J>'] = function(fallback)
-            if cmp.visible() then
-              local i = 0
-              while i < 7 do
-                cmp.select_next_item()
-                i = i + 1
-              end
-            else
+            if not cmp.select_next_item({ behavior = types.cmp.SelectBehavior.Select }) then
               fallback()
+              return nil
+            end
+            local i = 0
+            while i < 6 do
+              cmp.select_next_item({ behavior = types.cmp.SelectBehavior.Select })
+              i = i + 1
             end
           end,
           ['<C-S-K>'] = function(fallback)
-            if cmp.visible() then
-              local i = 0
-              while i < 7 do
-                cmp.select_prev_item()
-                i = i + 1
-              end
-            else
+            if not cmp.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }) then
               fallback()
+              return nil
+            end
+            local i = 0
+            while i < 6 do
+              cmp.select_prev_item({ behavior = types.cmp.SelectBehavior.Select })
+              i = i + 1
             end
           end,
-          ['<C-k>'] = function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            else
-              fallback()
-            end
-          end,
+          ['<C-j>'] = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
+          ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }),
+          ['<Down>'] = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
+          ['<Up>'] = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_next_item()
+              cmp.select_next_item({ behavior = types.cmp.SelectBehavior.Insert})
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
             elseif has_words_before() then
@@ -146,7 +125,7 @@ M.setup = function(use)
           end, { "i", "s" }),
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_prev_item()
+              cmp.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert })
             elseif luasnip.jumpable(-1) then
               luasnip.jump(-1)
             else
@@ -161,7 +140,7 @@ M.setup = function(use)
               }
             }
           })
-        }),
+        },
 
         sources = cmp.config.sources(unpack(global_sources)),
 

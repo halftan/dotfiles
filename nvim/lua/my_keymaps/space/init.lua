@@ -15,7 +15,7 @@ end
 utils.load_all_in_path(utils.file_in_conf_dir('lua/my_keymaps/space'))
 
 wk.register({
-  ['0'] = {'<cmd>NvimTreeFocus<cr>', 'Focus nvim-tree'},
+  ['0'] = {function() require'nvim-tree.api'.tree.focus() end, 'Focus nvim-tree'},
   ['1'] = {function() focus_winnr(1) end, 'Focus window 1'},
   ['2'] = {function() focus_winnr(2) end, 'Focus window 2'},
   ['3'] = {function() focus_winnr(3) end, 'Focus window 3'},

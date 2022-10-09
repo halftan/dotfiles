@@ -43,10 +43,12 @@ cnoremap <C-f> <Right>
 cnoremap <C-a> <Home>
 cnoremap <C-b> <Left>
 cnoremap <C-e> <End>
+cnoremap <C-d> <Delete>
 inoremap <C-f> <Right>
 inoremap <C-a> <Home>
 inoremap <C-b> <Left>
 inoremap <C-e> <End>
+inoremap <C-d> <Delete>
 " @bug_vim with <silent> command line can not be cleared
 cnoremap <expr> <C-k> repeat('<Delete>', strchars(getcmdline()) - getcmdpos() + 1)
 

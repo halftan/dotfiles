@@ -83,6 +83,9 @@ let g:sneak#use_ic_scs=1
 
 let g:camelcasemotion_key=','
 
+" vim-fugitive
+let g:github_enterprise_urls = ['***REMOVED***']
+
 " editorconfig
 let g:EditorConfig_exclude_patterns=['fugitive://.*', 'scp://.*']
 
@@ -113,6 +116,9 @@ augroup filetype_indent
 augroup END
 
 " FileType specs End ----------
+
+" Highlight on yank
+au TextYankPost * silent! lua vim.highlight.on_yank()
 
 lua require 'my_keymaps'
 
