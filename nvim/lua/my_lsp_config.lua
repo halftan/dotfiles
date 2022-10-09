@@ -51,7 +51,7 @@ local lspconfigs = {
   },
   --}}}
 
-  'jsonls', 'gopls', 'pyright', 'bashls', 'ansiblels',
+  'gopls', 'pyright', 'bashls', 'ansiblels',
 }
 
 local on_attach_func = function(client, bufnr)
@@ -69,6 +69,12 @@ local function add_on_attach(conf)
   end
   return conf
 end
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, {
+    border = "single",
+  }
+)
 
 return {
   setup = function(ensure_capabilities)

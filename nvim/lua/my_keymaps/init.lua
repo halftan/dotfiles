@@ -58,7 +58,10 @@ function M.local_keymaps(client, bufnr)
       },
       ['a'] = {vim.lsp.buf.code_action, 'Code action'},
       ['='] = {vim.lsp.buf.formatting, 'Format'},
-      ['S'] = {function() vim.lsp.stop_client(vim.lsp.get_active_clients()) end, 'Stop LSP client'},
+      ['w'] = {
+        name = 'Workspace',
+        ['S'] = {function() vim.lsp.stop_client(vim.lsp.get_active_clients()) end, 'Stop LSP client'},
+      }
     },
   })
 

@@ -18,6 +18,7 @@ wk.register({
     ['d'] = {'<cmd>close<cr>', 'Close window'},
     ['D'] = {'<cmd>close!<cr>', 'Close window'},
     ['='] = {'<cmd>wincmd =<cr>', 'Balance hiehgt and width'},
+    ['n'] = {'<cmd>new<cr>', 'Create window'},
   },
 }, { prefix = '<space>' })
 

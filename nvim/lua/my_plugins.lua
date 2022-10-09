@@ -189,6 +189,9 @@ return { setup = function(use)
       {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
     },
     config = function()
+      require("project_nvim").setup {
+        detection_methods = {"pattern", "lsp"},
+      }
       require('my_telescope_config').setup()
     end,
   }
@@ -220,7 +223,7 @@ return { setup = function(use)
         respect_buf_cwd = true,
         update_focused_file = {
           enable = true,
-          update_root = false,
+          update_root = true,
         },
         renderer = {
           group_empty = true,
@@ -277,7 +280,19 @@ return { setup = function(use)
     after = 'vim-dadbod',
   }
 
-  use 'sheerun/vim-polyglot'
+  use {
+    'sheerun/vim-polyglot',
+    setup = function()
+      vim.g.polyglot_disabled = {
+        'autoindent',
+      }
+      vim.g.vim_markdown_toc_autofit = 1
+      vim.g.vim_markdown_auto_insert_bullets = 0
+      vim.g.vim_markdown_conceal = 0
+      vim.g.vim_markdown_conceal_code_blocks = 0
+    end,
+  }
+  use 'tpope/vim-sleuth'
   use 'fatih/vim-go'
   use {
     'rafcamlet/nvim-luapad',

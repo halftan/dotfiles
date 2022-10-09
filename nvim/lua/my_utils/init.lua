@@ -20,7 +20,6 @@ function M.load_all_in_path(path)
     end,
     on_insert = function(entry)
       local name = entry:match(M.file_in_conf_dir('lua') .. '/(.+).lua$'):gsub('/', '.')
-      vim.pretty_print('Loading ' .. name)
       pcall(require, name)
     end
   })
