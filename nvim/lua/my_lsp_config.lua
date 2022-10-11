@@ -51,7 +51,7 @@ local lspconfigs = {
   },
   --}}}
 
-  'gopls', 'pyright', 'bashls', 'ansiblels',
+  'gopls', 'pyright', 'bashls', 'ansiblels', 'vimls',
 }
 
 local on_attach_func = function(client, bufnr)
@@ -70,11 +70,48 @@ local function add_on_attach(conf)
   return conf
 end
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    border = "single",
-  }
-)
+local function pin_preview_window(winnr)
+  local ok, result = pcall(vim.api.nvim_win_get_var, vim.api.nvim_get_current_win(), 'preview_window_pinned')
+  local pinned = 0
+  if ok then pinned = tonumber(result) end
+  vim.api.nvim_win_set_var(winnr, 'preview_window_pinned', 1 - pinned)
+end
+
+local function my_hover_handler(err, result, ctx, config)
+  local floating_bufnr, floating_winnr = vim.lsp.handlers.hover(err, result, ctx, config)
+  vim.keymap.set("n", "p", function() pin_preview_window(floating_winnr) end, {buffer = floating_bufnr, silent = true, noremap = true, nowait = true})
+end
+
+-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+--   my_hover_handler, {
+--     border = "single",
+--   }
+-- )
+
+-- vim.lsp.util._close_preview_window = function(winnr, bufnrs)
+--   vim.schedule(function()
+--     -- exit if we are in one of ignored buffers
+--     if bufnrs and vim.tbl_contains(bufnrs, vim.api.nvim_get_current_buf()) then
+--       return
+--     end
+--
+--     local ok, result = pcall(vim.api.nvim_win_get_var, vim.api.nvim_get_current_win(), 'preview_window_pinned')
+--     local pinned = 0
+--     if ok then pinned = tonumber(result) end
+--     if pinned == 1 then
+--       return
+--     end
+--
+--     local augroup = 'preview_window_'..winnr
+--     vim.cmd(string.format([[
+--       augroup %s
+--         autocmd!
+--       augroup end
+--       augroup! %s
+--     ]], augroup, augroup))
+--     pcall(vim.api.nvim_win_close, winnr, true)
+--   end)
+-- end
 
 return {
   setup = function(ensure_capabilities)
