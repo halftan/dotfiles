@@ -68,7 +68,8 @@ function M.local_keymaps(client, bufnr)
   wk.register({
     ['gd'] = {vim.lsp.buf.definition, 'Goto definition'},
     ['gD'] = {vim.lsp.buf.declaration, 'Goto declaration'},
-    ['K'] = {vim.lsp.buf.hover, 'Hover action'},
+    ['K'] = {require("hover").hover, 'Hover action'},
+    ['gK'] = {require("hover").hover_select, 'Hover action selecte provider'},
   }, {
       buffer = bufnr,
     })

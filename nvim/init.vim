@@ -48,6 +48,7 @@ set listchars=tab:▸\ ,extends:❯,precedes:❮,trail:· " Change listchars
 set linebreak " Wrap long lines at a blank
 set showbreak=↪  " Change wrap line break
 set nrformats=bin,hex,unsigned
+set previewheight=6
 
 
 if &history < 1000
