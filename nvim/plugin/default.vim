@@ -18,8 +18,8 @@ endif
 inoremap <S-Return> <C-o>o
 
 " Improve scroll, credits: https://github.com/Shougo
-nnoremap <expr> zz (winline() == (winheight(0)+1) / 2) ?
-      \ 'zt' : (winline() == &scrolloff + 1) ? 'zb' : 'zz'
+" nnoremap <expr> zz (winline() == (winheight(0)+1) / 2) ?
+"       \ 'zt' : (winline() == &scrolloff + 1) ? 'zb' : 'zz'
 
 " Select blocks after indenting
 xnoremap < <gv

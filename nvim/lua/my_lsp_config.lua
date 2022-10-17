@@ -57,6 +57,12 @@ local lspconfigs = {
 local on_attach_func = function(client, bufnr)
   require'my_keymaps'.local_keymaps(client, bufnr)
   require'my_keymaps.space.d'.local_keymaps(client, bufnr)
+
+  if client.server_capabilities.documentSymbolProvider then
+    require("nvim-navic").attach(client, bufnr)
+  else
+    vim.notify("LSP server does not support document symbol")
+  end
 end
 
 local default_conf = {
@@ -119,7 +125,7 @@ return {
 
     for lang, lspconf in pairs(lspconfigs) do
       if type(lspconf) == 'string' then
-        lsp[lspconf].setup(ensure_capabilities(default_conf))
+        lsp[lspconf].setup(ensure_capabilities(add_on_attach(default_conf)))
       else
         lsp[lang].setup(ensure_capabilities(add_on_attach(lspconf)))
       end

@@ -93,7 +93,9 @@ return {
           clear_on_cursor_move = true,
           enable = true,
         },
-        highlight_current_scope = { enable = true },
+        highlight_current_scope = {
+          enable = false,
+        },
         smart_rename = {
           enable = true,
           keymaps = {
@@ -101,7 +103,7 @@ return {
           },
         },
         navigation = {
-          enable = true,
+          enable = false,
           keymaps = {
             goto_definition = "gnd",
             list_definitions = "gnD",

@@ -16,6 +16,9 @@ lua <<EOF
     vim.cmd [[packadd packer.nvim]]
   end
 
+  require'packer'.init({
+    max_jobs=50
+  })
   return require('packer').startup(function(use)
     require('my_plugins').setup(use)
     -- Automatically set up your configuration after cloning packer.nvim
