@@ -12,10 +12,10 @@ local utils = require('my_utils')
 
 wk.register({
   ['<c-p>'] = {'<cmd>Telescope find_files hidden=true<cr>', 'Find files'},
-  ['H'] = {'<cmd>BufferPrevious<cr>', 'Previous buffer'},
-  ['L'] = {'<cmd>BufferNext<cr>', 'Next buffer'},
-  ['<S-Left>'] = {'<cmd>BufferMovePrevious<cr>', 'Move buffer left'},
-  ['<S-Right>'] = {'<cmd>BufferMoveNext<cr>', 'Move buffer right'},
+  ['H'] = {'<cmd>BufferLineCyclePrev<cr>', 'Previous buffer'},
+  ['L'] = {'<cmd>BufferLineCycleNext<cr>', 'Next buffer'},
+  ['<S-Left>'] = {'<cmd>BufferLineMovePrev<cr>', 'Move buffer left'},
+  ['<S-Right>'] = {'<cmd>BufferLineMoveNext<cr>', 'Move buffer right'},
   -- ['H'] = {function()
   --   if vim.fn.tabpagenr('$') > 1 then
   --     vim.cmd('normal gT')
