@@ -4,7 +4,7 @@ local utils = require('my_utils')
 wk.register({
   ['e'] = {
     name = 'Edit/Eval',
-    ['e'] = {"<cmd>'<,'>SnipRun<cr>", "SnipRun selected"}
+    ['e'] = {"<cmd>SnipRun<cr>", "SnipRun selected"}
   },
 }, { prefix = '<space>', mode = 'x' })
 

@@ -18,6 +18,10 @@ return { setup = function(use)
     end
   }
   use 'neovim/nvim-lspconfig'
+  use {
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig",
+  }
   use 'b0o/SchemaStore.nvim'
 
   if vim.g.completion_engine ~= nil then
@@ -97,7 +101,13 @@ return { setup = function(use)
       })
     end
   }
-  use 'mhinz/vim-startify'
+  use {
+    'goolord/alpha-nvim',
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    config = function ()
+      require'alpha'.setup(require'alpha.themes.startify'.config)
+    end
+  }
 
   -- use 'tpope/vim-surround'
   use {
@@ -237,6 +247,7 @@ return { setup = function(use)
       require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
     end
   }
+  use 'mizlan/iswap.nvim'
   use 'rhysd/clever-f.vim'
   use 'bkad/CamelCaseMotion'
   use {
@@ -271,7 +282,17 @@ return { setup = function(use)
     }
   }
   use 'wellle/targets.vim'
-  use 'Yggdroot/indentLine'
+  -- use 'Yggdroot/indentLine'
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    config = function()
+      require("indent_blankline").setup {
+        -- for example, context is off by default, use this to turn it on
+        show_current_context = true,
+        show_current_context_start = true,
+      }
+    end
+  }
   use 'pearofducks/ansible-vim'
   use {
     'vim-airline/vim-airline',
@@ -280,16 +301,13 @@ return { setup = function(use)
     end
   }
   use 'joshdick/onedark.vim'
-  use {
-    'rrethy/vim-hexokinase',
-    cmd = {
-      'HexokinaseToggle',
-      'HexokinaseTurnOn',
-      'HexokinaseTurnOff',
-    },
-    run = 'make hexokinase',
-  }
   use 'editorconfig/editorconfig-vim'
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require'colorizer'.setup()
+    end
+  }
 
   use {
     'tpope/vim-dadbod',
