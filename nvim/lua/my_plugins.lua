@@ -87,9 +87,9 @@ return { setup = function(use)
   }
 
   use {
-    'folke/lua-dev.nvim',
+    'folke/neodev.nvim',
     config = function()
-      require('lua-dev').setup({
+      require('neodev').setup({
         override = function(root_dir, library)
           if root_dir:find('dotfiles', 1, true) ~= nil then
             library.enabled = true
@@ -123,8 +123,16 @@ return { setup = function(use)
   use 'lambdalisue/suda.vim'
   use 'mbbill/undotree'
   use 'dhruvasagar/vim-table-mode'
+  -- use {
+  --   'romgrk/barbar.nvim',
+  --   config = function()
+  --     require('my_configs.bufferline').setup()
+  --   end
+  -- }
   use {
-    'romgrk/barbar.nvim',
+    'akinsho/bufferline.nvim',
+    tag = "v3.*",
+    requires = "kyazdani42/nvim-web-devicons",
     config = function()
       require('my_configs.bufferline').setup()
     end

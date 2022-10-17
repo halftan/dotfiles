@@ -215,8 +215,7 @@ M.setup = function(use)
 
       -- Set up lspconfig.
       local function ensure_capabilities(lspconf)
-        local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-        lspconf['capabilities'] = capabilities
+        lspconf['capabilities'] = require('cmp_nvim_lsp').default_capabilities()
         return lspconf
       end
       require('my_lsp_config').setup(ensure_capabilities)
