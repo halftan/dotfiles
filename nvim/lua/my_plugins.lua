@@ -22,6 +22,7 @@ return { setup = function(use)
     "SmiteshP/nvim-navic",
     requires = "neovim/nvim-lspconfig",
   }
+  use 'ray-x/lsp_signature.nvim'
   use 'b0o/SchemaStore.nvim'
 
   if vim.g.completion_engine ~= nil then
@@ -186,6 +187,8 @@ return { setup = function(use)
       {'nvim-treesitter/nvim-treesitter-context'},
       {'nvim-treesitter/nvim-treesitter-refactor'},
       {'RRethy/nvim-treesitter-endwise'},
+      {'JoosepAlviste/nvim-ts-context-commentstring'},
+      {'windwp/nvim-ts-autotag'},
     },
     config = function()
       require('my_treesitter_config').setup()
@@ -209,6 +212,8 @@ return { setup = function(use)
     end,
     after = {'nvim-treesitter'},
   }
+
+  use 'monaqa/dial.nvim'
 
   use {
     "max397574/better-escape.nvim",
@@ -342,14 +347,22 @@ return { setup = function(use)
       }
       vim.g.vim_markdown_toc_autofit = 1
       vim.g.vim_markdown_auto_insert_bullets = 0
-      vim.g.vim_markdown_conceal = 0
+      -- vim.g.vim_markdown_conceal = 0
       vim.g.vim_markdown_conceal_code_blocks = 0
     end,
   }
   use 'tpope/vim-sleuth'
-  use 'fatih/vim-go'
+  use {
+    'fatih/vim-go',
+    setup = function()
+      vim.g.go_code_completion_enabled = 0
+      vim.g.go_doc_keywordprg_enabled = 1
+      vim.g.go_def_mapping_enabled = 0
+    end
+  }
   use {
     'rafcamlet/nvim-luapad',
     cmd = {'Luapad', 'LuaRun'}
   }
+  use 'junegunn/vim-easy-align'
 end}

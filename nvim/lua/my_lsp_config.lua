@@ -54,6 +54,13 @@ local lspconfigs = {
   'gopls', 'pyright', 'bashls', 'ansiblels', 'vimls',
 }
 
+local signature_setup = {
+  bind = true, -- This is mandatory, otherwise border config won't get registered.
+  handler_opts = {
+    border = "rounded"
+  }
+}
+
 local on_attach_func = function(client, bufnr)
   require'my_keymaps'.local_keymaps(client, bufnr)
   require'my_keymaps.space.d'.local_keymaps(client, bufnr)
@@ -63,6 +70,8 @@ local on_attach_func = function(client, bufnr)
   else
     vim.notify("LSP server does not support document symbol")
   end
+
+  require "lsp_signature".on_attach(signature_setup, bufnr)
 end
 
 local default_conf = {
