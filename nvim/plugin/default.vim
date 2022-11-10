@@ -35,9 +35,6 @@ xnoremap <S-Tab> <gv
 nnoremap <silent><Down> gj
 nnoremap <silent><Up> gk
 
-" Remove spaces at the end of lines
-nnoremap <silent> ,<Space> :<C-u>silent! keeppatterns %substitute/\s\+$//e<CR>
-
 " Navigation
 cnoremap <C-f> <Right>
 cnoremap <C-a> <Home>

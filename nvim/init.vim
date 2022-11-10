@@ -52,6 +52,8 @@ set linebreak " Wrap long lines at a blank
 set showbreak=↪  " Change wrap line break
 set nrformats=bin,hex,unsigned
 set previewheight=6
+set formatoptions+=r
+set conceallevel=2
 
 
 if &history < 1000

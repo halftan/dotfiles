@@ -113,6 +113,14 @@ return {
           },
         },
       },
+
+      autotag = {
+        enable = true,
+      },
+
+      context_commentstring = {
+        enable = true,
+      },
     }
   end
 }
