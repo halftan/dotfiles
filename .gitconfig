@@ -44,7 +44,7 @@
 [pull]
 	rebase = true
 [init]
-	defaultBranch = master
+	defaultBranch = main
 [interactive]
 	diffFilter = delta --color-only
 [delta]
