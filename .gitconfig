@@ -16,7 +16,7 @@
 	default = upstream
 [core]
 	editor = nvim
-	excludesfile = 
+	excludesfile = /Users/andyzhang/.gitignore
 	ignorecase = false
 	pager = delta
 [merge]
@@ -51,3 +51,6 @@
 	navigate = true
 	line-numbers = true
 	# side-by-side = true
+
+[url "***REMOVED***"]
+	insteadOf = ***REMOVED***
