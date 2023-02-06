@@ -20,19 +20,21 @@
 	ignorecase = false
 	pager = delta
 [merge]
-	tool = vscode
-	conflictstyle = diff3
+	tool = nvimdiff
+	; conflictstyle = diff3
 [mergetool]
 	prompt = true
-[mergetool "nvim"]
-	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
+[mergetool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$BASE\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd J\"
 [mergetool "vscode"]
 	cmd = code --wait $MERGED
 [difftool]
 	prompt = true
 [diff]
-	tool = vscode
+	tool = nvimdiff
 	colorMoved = default
+[difftool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd L\"
 [difftool "vscode"]
 	cmd = code --wait --diff $LOCAL $REMOTE
 [http]
