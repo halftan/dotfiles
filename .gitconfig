@@ -20,7 +20,7 @@
 	ignorecase = false
 	pager = delta
 [merge]
-	tool = nvimdiff
+	tool = meld
 	; conflictstyle = diff3
 [mergetool]
 	prompt = true
@@ -33,6 +33,7 @@
 [diff]
 	tool = nvimdiff
 	colorMoved = default
+	guitool = meld
 [difftool "nvimdiff"]
 	cmd = nvim -d \"$LOCAL\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd L\"
 [difftool "vscode"]
