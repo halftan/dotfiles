@@ -15,4 +15,7 @@ export NVM_DIR="$HOME/.nvm"
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
+# eval "$(pyenv init --path)"
+
+# Set PATH, MANPATH, etc., for Homebrew.
+[ $(uname -m) = "arm64" ] && eval "$(/opt/homebrew/bin/brew shellenv)"

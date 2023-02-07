@@ -157,18 +157,18 @@ return { setup = function(use)
     end
   }
   use 'rcarriga/nvim-notify'
-  use {
-    'michaelb/sniprun',
-    after = 'nvim-notify',
-    config = function()
-      require('sniprun').setup {
-        show_no_output = {'TempFloatingWindow'},
-        display = {'VirtualTextOk', 'VirtualTextErr', 'TempFloatingWindow', 'LongTempFloatingWindow'},
-      }
-    end,
-    run = 'bash ./install.sh',
-    cmd = {'SnipRun', 'SnipInfo'},
-  }
+  -- use {
+  --   'michaelb/sniprun',
+  --   after = 'nvim-notify',
+  --   config = function()
+  --     require('sniprun').setup {
+  --       show_no_output = {'TempFloatingWindow'},
+  --       display = {'VirtualTextOk', 'VirtualTextErr', 'TempFloatingWindow', 'LongTempFloatingWindow'},
+  --     }
+  --   end,
+  --   run = 'bash ./install.sh',
+  --   cmd = {'SnipRun', 'SnipInfo'},
+  -- }
   use {'andymass/vim-matchup', event = 'VimEnter'}
   -- use {
   --   'w0rp/ale',
@@ -352,6 +352,7 @@ return { setup = function(use)
       vim.g.no_csv_maps = 1
     end,
   }
+  use 'darfink/vim-plist'
   use 'tpope/vim-sleuth'
   use {
     'fatih/vim-go',
