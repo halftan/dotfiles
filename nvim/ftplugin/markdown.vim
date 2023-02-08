@@ -4,4 +4,4 @@ endif
 
 let b:plugin_loaded = 1
 
-set formatexpr=
+set textwidth = 80

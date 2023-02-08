@@ -15,6 +15,7 @@ local lspconfigs = {
           library = vim.api.nvim_get_runtime_file("", true),
           maxPreload = 100000,
           preloadFileSize = 10000,
+          checkThirdParty = false,
         },
         -- Do not send telemetry data containing a randomized but unique identifier
         telemetry = {
@@ -50,8 +51,25 @@ local lspconfigs = {
     }
   },
   --}}}
+-- {{{ ansiblels
+  ansiblels = {
+    settings = {
+      ansible = {
+        validation = {
+          enabled = false,
+          lint = {
+            enabled = false,
+          },
+        },
+      }
+    },
+    on_attach = function(client, bufnr)
+      vim.diagnostic.disable(nil, vim.lsp.diagnostic.get_namespace(client.id))
+    end
+  },
+-- }}}
 
-  'gopls', 'pyright', 'bashls', 'ansiblels', 'vimls',
+  'gopls', 'pyright', 'bashls', 'vimls',
 }
 
 local signature_setup = {
@@ -81,6 +99,12 @@ local default_conf = {
 local function add_on_attach(conf)
   if conf['on_attach'] == nil then
     conf['on_attach'] = on_attach_func
+  else
+    local original_on_attach_func = conf['on_attach']
+    conf['on_attach'] = function(client, bufnr)
+      on_attach_func(client, bufnr)
+      original_on_attach_func(client, bufnr)
+    end
   end
   return conf
 end
@@ -139,7 +163,8 @@ return {
         lsp[lang].setup(ensure_capabilities(add_on_attach(lspconf)))
       end
     end
-  end
+  end,
+  on_attach_func = on_attach_func,
 }
 
 -- vim:set foldmethod=marker:
