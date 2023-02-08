@@ -73,6 +73,7 @@ function M.local_keymaps(client, bufnr)
         ['S'] = {function() vim.lsp.stop_client(vim.lsp.get_active_clients()) end, 'Stop LSP client'},
       }
     },
+    ['-'] = {'za', 'Toggle fold'}
   })
 
   wk.register({

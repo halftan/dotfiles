@@ -1,0 +1,7 @@
+---
+
+profile:
+  - basic
+offline: true
+skip_list:
+  - name[casing]
