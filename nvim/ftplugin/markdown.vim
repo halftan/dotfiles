@@ -4,4 +4,4 @@ endif
 
 let b:plugin_loaded = 1
 
-set textwidth = 80
+set textwidth=80
