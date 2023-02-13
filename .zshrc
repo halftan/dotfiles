@@ -61,13 +61,13 @@ zplug "plugins/sudo", from:oh-my-zsh
 zplug "plugins/history", from:oh-my-zsh
 zplug "plugins/autojump", from:oh-my-zsh
 # zplug "plugins/emacs", from:oh-my-zsh
-# 
+
 zplug "plugins/golang", from:oh-my-zsh
 zplug "plugins/tig", from:oh-my-zsh
 zplug "plugins/gitignore", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/npm", from:oh-my-zsh
-zplug "plugins/nvm", from:oh-my-zsh
+zplug "plugins/nvm", from:oh-my-zsh, lazy:true
 zplug "plugins/pip", from:oh-my-zsh
 zplug "plugins/pyenv", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh

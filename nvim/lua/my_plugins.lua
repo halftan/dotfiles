@@ -234,15 +234,15 @@ return { setup = function(use)
     'nvim-telescope/telescope.nvim', branch = '0.1.x',
     requires = {
       {'nvim-lua/plenary.nvim'},
-      {'ahmedkhalf/project.nvim'},
+      -- {'ahmedkhalf/project.nvim'},
       {'nvim-telescope/telescope-live-grep-args.nvim'},
       {'nvim-telescope/telescope-packer.nvim'},
       {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
     },
     config = function()
-      require("project_nvim").setup {
-        detection_methods = {"pattern", "lsp"},
-      }
+      -- require("project_nvim").setup {
+      --   detection_methods = {"pattern", "lsp"},
+      -- }
       require('my_telescope_config').setup()
     end,
   }
