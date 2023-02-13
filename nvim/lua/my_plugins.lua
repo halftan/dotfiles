@@ -313,7 +313,8 @@ return { setup = function(use)
       require'my_statusline'
     end
   }
-  use 'joshdick/onedark.vim'
+  use 'olimorris/onedarkpro.nvim'
+  use 'ellisonleao/gruvbox.nvim'
   use 'editorconfig/editorconfig-vim'
   use {
     'norcalli/nvim-colorizer.lua',
