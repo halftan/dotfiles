@@ -48,6 +48,7 @@ wk.register({
   ['<c-x>'] = {require('dial.map').dec_visual(), 'Decrement'},
   ['g<c-a>'] = {require('dial.map').inc_gvisual(), 'Increment'},
   ['g<c-x>'] = {require('dial.map').dec_gvisual(), 'Decrement'},
+  ['<Enter>'] = {'<Plug>(EasyAlign)', 'Live EasyAlign'},
 }, { mode = 'v' })
 
 local M = {}

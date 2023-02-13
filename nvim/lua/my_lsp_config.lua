@@ -1,6 +1,6 @@
 local lspconfigs = {
-  --{{{ sumneko_lua
-  ['sumneko_lua'] = {
+  --{{{ lua_ls
+  ['lua_ls'] = {
     settings = {
       Lua = {
         runtime = {
