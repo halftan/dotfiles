@@ -57,3 +57,8 @@
 
 [url "ssh://git@gh.apple.com/"]
 	insteadOf = https://gh.apple.com/
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
