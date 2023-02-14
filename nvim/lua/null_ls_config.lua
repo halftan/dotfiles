@@ -19,12 +19,14 @@ M.setup = function()
         args = { "-c", vim.fn.expand("~/git/dotfiles/ansible-lint.yaml"), "-f", "codeclimate", "-q", "--nocolor", "$FILENAME" }
       }),
       null_ls.builtins.diagnostics.trail_space,
+      null_ls.builtins.diagnostics.yamllint,
 
       -- formatting
-      null_ls.builtins.formatting.cbfmt,
+      -- null_ls.builtins.formatting.cbfmt,
       null_ls.builtins.formatting.autopep8,
       null_ls.builtins.formatting.trim_whitespace,
-      null_ls.builtins.formatting.deno_fmt,
+      null_ls.builtins.formatting.prettier,
+      -- null_ls.builtins.formatting.deno_fmt,
 
       -- Misc
       null_ls.builtins.code_actions.gitsigns,

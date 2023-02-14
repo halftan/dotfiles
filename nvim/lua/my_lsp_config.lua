@@ -8,7 +8,7 @@ local lspconfigs = {
         },
         diagnostics = {
           -- Get the language server to recognize the `vim` global
-          globals = {'vim', 'packer_plugins'},
+          globals = { 'vim', 'packer_plugins' },
         },
         workspace = {
           -- Make the server aware of Neovim runtime files
@@ -41,7 +41,7 @@ local lspconfigs = {
     }
   },
   --}}}
---{{{ jsonls
+  --{{{ jsonls
   jsonls = {
     settings = {
       json = {
@@ -51,7 +51,7 @@ local lspconfigs = {
     }
   },
   --}}}
--- {{{ ansiblels
+  -- {{{ ansiblels
   ansiblels = {
     settings = {
       ansible = {
@@ -67,9 +67,12 @@ local lspconfigs = {
       vim.diagnostic.disable(nil, vim.lsp.diagnostic.get_namespace(client.id))
     end
   },
--- }}}
+  -- }}}
 
-  'gopls', 'pyright', 'bashls', 'vimls',
+  'gopls',
+  'pyright',
+  'bashls',
+  'vimls',
 }
 
 local signature_setup = {
@@ -79,9 +82,18 @@ local signature_setup = {
   }
 }
 
+local function is_null_ls_formatting_enabed(bufnr)
+  local file_type = vim.bo[bufnr].filetype
+  local generators = require("null-ls.generators").get_available(
+    file_type,
+    require("null-ls.methods").internal.FORMATTING
+  )
+  return #generators > 0
+end
+
 local on_attach_func = function(client, bufnr)
-  require'my_keymaps'.local_keymaps(client, bufnr)
-  require'my_keymaps.space.d'.local_keymaps(client, bufnr)
+  require 'my_keymaps'.local_keymaps(client, bufnr)
+  require 'my_keymaps.space.d'.local_keymaps(client, bufnr)
 
   if client.server_capabilities.documentSymbolProvider then
     require("nvim-navic").attach(client, bufnr)
@@ -90,6 +102,16 @@ local on_attach_func = function(client, bufnr)
   end
 
   require "lsp_signature".on_attach(signature_setup, bufnr)
+
+  if client.server_capabilities.documentFormattingProvider then
+    if client.name == "null-ls" and is_null_ls_formatting_enabed(bufnr)
+        or client.name ~= "null-ls"
+    then
+      vim.bo[bufnr].formatexpr = "v:lua.vim.lsp.formatexpr()"
+    else
+      vim.bo[bufnr].formatexpr = nil
+    end
+  end
 end
 
 local default_conf = {
@@ -118,7 +140,8 @@ end
 
 local function my_hover_handler(err, result, ctx, config)
   local floating_bufnr, floating_winnr = vim.lsp.handlers.hover(err, result, ctx, config)
-  vim.keymap.set("n", "p", function() pin_preview_window(floating_winnr) end, {buffer = floating_bufnr, silent = true, noremap = true, nowait = true})
+  vim.keymap.set("n", "p", function() pin_preview_window(floating_winnr) end,
+    { buffer = floating_bufnr, silent = true, noremap = true, nowait = true })
 end
 
 -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(

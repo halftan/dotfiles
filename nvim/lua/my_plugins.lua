@@ -311,6 +311,7 @@ return { setup = function(use)
   use 'pearofducks/ansible-vim'
   use {
     'vim-airline/vim-airline',
+    requires = { 'vim-airline/vim-airline-themes' },
     config = function()
       require'my_statusline'
     end
