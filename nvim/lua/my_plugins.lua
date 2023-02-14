@@ -268,6 +268,8 @@ return { setup = function(use)
     requires = {
       'kyazdani42/nvim-web-devicons', -- optional, for file icons
     },
+    -- See https://github.com/nvim-tree/nvim-tree.lua/issues/1998
+    commit = '8b8d457',
     -- tag = 'nightly' -- optional, updated every week. (see issue #1193)
     config = function()
       require('nvim-tree').setup({
