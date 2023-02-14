@@ -1,5 +1,7 @@
 let mapleader='\'
-let g:python3_host_prog=expand("$HOME/.pyenv/versions/3.10.2/bin/python")
+let g:python3_host_prog=expand("$HOME/.pyenv/versions/neovim/bin/python")
+let g:loaded_node_provider = 0
+let g:loaded_perl_provider = 0
 
 if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'))
   set shell=/usr/bin/env\ bash
