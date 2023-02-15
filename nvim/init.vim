@@ -115,11 +115,6 @@ augroup filetype_indent
   au FileType gotmpl,helm setl sw=2 ts=2 sts=2 et
   au FileType lua,vim setl sw=2 ts=2 sts=2 et
   au FileType gitcommit setlocal spell
-
-  au BufRead,BufNewFile nginx.d/*.conf set ft=nginx
-  au BufRead,BufNewFile *.nginx set ft=nginx
-  au BufRead,BufNewFile *.nginx.* set ft=nginx
-  au BufRead,BufNewFile nginx.conf.* set ft=nginx
   " au BufRead,BufNewFile */playbooks/**/*.yml set filetype=yaml.ansible
 augroup END
 
@@ -129,4 +124,3 @@ augroup END
 au TextYankPost * silent! lua vim.highlight.on_yank()
 
 lua require 'my_keymaps'
-
