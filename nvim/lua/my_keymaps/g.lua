@@ -6,5 +6,5 @@ wk.register({
     ['r'] = {'Rename'}
   },
   ['a'] = {'<Plug>(EasyAlign)', 'EasyAlign'},
-  ['='] = {function() vim.lsp.buf.formatting() end, 'Format buffer'},
+  ['='] = {function() vim.lsp.buf.format() end, 'Format buffer'},
 }, { prefix = 'g' })
