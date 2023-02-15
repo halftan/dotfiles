@@ -26,4 +26,7 @@ ssh_only = false
 format = "@[$localipv4](bold red) "
 disabled = false
 
+[python]
+pyenv_version_name = true
+
 [aws]
