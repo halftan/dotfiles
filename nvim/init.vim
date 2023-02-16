@@ -1,5 +1,6 @@
 let mapleader='\'
 let g:python3_host_prog=expand("$HOME/.pyenv/versions/neovim/bin/python")
+let g:loaded_ruby_provider = 0
 let g:loaded_node_provider = 0
 let g:loaded_perl_provider = 0
 
