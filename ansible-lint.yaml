@@ -4,3 +4,6 @@ profile: basic
 offline: true
 skip_list:
   - name[casing]
+  - risky-file-permission
+  - no-changed-when
+  - unnamed-task
