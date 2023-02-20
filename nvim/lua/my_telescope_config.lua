@@ -58,13 +58,18 @@ return {
       },
       pickers = pickers_conf,
       extensions = {
-        live_grep_args = {
+        ["live_grep_args"] = {
           default_mappings = {
             i = {
               ["<C-S-K>"] = lga_actions.quote_prompt(),
             }
           }
-        }
+        },
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown {
+
+          }
+        },
       }
     }
 
@@ -72,5 +77,6 @@ return {
     pcall(ts.load_extension, "projects")
     pcall(ts.load_extension, "fzf")
     pcall(ts.load_extension, "packer")
+    pcall(ts.load_extension, "ui-select")
   end
 }

@@ -238,6 +238,7 @@ return { setup = function(use)
       {'nvim-telescope/telescope-live-grep-args.nvim'},
       {'nvim-telescope/telescope-packer.nvim'},
       {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+      {'nvim-telescope/telescope-ui-select.nvim'},
     },
     config = function()
       -- require("project_nvim").setup {
@@ -268,8 +269,6 @@ return { setup = function(use)
     requires = {
       'kyazdani42/nvim-web-devicons', -- optional, for file icons
     },
-    -- See https://github.com/nvim-tree/nvim-tree.lua/issues/1998
-    commit = '8b8d457',
     -- tag = 'nightly' -- optional, updated every week. (see issue #1193)
     config = function()
       require('nvim-tree').setup({

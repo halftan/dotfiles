@@ -1,3 +1,4 @@
+---
 extends: default
 
 rules:
@@ -7,3 +8,6 @@ rules:
     level: warning
   indentation:
     indent-sequences: whatever
+  truthy:
+    allowed-values: ['true', 'false', 'yes', 'no']
+    check-keys: true
