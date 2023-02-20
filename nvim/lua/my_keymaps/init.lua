@@ -41,6 +41,8 @@ wk.register({
 
   ['<c-a>'] = {require('dial.map').inc_normal(), 'Increment'},
   ['<c-x>'] = {require('dial.map').dec_normal(), 'Decrement'},
+
+  ['-'] = {'za', 'Toggle fold'},
 })
 
 wk.register({
@@ -74,8 +76,14 @@ function M.local_keymaps(client, bufnr)
         ['S'] = {function() vim.lsp.stop_client(vim.lsp.get_active_clients()) end, 'Stop LSP client'},
       }
     },
-    ['-'] = {'za', 'Toggle fold'}
   })
+
+  wk.register({
+    [','] = {
+      name = 'LSP',
+      ['a'] = { vim.lsp.buf.code_action, 'Code action' },
+    },
+  }, { mode = 'v' })
 
   wk.register({
     ['gd'] = {vim.lsp.buf.definition, 'Goto definition'},
