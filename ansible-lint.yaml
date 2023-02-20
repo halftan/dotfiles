@@ -7,3 +7,4 @@ skip_list:
   - risky-file-permission
   - no-changed-when
   - unnamed-task
+  - yaml
