@@ -70,7 +70,7 @@ function M.local_keymaps(client, bufnr)
         ['n'] = {vim.lsp.buf.rename, 'Rename'},
       },
       ['a'] = {vim.lsp.buf.code_action, 'Code action'},
-      ['='] = {vim.lsp.buf.formatting, 'Format'},
+      ['='] = {function() vim.lsp.buf.format { async = false } end, 'Format buffer'},
       ['w'] = {
         name = 'Workspace',
         ['S'] = {function() vim.lsp.stop_client(vim.lsp.get_active_clients()) end, 'Stop LSP client'},
