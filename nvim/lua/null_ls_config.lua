@@ -29,6 +29,7 @@ M.setup = function()
       null_ls.builtins.formatting.trim_whitespace,
       null_ls.builtins.formatting.prettier,
       -- null_ls.builtins.formatting.deno_fmt,
+      null_ls.builtins.formatting.beautysh,
 
       -- Misc
       null_ls.builtins.code_actions.gitsigns,

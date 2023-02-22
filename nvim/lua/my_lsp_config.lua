@@ -78,6 +78,7 @@ local lspconfigs = {
   'pyright',
   'bashls',
   'vimls',
+  'terraform',
 }
 
 local signature_setup = {
