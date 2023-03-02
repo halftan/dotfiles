@@ -22,6 +22,7 @@ M.setup = function()
       null_ls.builtins.diagnostics.yamllint.with({
         args = { "-c", vim.fn.expand("~/git/dotfiles/yamllint.yaml"), "--format", "parsable", "-" },
       }),
+      null_ls.builtins.diagnostics.cfn_lint,
 
       -- formatting
       -- null_ls.builtins.formatting.cbfmt,

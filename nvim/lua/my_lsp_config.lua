@@ -34,13 +34,37 @@ local lspconfigs = {
       yaml = {
         completion = true,
         schemas = {
-          ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*"
+          ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+          ["https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json"] = "*.ya?ml",
           -- ["../path/relative/to/file.yml"] = "/.github/workflows/*"
           -- ["/path/from/root/of/project"] = "/.github/workflows/*"
         },
         schemaStore = {
           enable = true,
           url = "https://www.schemastore.org/api/json/catalog.json",
+        },
+        customTags = {
+          "!Base64 scalar",
+          "!Cidr scalar",
+          "!And sequence",
+          "!Equals sequence",
+          "!If sequence",
+          "!Not sequence",
+          "!Or sequence",
+          "!Condition scalar",
+          "!FindInMap sequence",
+          "!GetAtt scalar",
+          "!GetAtt sequence",
+          "!GetAZs scalar",
+          "!ImportValue scalar",
+          "!Join sequence",
+          "!Select sequence",
+          "!Split sequence",
+          "!Sub scalar",
+          "!Transform mapping",
+          "!Ref scalar",
+          "!ImportValue scalar",
+          "!ImportValue mapping",
         },
       },
     }
@@ -56,7 +80,29 @@ local lspconfigs = {
     }
   },
   --}}}
-  -- {{{ ansiblels
+
+  'pyright',
+  'bashls',
+  'vimls',
+}
+
+local add_if_command_exist = function(command, lspconfig)
+  if vim.fn.executable(command) == 1 then
+    if type(lspconfig) == "string" then
+      lspconfigs[#lspconfigs+1] = lspconfig
+    elseif type(lspconfig) == "table" then
+      for k, v in pairs(lspconfig) do
+        lspconfigs[k] = v
+      end
+    else
+      vim.notify(string.format("LSP config for command %s is not recognized.", command))
+    end
+  end
+end
+
+add_if_command_exist("terraform", "terraformls")
+add_if_command_exist("go", "gopls")
+add_if_command_exist("ansible", { -- {{{ ansiblels
   ansiblels = {
     settings = {
       ansible = {
@@ -72,14 +118,7 @@ local lspconfigs = {
       vim.diagnostic.disable(nil, vim.lsp.diagnostic.get_namespace(client.id))
     end
   },
-  -- }}}
-
-  'gopls',
-  'pyright',
-  'bashls',
-  'vimls',
-  'terraform',
-}
+}) -- }}}
 
 local signature_setup = {
   bind = true, -- This is mandatory, otherwise border config won't get registered.
