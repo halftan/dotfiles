@@ -13,3 +13,5 @@ rules:
   truthy:
     allowed-values: ['true', 'false', 'yes', 'no', 'False', 'True']
     check-keys: true
+  empty-lines:
+    max-end: 1
