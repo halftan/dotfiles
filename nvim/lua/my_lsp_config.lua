@@ -28,14 +28,14 @@ local lspconfigs = {
   --{{{ yamlls
   yamlls = {
     filetypes = {
-      "yaml", "yaml.ansible",
+      "yaml",
     },
     settings = {
       yaml = {
         completion = true,
         schemas = {
           ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-          ["https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json"] = "*.ya?ml",
+          -- ["https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json"] = "*.ya?ml",
           -- ["../path/relative/to/file.yml"] = "/.github/workflows/*"
           -- ["/path/from/root/of/project"] = "/.github/workflows/*"
         },
