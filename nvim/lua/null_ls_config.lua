@@ -23,8 +23,14 @@ M.setup = function()
         args = { "-c", vim.fn.expand("~/git/dotfiles/yamllint.yaml"), "--format", "parsable", "-" },
         filter = function(diagnostic)
           local row = tonumber(diagnostic.row)
-          local line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
-          return line:match('%{%%') == nil and line:match('%{%-') == nil
+          local line = ""
+          if diagnostic.message == "syntax error: could not find expected ':'" then
+            line = vim.api.nvim_buf_get_lines(0, row - 2, row - 1, false)[1]
+          else
+            line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
+          end
+          if line == nil then return true end
+          return line:match('%{%%') == nil and line:match('%{%-') == nil and line:match('%{%{') == nil
         end,
       }),
       null_ls.builtins.diagnostics.cfn_lint,
