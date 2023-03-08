@@ -156,7 +156,7 @@ return { setup = function(use)
       require('gitsigns').setup()
     end
   }
-  use 'rcarriga/nvim-notify'
+  -- use 'rcarriga/nvim-notify'
   -- use {
   --   'michaelb/sniprun',
   --   after = 'nvim-notify',

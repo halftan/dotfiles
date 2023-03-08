@@ -1,5 +1,19 @@
 local M = {}
 
+local function find_previous_yaml_line(row, max_retrospect_lines)
+  max_retrospect_lines = max_retrospect_lines or 200
+  local start_row = row - 1 - max_retrospect_lines
+  if start_row < 0 then start_row = 0 end
+  local lines = vim.api.nvim_buf_get_lines(0, start_row, row - 1, false)
+  for i = #lines, 1, -1 do
+    local line = vim.trim(lines[i])
+    if #line > 0 and line:sub(1, 1) ~= '#' then
+      return line
+    end
+  end
+  return lines[#lines]
+end
+
 -- See https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
 -- for all sources
 
@@ -13,27 +27,34 @@ M.setup = function()
       -- null_ls.builtins.diagnostics.shellcheck,
 
       -- Diagnostics
-      null_ls.builtins.diagnostics.selene,
-      null_ls.builtins.diagnostics.flake8,
-      null_ls.builtins.diagnostics.ansiblelint.with({
+      null_ls.builtins.diagnostics.selene.with {
+        method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+      },
+      null_ls.builtins.diagnostics.flake8.with {
+        method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+      },
+      null_ls.builtins.diagnostics.ansiblelint.with {
         args = { "-c", vim.fn.expand("~/git/dotfiles/ansible-lint.yaml"), "-f", "codeclimate", "-q", "--nocolor", "$FILENAME" }
-      }),
+        method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+      },
       null_ls.builtins.diagnostics.trail_space,
-      null_ls.builtins.diagnostics.yamllint.with({
+      null_ls.builtins.diagnostics.yamllint.with {
         args = { "-c", vim.fn.expand("~/git/dotfiles/yamllint.yaml"), "--format", "parsable", "-" },
         filter = function(diagnostic)
           local row = tonumber(diagnostic.row)
+          if row == nil then return true end
           local line = ""
           if diagnostic.message == "syntax error: could not find expected ':'" then
-            line = vim.api.nvim_buf_get_lines(0, row - 2, row - 1, false)[1]
+            -- line = vim.api.nvim_buf_get_lines(0, row - 2, row - 1, false)[1]
+            line = find_previous_yaml_line(row)
           else
             line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
           end
           if line == nil then return true end
           return line:match('%{%%') == nil and line:match('%{%-') == nil and line:match('%{%{') == nil
         end,
-      }),
-      null_ls.builtins.diagnostics.cfn_lint,
+        method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+      },
 
       -- formatting
       -- null_ls.builtins.formatting.cbfmt,
