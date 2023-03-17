@@ -12,3 +12,4 @@ nmap <Leader>/ :nohlsearch<cr>
 nmap <Leader>w <C-w>
 nmap L gt
 nmap H gT
+set ideajoin

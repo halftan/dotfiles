@@ -34,7 +34,7 @@ M.setup = function()
         method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
       },
       null_ls.builtins.diagnostics.ansiblelint.with {
-        args = { "-c", vim.fn.expand("~/git/dotfiles/ansible-lint.yaml"), "-f", "codeclimate", "-q", "--nocolor", "$FILENAME" }
+        args = { "-c", vim.fn.expand("~/git/dotfiles/ansible-lint.yaml"), "-f", "codeclimate", "-q", "--nocolor", "$FILENAME" },
         method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
       },
       null_ls.builtins.diagnostics.trail_space,
