@@ -80,7 +80,7 @@ zplug "plugins/docker-compose", from:oh-my-zsh
 zplug "plugins/fzf", from:oh-my-zsh
 
 zplug "denysdovhan/gitio-zsh"
-zplug "Tarrasch/zsh-autoenv"
+# zplug "Tarrasch/zsh-autoenv"
 zplug "paulirish/git-open"
 # zplug "b4b4r07/enhancd", use:init.sh
 
