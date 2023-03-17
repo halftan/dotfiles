@@ -17,7 +17,7 @@ wk.register({
     ['b'] = {'<cmd>BufferLinePick<cr>', 'Pick buffer'},
     ['d'] = {'<cmd>bp<bar>sp<bar>bn<bar>bd<cr>', 'Unload buffer'},
     ['o'] = {function() local close = require'bufferline'.close_in_direction; close('left'); close('right') end, 'Close other buffers'},
-    ['O'] = {'<cmd>BufferCloseAllButCurrent<cr>', 'Close other buffers (including pinned)'},
+    ['O'] = {'<cmd>BufferLineCloseLeft<cr>|<cmd>BufferLineCloseRight<cr>', 'Close other buffers (including pinned)'},
     ['u'] = {function() require'bufferline'.close_in_direction('left') end, 'Close buffers to left'},
     ['k'] = {function() require'bufferline'.close_in_direction('right') end, 'Close buffers to right'},
     ['D'] = {'<cmd>bp<bar>sp<bar>bn<bar>bd!<cr>', 'Force unload buffer'},
