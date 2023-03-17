@@ -161,7 +161,7 @@ fi
 
 if [ $commands[sw_vers] ]; then
     # Mac OS X
-    # export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+    export JAVA_HOME=$(/usr/libexec/java_home)
     export ON_MAC_OS=1
     # export PATH="$(brew --prefix homebrew/php/php70)/bin:$PATH"
     # PATH="$(brew --prefix vim)/bin:$PATH"
