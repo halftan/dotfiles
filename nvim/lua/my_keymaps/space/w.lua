@@ -15,6 +15,8 @@ wk.register({
     ['`'] = {'<cmd>wincmd p<cr>', 'Focus previous window'},
     ['p'] = {'<cmd>wincmd P<cr>', 'Focus preview window'},
     ['P'] = {'<cmd>wincmd z<cr>', 'Focus preview window'},
+    ['_'] = {'<cmd>wincmd _<cr>', 'Max out height'},
+    ['|'] = {'<cmd>wincmd |<cr>', 'Max out weight'},
     ['/'] = {'<cmd>vs<cr>', 'Split vertically'},
     ['s'] = {'<cmd>sp<cr>', 'Split horizontally'},
     ['f'] = {'<cmd>NvimTreeFocus<cr>', 'Focus nvim-tree'},
