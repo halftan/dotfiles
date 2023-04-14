@@ -15,8 +15,8 @@ alias zshconfig="${EDITOR} ~/.zshrc"
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
-# Comment this out to disable bi-weekly auto-update checks
-DISABLE_AUTO_UPDATE="true"
+zstyle ':omz:update' mode disabled
+zstyle ':omz:directories' aliases no
 
 # Disable zsh magic functions like url-quote-magic
 DISABLE_MAGIC_FUNCTIONS="true"
