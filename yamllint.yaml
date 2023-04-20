@@ -5,9 +5,9 @@ rules:
   # comments-indentation: disable  # don't bother me with this rule
   comments: disable
   document-start: disable
-  line-length:
-    max: 120
-    level: warning
+  line-length: disable
+    # max: 120
+    # level: warning
   indentation:
     indent-sequences: whatever
   truthy:
