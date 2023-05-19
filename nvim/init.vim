@@ -12,6 +12,7 @@ let g:completion_engine = 'nvim_cmp' " Available options: coq, nvim_cmp
 
 " Load packer.nvim
 lua <<EOF
+  vim.loader.enable()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
