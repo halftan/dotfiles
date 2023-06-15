@@ -113,6 +113,7 @@ return { setup = function(use)
   -- use 'tpope/vim-surround'
   use {
     'kylechui/nvim-surround',
+    tag = "*",
     config = function()
       require('nvim-surround').setup {}
     end
@@ -147,6 +148,9 @@ return { setup = function(use)
     'numToStr/Comment.nvim',
     config = function()
       require('Comment').setup()
+      local ft = require('Comment.ft')
+      ft.Jenkinsfile = {'//%s', '/*%s*/'}
+      ft.jenkinsfile = {'//%s', '/*%s*/'}
     end
   }
   use 'AndrewRadev/splitjoin.vim'
