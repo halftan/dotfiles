@@ -111,25 +111,3 @@ alias kctx="kubectx"
 # if [[ $commands[vctl] && -n $commands[docker] ]]; then
 #     alias docker="vctl"
 # fi
-
-dn1_any_tunnel() {
-  if [[ $# -eq 0 ]]; then
-    echo Usage: any_tunnel faz-pxe-host 10.10.10.10:8765
-    return
-  fi
-  PORT=$((((RANDOM % 1000)) + 22000))
-  LOCAL_PORT=${LOCAL_PORT:-$((((RANDOM & 1000 + 11000))))}
-  echo "Tunneling on remote port $PORT to localhost:$LOCAL_PORT"
-  ssh -t -L "$LOCAL_PORT":localhost:$PORT shadow@17.239.39.78 "ssh -L $PORT:$2 $1"
-}
-
-any_tunnel() {
-  if [[ $# -eq 0 ]]; then
-    echo Usage: any_tunnel faz-pxe-host 10.10.10.10:8765
-    return
-  fi
-  PORT=$((((RANDOM % 1000)) + 22000))
-  LOCAL_PORT=${LOCAL_PORT:-$((((RANDOM & 1000 + 11000))))}
-  echo "Tunneling on remote port $PORT to localhost:$LOCAL_PORT"
-  ssh -t -L "$LOCAL_PORT":localhost:$PORT shadow@17.221.110.60 "ssh -L $PORT:$2 $1"
-}
