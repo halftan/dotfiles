@@ -44,7 +44,7 @@ return {
 
       indent = {
         enable = true,
-        -- disable = {},
+        disable = { 'yaml' },
       },
 
       endwise = {

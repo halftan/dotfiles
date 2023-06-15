@@ -16,7 +16,7 @@ alias zshconfig="${EDITOR} ~/.zshrc"
 # CASE_SENSITIVE="true"
 
 zstyle ':omz:update' mode disabled
-zstyle ':omz:directories' aliases no
+# zstyle ':omz:lib:directories' aliases no
 
 # Disable zsh magic functions like url-quote-magic
 DISABLE_MAGIC_FUNCTIONS="true"
@@ -62,6 +62,8 @@ zplug "plugins/extract", from:oh-my-zsh
 zplug "plugins/sudo", from:oh-my-zsh
 zplug "plugins/history", from:oh-my-zsh
 zplug "plugins/autojump", from:oh-my-zsh
+zplug "plugins/alias-finder", from:oh-my-zsh
+zplug "plugins/aliases", from:oh-my-zsh
 # zplug "plugins/emacs", from:oh-my-zsh
 
 zplug "plugins/golang", from:oh-my-zsh
@@ -162,7 +164,7 @@ if [[ $commands[go] ]]; then
     PATH=$GOBIN:$PATH
 fi
 
-if [ $commands[sw_vers] ]; then
+if [[ $OSTYPE == *darwin* ]]; then
     # Mac OS X
     export JAVA_HOME=$(/usr/libexec/java_home)
     export ON_MAC_OS=1
@@ -174,10 +176,6 @@ else
 fi
 
 if [[ $ON_MAC_OS ]]; then
-    # LUNCHY_DIR=$(dirname `gem which lunchy`)/../extras
-    # if [ -f $LUNCHY_DIR/lunchy-completion.zsh ]; then
-    #     . $LUNCHY_DIR/lunchy-completion.zsh
-    # fi
     if [[ -e /usr/local/opt/coreutils ]]; then
         PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
         MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
