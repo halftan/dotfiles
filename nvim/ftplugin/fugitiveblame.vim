@@ -4,4 +4,4 @@ endif
 
 let b:plugin_loaded = 1
 
-nmap <buffer> q <cmd>q<cr>
+nmap <buffer> q gq
