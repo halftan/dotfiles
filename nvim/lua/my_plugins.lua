@@ -258,8 +258,7 @@ return { setup = function(use)
     end
   }
   use {
-    'phaazon/hop.nvim',
-    branch = 'v2', -- optional but strongly recommended
+    'halftan/hop.nvim',
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
       require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
