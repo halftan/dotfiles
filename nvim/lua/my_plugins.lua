@@ -265,7 +265,7 @@ return { setup = function(use)
     end
   }
   use 'mizlan/iswap.nvim'
-  use 'rhysd/clever-f.vim'
+  -- use 'rhysd/clever-f.vim'
   use 'bkad/CamelCaseMotion'
   use {
     'kyazdani42/nvim-tree.lua',
