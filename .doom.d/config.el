@@ -252,9 +252,9 @@
 (setq-default word-wrap nil
               fill-column 100)
 
-(setq url-proxy-services
-   '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
-     ("http" . "127.0.0.1:7890")))
+;; (setq url-proxy-services
+;;    '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
+;;      ("http" . "127.0.0.1:7890")))
 (setq lsp-file-watch-threshold nil)
 (setq which-key-idle-delay 0.6)
 (setq which-key-idle-secondary-delay 0.2)
