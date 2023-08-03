@@ -58,6 +58,7 @@ set nrformats=bin,hex,unsigned
 set previewheight=6
 set formatoptions+=r
 set conceallevel=2
+set clipboard=unnamedplus
 
 
 if &history < 1000
