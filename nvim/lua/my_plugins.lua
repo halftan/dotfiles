@@ -217,7 +217,13 @@ return { setup = function(use)
     after = {'nvim-treesitter'},
   }
 
-  use 'monaqa/dial.nvim'
+  -- use 'monaqa/dial.nvim'
+  use {
+    'tenxsoydev/karen-yank.nvim',
+    config = function ()
+      require('karen-yank').setup()
+    end
+  }
 
   use {
     "max397574/better-escape.nvim",
