@@ -9,6 +9,7 @@ return {
     local theme_conf = {
       commands = {theme = "dropdown"},
       -- builtin = {theme = "dropdown"},
+      yank_history = {theme = "dropdown"},
     }
 
     for k, _ in pairs(require "telescope.builtin") do
@@ -78,5 +79,6 @@ return {
     pcall(ts.load_extension, "fzf")
     pcall(ts.load_extension, "packer")
     pcall(ts.load_extension, "ui-select")
+    pcall(ts.load_extension, "yank_history")
   end
 }

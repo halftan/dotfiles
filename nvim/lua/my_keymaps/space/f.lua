@@ -1,5 +1,6 @@
 local wk = require('which-key')
 local utils = require('my_utils')
+local themes = require('telescope.themes')
 
 wk.register({
   ['f'] = {
@@ -15,8 +16,11 @@ wk.register({
     ['S'] = {'<cmd>SudaWrite<cr>', 'Sudo save file'},
     ['p'] = {'<cmd>Telescope packer __hide_previewer=true<cr>', 'Find packages'},
     ['o'] = {'<cmd>NvimTreeFindFile<cr>', 'Find current buffer in nvim-tree'},
-    ['y'] = {function() vim.fn.setreg('+', vim.fn.expand('%')) end, "Copy current buffer's relative path"},
-    ['Y'] = {function() vim.fn.setreg('+', vim.fn.expand('%:p')) end, "Copy current buffer's absolute path"},
+    ['y'] = {function() require("telescope").extensions.yank_history.yank_history(themes.get_dropdown({
+      initial_mode = 'normal',
+    })) end, "Open yank ring"},
+    ['.'] = {function() vim.fn.setreg('+', vim.fn.expand('%')) end, "Copy current buffer's relative path"},
+    ['>'] = {function() vim.fn.setreg('+', vim.fn.expand('%:p')) end, "Copy current buffer's absolute path"},
   },
 }, { prefix = '<space>' })
 

@@ -11,7 +11,13 @@ local wk = require('which-key')
 local utils = require('my_utils')
 
 wk.register({
-  ['<c-p>'] = {'<cmd>Telescope find_files hidden=true<cr>', 'Find files'},
+  ['<c-n>'] = {'<Plug>(YankyCycleForward)', 'Yanky Cycle Forward'},
+  ['<c-p>'] = {'<Plug>(YankyCycleBackward)', 'Yanky Cycle Backward'},
+  ['p'] = {'<Plug>(YankyPutAfter)', 'Yanky Put After'},
+  ['P'] = {'<Plug>(YankyPutBefore)', 'Yanky Put Before'},
+  ['gp'] = {'<Plug>(YankyGPutAfter)', 'Yanky GPut After'},
+  ['gP'] = {'<Plug>(YankyGPutBefore)', 'Yanky GPut Before'},
+  ['y'] = {'<Plug>(YankyYank)', 'Yanky Yank'},
   ['H'] = {'<cmd>BufferLineCyclePrev<cr>', 'Previous buffer'},
   ['L'] = {'<cmd>BufferLineCycleNext<cr>', 'Next buffer'},
   ['<S-Left>'] = {'<cmd>BufferLineMovePrev<cr>', 'Move buffer left'},
@@ -41,6 +47,14 @@ wk.register({
 
   ['-'] = {'za', 'Toggle fold'},
 })
+
+wk.register({
+  ['p'] = {'<Plug>(YankyPutAfter)', 'Yanky Put After'},
+  ['P'] = {'<Plug>(YankyPutBefore)', 'Yanky Put Before'},
+  ['gp'] = {'<Plug>(YankyGPutAfter)', 'Yanky GPut After'},
+  ['gP'] = {'<Plug>(YankyGPutBefore)', 'Yanky GPut Before'},
+  ['y'] = {'<Plug>(YankyYank)', 'Yanky Yank'},
+}, { mode = 'x' })
 
 wk.register({
   ['<Enter>'] = {'<Plug>(EasyAlign)', 'Live EasyAlign'},
