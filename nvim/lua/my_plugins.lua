@@ -187,7 +187,6 @@ return { setup = function(use)
     'nvim-treesitter/nvim-treesitter',
     requires = {
       {'nvim-treesitter/nvim-treesitter-textobjects'},
-      {'p00f/nvim-ts-rainbow'},
       {'nvim-treesitter/nvim-treesitter-context'},
       {'nvim-treesitter/nvim-treesitter-refactor'},
       {'RRethy/nvim-treesitter-endwise'},
@@ -218,12 +217,12 @@ return { setup = function(use)
   }
 
   -- use 'monaqa/dial.nvim'
-  use {
-    'tenxsoydev/karen-yank.nvim',
-    config = function ()
-      require('karen-yank').setup()
-    end
-  }
+  -- use {
+  --   'tenxsoydev/karen-yank.nvim',
+  --   config = function ()
+  --     require('karen-yank').setup()
+  --   end
+  -- }
 
   use {
     "max397574/better-escape.nvim",
@@ -237,6 +236,40 @@ return { setup = function(use)
         keys = function()
           return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>l' or '<esc>'
         end,
+      })
+    end,
+  }
+  use {
+    'gbprod/yanky.nvim',
+    config = function()
+      local utils = require("yanky.utils")
+      local mapping = require("yanky.telescope.mapping")
+      require('yanky').setup({
+        picker = {
+          telescope = {
+            use_default_mappings = false,
+            mappings = {
+              default = mapping.put('p'),
+              i = {
+                ["<c-x>"] = mapping.delete(),
+                ["<c-r>"] = mapping.set_register(utils.get_default_register()),
+              },
+              n = {
+                ['p'] = mapping.put('p'),
+                ['P'] = mapping.put('P'),
+                ['d'] = mapping.delete(),
+                ['r'] = mapping.set_register(utils.get_default_register()),
+                ['[p'] = mapping.special_put('YankyPutIndentBeforeLinewise'),
+                [']p'] = mapping.special_put('YankyPutIndentAfterLinewise'),
+                ['=p'] = mapping.special_put('YankyPutAfterFilter'),
+                ['=P'] = mapping.special_put('YankyPutBeforeFilter'),
+                ['J'] = mapping.special_put('YankyPutAfterJoined'),
+                ['[J'] = mapping.special_put('YankyPutIndentBeforeJoined'),
+                [']J'] = mapping.special_put('YankyPutIndentAfterJoined'),
+              }
+            }
+          }
+        }
       })
     end,
   }
@@ -334,22 +367,22 @@ return { setup = function(use)
     end
   }
 
-  use {
-    'tpope/vim-dadbod',
-    cmd = {'DB'},
-  }
-  use {
-    'kristijanhusak/vim-dadbod-ui',
-    cmd = {
-      'DBUI',
-      'DBUIToggle',
-      'DBUIAddConnection',
-      'DBUIFindBuffer',
-      'DBUIRenameBuffer',
-      'DBUILastQueryInfo',
-    },
-    after = 'vim-dadbod',
-  }
+  -- use {
+  --   'tpope/vim-dadbod',
+  --   cmd = {'DB'},
+  -- }
+  -- use {
+  --   'kristijanhusak/vim-dadbod-ui',
+  --   cmd = {
+  --     'DBUI',
+  --     'DBUIToggle',
+  --     'DBUIAddConnection',
+  --     'DBUIFindBuffer',
+  --     'DBUIRenameBuffer',
+  --     'DBUILastQueryInfo',
+  --   },
+  --   after = 'vim-dadbod',
+  -- }
 
   use {
     'sheerun/vim-polyglot',

@@ -27,6 +27,7 @@ wk.register({
   ['9'] = {function() focus_winnr(9) end, 'Focus window 9'},
   ['/'] = {'<cmd>nohlsearch<cr>', 'No search highlight'},
   ['.'] = {'<cmd>Telescope buffers<cr>', 'Find buffer'},
+  ['>'] = {'<cmd>Telescope find_files<cr>', 'Find files'},
   [':'] = {'<cmd>Telescope commands __hide_previewer=true<cr>', 'List commands'},
   ['`'] = {function() vim.cmd('try | b# | catch | endtry') end, 'Switch last buffer'},
   ['<TAB>'] = {'<cmd>wincmd p<cr>', 'Switch last window'},

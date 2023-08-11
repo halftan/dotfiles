@@ -12,7 +12,7 @@ M.setup = function(use)
       {'hrsh7th/cmp-nvim-lua'},
       {'L3MON4D3/LuaSnip'},
       {'saadparwaiz1/cmp_luasnip'},
-      {'kristijanhusak/vim-dadbod-completion'},
+      -- {'kristijanhusak/vim-dadbod-completion'},
       {'rafamadriz/friendly-snippets'},
       {'onsails/lspkind.nvim'},
     },
@@ -152,7 +152,7 @@ M.setup = function(use)
               buffer = '[buf]',
               nvim_lsp = '[λ]',
               path = '[path]',
-              ['vim-dadbod-completion'] = '[DB]',
+              -- ['vim-dadbod-completion'] = '[DB]',
               orgmode = '[org]',
               cmdline = '[cmd]',
               luasnip = '[SNIP]',
@@ -174,11 +174,11 @@ M.setup = function(use)
         })
       })
 
-      cmp.setup.filetype({'sql', 'mysql', 'plsql'}, {
-        sources = cmp.config.sources(unpack(global_sources), {
-          { name = 'vim-dadbod-completion' },
-        })
-      })
+      -- cmp.setup.filetype({'sql', 'mysql', 'plsql'}, {
+      --   sources = cmp.config.sources(unpack(global_sources), {
+      --     { name = 'vim-dadbod-completion' },
+      --   })
+      -- })
 
       -- cmp.setup.filetype('lua', {
       --   sources = cmp.config.sources(unpack(global_sources), {
