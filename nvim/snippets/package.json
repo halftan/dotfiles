@@ -1,0 +1,22 @@
+{
+    "name": "snippets",
+    "engines": {
+        "vscode": "^1.11.0"
+    },
+    "contributes": {
+        "snippets": [
+            {
+                "language": "jinja",
+                "path": "./jinja2/snippets.json"
+            },
+            {
+                "language": "jinja2",
+                "path": "./jinja2/snippets.json"
+            },
+            {
+                "language": "ansible",
+                "path": "./jinja2/snippets.json"
+            }
+        ]
+    }
+}

@@ -1,0 +1,18 @@
+# EditorConfig is a file format to define coding styles and other text editor preferences
+# For more information, visit: https://editorconfig.org/
+
+# Top-most EditorConfig file marker
+root = true
+
+# All files
+[*]
+indent_style = space
+indent_size = 4
+
+# Lua files
+[*.lua]
+indent_size = 2
+
+# Vim files
+[*.vim]
+indent_size = 2

@@ -10,7 +10,7 @@ M.setup = function(use)
       {'hrsh7th/cmp-path'},
       {'hrsh7th/cmp-cmdline'},
       {'hrsh7th/cmp-nvim-lua'},
-      {'L3MON4D3/LuaSnip'},
+      {'L3MON4D3/LuaSnip', tag = 'v2.*', run = 'make install_jsregexp'},
       {'saadparwaiz1/cmp_luasnip'},
       -- {'kristijanhusak/vim-dadbod-completion'},
       {'rafamadriz/friendly-snippets'},
@@ -220,6 +220,9 @@ M.setup = function(use)
       end
       require('my_lsp_config').setup(ensure_capabilities)
       require('luasnip.loaders.from_vscode').lazy_load()
+      require('luasnip.loaders.from_vscode').lazy_load({
+        paths = vim.fn.stdpath('config') .. '/snippets',
+      })
     end
   }
 end
