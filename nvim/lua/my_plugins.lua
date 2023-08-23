@@ -241,10 +241,16 @@ return { setup = function(use)
   }
   use {
     'gbprod/yanky.nvim',
+    requires = {
+      "kkharji/sqlite.lua",
+    },
     config = function()
       local utils = require("yanky.utils")
       local mapping = require("yanky.telescope.mapping")
       require('yanky').setup({
+        ring = {
+          storage = "sqlite",
+        },
         picker = {
           telescope = {
             use_default_mappings = false,
