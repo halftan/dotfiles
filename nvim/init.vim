@@ -11,32 +11,31 @@ endif
 let g:completion_engine = 'nvim_cmp' " Available options: coq, nvim_cmp
 
 " Load packer.nvim
-lua <<EOF
-  vim.loader.enable()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-  end
-
-  require'packer'.init({
-    max_jobs=50
-  })
-  return require('packer').startup(function(use)
-    require('my_plugins').setup(use)
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if packer_bootstrap then
-      require('packer').sync()
-    end
-  end)
-EOF
+" lua <<EOF
+"   vim.loader.enable()
+"   local fn = vim.fn
+"   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+"   if fn.empty(fn.glob(install_path)) > 0 then
+"     packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+"     vim.cmd [[packadd packer.nvim]]
+"   end
+"
+"   require'packer'.init({
+"     max_jobs=50
+"   })
+"   return require('packer').startup(function(use)
+"     require('my_plugins').setup(use)
+"     -- Automatically set up your configuration after cloning packer.nvim
+"     -- Put this at the end after all plugins
+"     if packer_bootstrap then
+"       require('packer').sync()
+"     end
+"   end)
+" EOF
 
 set mouse=nv
 set termguicolors
 set background=dark
-colorscheme onedark
 set virtualedit=block,onemore " Allow for cursor beyond last character
 set updatetime=200
 set undofile
@@ -125,5 +124,22 @@ augroup END
 
 " Highlight on yank
 au TextYankPost * silent! lua vim.highlight.on_yank()
+
+lua <<EOF
+  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+  if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "https://github.com/folke/lazy.nvim.git",
+      "--branch=stable", -- latest stable release
+      lazypath,
+    })
+  end
+  vim.opt.rtp:prepend(lazypath)
+  require("lazy").setup("my_plugins")
+EOF
+colorscheme onedark
 
 lua require 'my_keymaps'

@@ -4,13 +4,14 @@ local utils = require('my_utils')
 wk.register({
   ['v'] = {
     name = 'Vim',
-    ['p'] = {
-      name = 'Packages',
-      ['i'] = {'<cmd>PackerInstall<cr>', 'PackerInstall'},
-      ['s'] = {'<cmd>PackerSync<cr>', 'PackerSync'},
-      ['c'] = {'<cmd>PackerCompile<cr>', 'PackerCompile'},
-      ['C'] = {'<cmd>PackerClean<cr>', 'PackerClean'},
-    },
+    ['p'] = {'<cmd>Lazy<cr>', 'Lazy'},
+    -- ['p'] = {
+    --   name = 'Packages',
+    --   ['i'] = {'<cmd>PackerInstall<cr>', 'PackerInstall'},
+    --   ['s'] = {'<cmd>PackerSync<cr>', 'PackerSync'},
+    --   ['c'] = {'<cmd>PackerCompile<cr>', 'PackerCompile'},
+    --   ['C'] = {'<cmd>PackerClean<cr>', 'PackerClean'},
+    -- },
     ['e'] = {
       name = 'Eval',
       ['f'] = {'<cmd>LuaRun<cr>', 'Run current lua file in nvim'},

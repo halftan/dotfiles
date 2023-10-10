@@ -14,7 +14,7 @@ wk.register({
     ['c'] = {'<cmd>Telescope colorscheme __hide_previewer=true<cr>', 'Find colorscheme'},
     ['s'] = {'<cmd>w<cr>', 'Save file'},
     ['S'] = {'<cmd>SudaWrite<cr>', 'Sudo save file'},
-    ['p'] = {'<cmd>Telescope packer __hide_previewer=true<cr>', 'Find packages'},
+    ['p'] = {'<cmd>Telescope lazy<cr>', 'Find packages'},
     ['o'] = {'<cmd>NvimTreeFindFile<cr>', 'Find current buffer in nvim-tree'},
     ['y'] = {function() require("telescope").extensions.yank_history.yank_history(themes.get_dropdown({
       initial_mode = 'normal',
