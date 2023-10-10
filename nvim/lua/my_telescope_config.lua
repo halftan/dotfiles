@@ -77,7 +77,7 @@ return {
     pcall(ts.load_extension, "live_grep_args")
     pcall(ts.load_extension, "projects")
     pcall(ts.load_extension, "fzf")
-    pcall(ts.load_extension, "packer")
+    pcall(ts.load_extension, "lazy")
     pcall(ts.load_extension, "ui-select")
     pcall(ts.load_extension, "yank_history")
   end

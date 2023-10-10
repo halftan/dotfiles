@@ -4,8 +4,8 @@ return {
       -- A list of parser names, or "all"
       ensure_installed = {
         "go", "gomod", "bash", "dockerfile", "make", "lua", "org",
-        "vim", "help", "comment", "python", "json", "yaml", "toml",
-        "markdown", "markdown_inline",
+        "vim", "comment", "python", "json", "yaml", "toml", "ssh_config",
+        "markdown", "markdown_inline", "csv",
       },
 
       -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -30,7 +30,6 @@ return {
         -- list of language that will be disabled
         disable = {
           -- "markdown", "markdown_inline",
-          "help",
         },
 
         -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -38,7 +37,7 @@ return {
         -- Using this option may slow down your editor, and you may see some duplicate highlights.
         -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = {
-          "vim", "org", "markdown", "help",
+          "vim", "org", "markdown",
         },
       },
 
