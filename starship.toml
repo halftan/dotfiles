@@ -30,4 +30,7 @@ disabled = false
 [python]
 pyenv_version_name = true
 
+[battery]
+disabled = true
+
 [aws]
