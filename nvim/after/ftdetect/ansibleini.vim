@@ -6,7 +6,8 @@ function! s:isAnsibleInventory()
   let filepath = expand("%:p")
   let filename = expand("%:t")
   if filename =~ '\v^[^.]+$'
-        \ && filepath =~ '\v/inventory/'
+        \ && (filepath =~ '\v/inventory/'
+        \      || filepath =~ '\v/inventories/')
     return 1
   endif
 
