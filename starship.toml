@@ -34,3 +34,8 @@ pyenv_version_name = true
 disabled = true
 
 [aws]
+
+[custom.devstack]
+when = 'test -n "$DEVSTACK"'
+command = 'echo "📦📐$DEVSTACK"'
+os = 'macos'
