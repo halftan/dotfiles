@@ -195,6 +195,7 @@ local pluginSpecs = {
           }
         }
       })
+      require('telescope').load_extension('yank_history')
     end,
   },
   {
@@ -204,7 +205,10 @@ local pluginSpecs = {
       'nvim-telescope/telescope-live-grep-args.nvim',
       -- {'ahmedkhalf/project.nvim'},
       -- 'nvim-telescope/telescope-packer.nvim',
-      {'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make',
+      },
       'nvim-telescope/telescope-ui-select.nvim',
       'tsakirist/telescope-lazy.nvim',
     },
