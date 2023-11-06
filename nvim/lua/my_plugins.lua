@@ -14,18 +14,7 @@ local pluginSpecs = {
       },
     }
   },
-  {
-    'SmiteshP/nvim-navic',
-    dependencies = {'neovim/nvim-lspconfig'},
-  },
-  'ray-x/lsp_signature.nvim',
-
-  {
-    'jose-elias-alvarez/null-ls.nvim',
-    config = function()
-      require('null_ls_config').setup()
-    end
-  },
+  'b0o/SchemaStore.nvim',
   'folke/trouble.nvim',
   {
     "lewis6991/hover.nvim",
@@ -167,6 +156,7 @@ local pluginSpecs = {
       local mapping = require("yanky.telescope.mapping")
       require('yanky').setup({
         ring = {
+          history_length = 9999,
           storage = "sqlite",
         },
         picker = {
@@ -322,6 +312,7 @@ if vim.g.completion_engine ~= nil then
   local loaded, engine = pcall(require, 'my_completion_engine.' .. vim.g.completion_engine)
   if loaded then
     engine.setup(pluginSpecs)
+    require('my_lsp_configs').setup(pluginSpecs, engine.ensure_capabilities)
   else
     vim.notify("Completion engine " .. vim.g.completion_engine .. " not found!", vim.log.levels.ERROR)
   end
