@@ -60,9 +60,10 @@ return {
       pickers = pickers_conf,
       extensions = {
         ["live_grep_args"] = {
-          default_mappings = {
+          mappings = {
             i = {
-              ["<C-S-K>"] = lga_actions.quote_prompt(),
+              ["<M-k>"] = lga_actions.quote_prompt(),
+              ["<M-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
             }
           }
         },

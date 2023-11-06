@@ -5,7 +5,6 @@ M.setup = function(pluginSpecs)
     'hrsh7th/nvim-cmp',
     dependencies = {
       'neovim/nvim-lspconfig',
-      'b0o/SchemaStore.nvim',
       {'hrsh7th/cmp-nvim-lsp'},
       {'hrsh7th/cmp-buffer'},
       {'hrsh7th/cmp-path'},
@@ -214,12 +213,6 @@ M.setup = function(pluginSpecs)
         )
       })
 
-      -- Set up lspconfig.
-      local function ensure_capabilities(lspconf)
-        lspconf['capabilities'] = require('cmp_nvim_lsp').default_capabilities()
-        return lspconf
-      end
-      require('my_lsp_config').setup(ensure_capabilities)
       require('luasnip.loaders.from_vscode').lazy_load()
       require('luasnip.loaders.from_vscode').lazy_load({
         paths = vim.fn.stdpath('config') .. '/snippets',
@@ -228,6 +221,11 @@ M.setup = function(pluginSpecs)
   })
 
   table.insert(pluginSpecs, {'windwp/nvim-autopairs', config = true})
+end
+
+M.ensure_capabilities = function (lspconf)
+  lspconf['capabilities'] = require('cmp_nvim_lsp').default_capabilities()
+  return lspconf
 end
 
 return M
