@@ -43,6 +43,8 @@ M.setup = function()
         filter = function(diagnostic)
           local row = tonumber(diagnostic.row)
           if row == nil then return true end
+
+          -- fix linter error on wrong line number in jinja2 templates
           local line = ""
           if diagnostic.message == "syntax error: could not find expected ':'" then
             -- line = vim.api.nvim_buf_get_lines(0, row - 2, row - 1, false)[1]
@@ -51,6 +53,7 @@ M.setup = function()
             line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
           end
           if line == nil then return true end
+
           return line:match('%{%%') == nil and line:match('%{%-') == nil and line:match('%{%{') == nil
         end,
         method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
