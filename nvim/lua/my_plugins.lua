@@ -54,7 +54,8 @@ local pluginSpecs = {
           library.plugins = true
         end
       end,
-    }
+    },
+    config = true,
   },
   {
     'goolord/alpha-nvim',

@@ -21,6 +21,7 @@ wk.register({
     })) end, "Open yank ring"},
     ['.'] = {function() vim.fn.setreg('+', vim.fn.expand('%')) end, "Copy current buffer's relative path"},
     ['>'] = {function() vim.fn.setreg('+', vim.fn.expand('%:p')) end, "Copy current buffer's absolute path"},
+    ['='] = {'<cmd>lua vim.lsp.buf.format({ async = true })<CR>', 'Format with LSP'},
   },
 }, { prefix = '<space>' })
 
