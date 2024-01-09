@@ -8,6 +8,7 @@ return {
 
     local theme_conf = {
       commands = {theme = "dropdown"},
+      command_history = {theme = "dropdown"},
       -- builtin = {theme = "dropdown"},
       yank_history = {theme = "dropdown"},
     }

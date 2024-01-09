@@ -9,6 +9,7 @@ if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'
 endif
 
 let g:completion_engine = 'nvim_cmp' " Available options: coq, nvim_cmp
+let g:ansible_template_syntaxes = {'*\.ya?ml\.j2': 'yaml'}
 
 " Load packer.nvim
 " lua <<EOF
