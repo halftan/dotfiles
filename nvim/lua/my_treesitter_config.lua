@@ -15,7 +15,7 @@ return {
       auto_install = true,
 
       -- List of parsers to ignore installing (for "all")
-      ignore_install = { "cpp" },
+      ignore_install = {},
 
       ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
       -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
@@ -37,13 +37,13 @@ return {
         -- Using this option may slow down your editor, and you may see some duplicate highlights.
         -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = {
-          "vim", "org", "markdown",
+          "vim", "org", "markdown", "yaml"
         },
       },
 
       indent = {
         enable = true,
-        disable = { 'yaml' },
+        disable = {},
       },
 
       endwise = {

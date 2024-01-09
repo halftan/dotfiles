@@ -16,5 +16,5 @@ endfunction
 
 augroup ansible_inventory_hostsft
     au!
-    au BufNewFile,BufRead * if s:isAnsibleInventory() | set ft=confini | en
+    au BufNewFile,BufRead * if s:isAnsibleInventory() | set ft=confini.ansible_hosts | en
 augroup END
