@@ -232,18 +232,26 @@ local pluginSpecs = {
     },
     -- branch = 'nightly' -- optional, updated every week. (see issue #1193)
     opts = {
-      sync_root_with_cwd = true,
-      respect_buf_cwd = true,
+      sync_root_with_cwd  = true,
+      respect_buf_cwd     = true,
+      prefer_startup_root = true,
+      select_prompts      = true,
       update_focused_file = {
-        enable = true,
+        enable      = true,
         update_root = true,
       },
       renderer = {
-        group_empty = true,
+        group_empty = false,
+        highlight_opened_files = 'all',
       },
       filters = {
-        dotfiles = false,
+        git_ignored = false,
+        dotfiles    = false,
       },
+      view = {
+        debounce_delay = 100,
+        relativenumber = true,
+      }
     }
   },
   {

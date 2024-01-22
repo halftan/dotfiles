@@ -224,7 +224,11 @@ M.setup = function(pluginSpecs)
 end
 
 M.ensure_capabilities = function (lspconf)
-  lspconf['capabilities'] = require('cmp_nvim_lsp').default_capabilities()
+  local override = {}
+  if lspconf['capabilities'] and lspconf['capabilities']['textDocument'] and lspconf['capabilities']['textDocument']['completion'] then
+    override = lspconf['capabilities']['textDocument']['completion']
+  end
+  lspconf['capabilities'] = require('cmp_nvim_lsp').default_capabilities(override)
   return lspconf
 end
 

@@ -29,6 +29,7 @@ return {
         -- the name of the parser)
         -- list of language that will be disabled
         disable = {
+          "groovy",
           -- "markdown", "markdown_inline",
         },
 
@@ -43,7 +44,7 @@ return {
 
       indent = {
         enable = true,
-        disable = {},
+        disable = {"yaml"},
       },
 
       endwise = {
