@@ -20,7 +20,7 @@ end
 M.setup = function()
   local null_ls = require('null-ls')
   null_ls.setup({
-    on_attach = require'my_lsp_config'.on_attach_func,
+    on_attach = require'my_lsp_configs'.on_attach_func,
     sources = {
       -- Shell
       -- null_ls.builtins.code_actions.shellcheck,

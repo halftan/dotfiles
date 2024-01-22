@@ -67,7 +67,7 @@ local on_attach_func = function(client, bufnr)
 end
 
 local function add_on_attach(conf)
-  if conf['on_attach'] == nil then
+  if conf == nil or conf['on_attach'] == nil then
     conf['on_attach'] = on_attach_func
   else
     local original_on_attach_func = conf['on_attach']
@@ -152,9 +152,15 @@ M.setup = function(pluginSpecs, ensure_capabilities)
           if not ok then
             lsp_conf = {}
           end
-          require("lspconfig")[server_name].setup(
+          local lspconfig = require("lspconfig")
+          lspconfig[server_name].setup(
             ensure_capabilities(add_on_attach(lsp_conf))
           )
+          if lspconfig.apple_codelm_ls then
+            lspconfig.apple_codelm_ls.setup(
+              ensure_capabilities(add_on_attach({}))
+            )
+          end
         end
       }
     end
