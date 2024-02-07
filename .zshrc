@@ -67,6 +67,7 @@ zplug "plugins/aliases", from:oh-my-zsh
 # zplug "plugins/emacs", from:oh-my-zsh
 
 zplug "plugins/golang", from:oh-my-zsh
+zplug "plugins/swiftpm", from:oh-my-zsh
 zplug "plugins/tig", from:oh-my-zsh
 zplug "plugins/gitignore", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh

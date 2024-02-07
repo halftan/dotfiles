@@ -208,12 +208,7 @@ local pluginSpecs = {
       'nvim-telescope/telescope-ui-select.nvim',
       'tsakirist/telescope-lazy.nvim',
     },
-    config = function()
-      -- require("project_nvim").setup {
-      --   detection_methods = {"pattern", "lsp"},
-      -- }
-      require('my_telescope_config').setup()
-    end,
+    config = require('my_telescope_config').setup,
   },
   {
     'ggandor/leap.nvim',
