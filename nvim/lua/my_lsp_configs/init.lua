@@ -150,6 +150,63 @@ M.setup = function(pluginSpecs, ensure_capabilities)
       },
     },
     config = function()
+      local configs = require 'lspconfig.configs'
+      local lspconf = require 'lspconfig'
+      if vim.fn.executable('appleconnect') == 1 then
+        configs.apple_codelm_ls = {
+          default_config = {
+            cmd = {
+              'apple-codelm-ls',
+              'start',
+              '--code-completion-max-prompt-tokens',
+              '2000',
+              -- server arguments go here (view args with `apple-codelm-ls start --help`)
+              -- ex:
+              '--max-completion-lines',
+              '10',
+              '--max-completion-tokens',
+              '100',
+              '--max-code-action-lines',
+              '20',
+              '--max-code-action-tokens',
+              '500',
+              'stdio',
+            },
+            filetypes = {
+              -- code formats
+              'c',
+              'cplusplus',
+              'csharp',
+              'go',
+              'java',
+              'javascript',
+              'objective-c',
+              'objective-cpp',
+              'php',
+              'python',
+              'ruby',
+              'swift',
+              'typescript',
+              'lua',
+              'vimscript',
+              -- text formats
+              'text',
+              'markdown',
+            },
+            single_file_support = true,
+          },
+          docs = {
+            description = [[
+              LSP server providing completions from CodeLM
+            ]],
+          },
+        }
+        lspconf.apple_codelm_ls.setup(
+          ensure_capabilities(add_on_attach({}))
+        )
+      end
+      lspconf["sourcekit"].setup(ensure_capabilities(add_on_attach({})))
+
       require("mason-lspconfig").setup_handlers {
         -- The first entry (without a key) will be the default handler
         -- and will be called for each installed server that doesn't have
@@ -159,16 +216,10 @@ M.setup = function(pluginSpecs, ensure_capabilities)
           if not ok then
             lsp_conf = {}
           end
-          local lspconfig = require("lspconfig")
-          lspconfig[server_name].setup(
+          require("lspconfig")[server_name].setup(
             ensure_capabilities(add_on_attach(lsp_conf))
           )
-          if lspconfig.apple_codelm_ls then
-            lspconfig.apple_codelm_ls.setup(
-              ensure_capabilities(add_on_attach({}))
-            )
-          end
-        end
+        end,
       }
     end
   })

@@ -1,16 +1,14 @@
-local actions = require "telescope.actions"
-local actions_layout = require "telescope.actions.layout"
-local lga_actions = require "telescope-live-grep-args.actions"
-
 return {
   setup = function()
+    local actions = require "telescope.actions"
+    local actions_layout = require "telescope.actions.layout"
+    local lga_actions = require "telescope-live-grep-args.actions"
     local ts = require("telescope")
 
     local theme_conf = {
       commands = {theme = "dropdown"},
       command_history = {theme = "dropdown"},
       -- builtin = {theme = "dropdown"},
-      yank_history = {theme = "dropdown"},
     }
 
     for k, _ in pairs(require "telescope.builtin") do
@@ -36,7 +34,9 @@ return {
       end
     end
 
-    local pickers_conf = {}
+    local pickers_conf = {
+      yank_history = {theme = "dropdown"},
+    }
 
     for ext, conf in pairs(theme_conf) do
       if pickers_conf[ext] ~= nil then
@@ -69,9 +69,7 @@ return {
           }
         },
         ["ui-select"] = {
-          require("telescope.themes").get_dropdown {
-
-          }
+          require("telescope.themes").get_dropdown {}
         },
       }
     }
