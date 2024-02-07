@@ -49,8 +49,8 @@ local on_attach_func = function(client, bufnr)
 
   if client.server_capabilities.documentSymbolProvider then
     require("nvim-navic").attach(client, bufnr)
-  else
-    vim.notify("LSP server does not support document symbol")
+  -- else
+  --   vim.notify("LSP server does not support document symbol")
   end
 
   require "lsp_signature".on_attach(signature_setup, bufnr)
@@ -126,6 +126,13 @@ end
 M.setup = function(pluginSpecs, ensure_capabilities)
   table.insert(pluginSpecs, {
     'neovim/nvim-lspconfig',
+    opts = {
+      setup = {
+        clangd = function(_, opts)
+          opts.capabilities.offsetEncoding = { "utf-8" }
+        end,
+      },
+    },
     dependencies = {
       {
         'williamboman/mason.nvim',

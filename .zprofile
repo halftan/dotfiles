@@ -19,3 +19,6 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 
 # Set PATH, MANPATH, etc., for Homebrew.
 [ $(uname -m) = "arm64" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Created by `pipx` on 2024-01-19 05:07:14
+export PATH="$PATH:/Users/andyzhang/.local/bin"
