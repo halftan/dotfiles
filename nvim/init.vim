@@ -44,10 +44,7 @@ set undolevels=1000
 set hidden
 set number relativenumber
 set ignorecase smartcase
-set timeoutlen=500
 set sessionoptions=buffers,curdir,folds,help,tabpages,winsize
-set ttimeout
-set ttimeoutlen=100
 set smarttab
 set modeline
 set list " Show these tabs and spaces and so on

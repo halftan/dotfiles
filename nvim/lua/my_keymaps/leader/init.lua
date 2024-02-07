@@ -6,7 +6,7 @@ wk.register({
   ['q'] = {'<cmd>bp<bar>sp<bar>bn<bar>bd<cr>', 'Close buffer'},
   ['y'] = {'"+y', 'Yank to system clipboard'},
   ['Y'] = {'"+Y', 'Yank to system clipboard'},
-  ['<space>'] = {':<C-u>silent! keeppatterns %substitute/\\s\\+$//e<cr>', 'Delete trailing spaces'}
+  ['<space>'] = {':<C-u>silent! keeppatterns %substitute/\\s\\+$//e<cr>', 'Delete trailing spaces'},
 }, {prefix = '<leader>'})
 
 wk.register({
