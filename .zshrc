@@ -75,8 +75,10 @@ zplug "plugins/npm", from:oh-my-zsh
 zplug "plugins/nvm", from:oh-my-zsh, lazy:true
 zplug "plugins/pip", from:oh-my-zsh
 zplug "plugins/pyenv", from:oh-my-zsh
-zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/docker-compose", from:oh-my-zsh
+if [ $commands[docker] ]; then
+    zplug "plugins/docker", from:oh-my-zsh
+    zplug "plugins/docker-compose", from:oh-my-zsh
+fi
 
 # zplug "plugins/kubectl", from:oh-my-zsh
 # zplug "plugins/minikube", from:oh-my-zsh
