@@ -76,11 +76,18 @@ function M.local_keymaps(client, bufnr)
         name = 'Refactoring',
         ['n'] = {vim.lsp.buf.rename, 'Rename'},
       },
-      ['a'] = {vim.lsp.buf.code_action, 'Code action'},
       ['='] = {function() vim.lsp.buf.format { async = false } end, 'Format buffer'},
+      ['c'] = {
+        name = 'Code',
+        ['a'] = {vim.lsp.buf.code_action, 'Code action'},
+        ['d'] = {vim.lsp.buf.type_definition, 'Type definition'},
+      },
       ['w'] = {
         name = 'Workspace',
         ['S'] = {function() vim.lsp.stop_client(vim.lsp.get_active_clients()) end, 'Stop LSP client'},
+        ['l'] = {function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, 'Print workspace folders'},
+        ['a'] = {vim.lsp.buf.add_workspace_folder, 'Add workspace folder'},
+        ['r'] = {vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder'},
       }
     },
   })
@@ -95,6 +102,8 @@ function M.local_keymaps(client, bufnr)
   wk.register({
     ['gd'] = {vim.lsp.buf.definition, 'Goto definition'},
     ['gD'] = {vim.lsp.buf.declaration, 'Goto declaration'},
+    ['gi'] = {vim.lsp.buf.implementation, 'Find implementation'},
+    ['<C-k>'] = {vim.lsp.buf.signature_help, 'Signature help'},
     ['K'] = {require("hover").hover, 'Hover action'},
     ['gK'] = {require("hover").hover_select, 'Hover action selecte provider'},
   }, {
