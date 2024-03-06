@@ -30,9 +30,6 @@ M.setup = function()
       null_ls.builtins.diagnostics.selene.with {
         method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
       },
-      null_ls.builtins.diagnostics.flake8.with {
-        method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-      },
       null_ls.builtins.diagnostics.ansiblelint.with {
         args = { "-c", vim.fn.expand("~/git/dotfiles/ansible-lint.yaml"), "-f", "codeclimate", "-q", "--nocolor", "$FILENAME" },
         method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
@@ -61,11 +58,10 @@ M.setup = function()
 
       -- formatting
       -- null_ls.builtins.formatting.cbfmt,
-      null_ls.builtins.formatting.autopep8,
-      null_ls.builtins.formatting.trim_whitespace,
+      null_ls.builtins.formatting.pyink,
       null_ls.builtins.formatting.prettier,
+      null_ls.builtins.formatting.shfmt,
       -- null_ls.builtins.formatting.deno_fmt,
-      null_ls.builtins.formatting.beautysh,
 
       -- Misc
       null_ls.builtins.code_actions.gitsigns,
