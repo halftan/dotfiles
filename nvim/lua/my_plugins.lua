@@ -107,6 +107,13 @@ local pluginSpecs = {
     'lewis6991/gitsigns.nvim',
     config = true
   },
+  {
+    'f-person/git-blame.nvim',
+    config = true,
+    opts = {
+      enabled = false,
+    },
+  },
   {'andymass/vim-matchup', event = 'VimEnter'},
   {
     'nvim-treesitter/nvim-treesitter',
@@ -247,6 +254,9 @@ local pluginSpecs = {
       filters = {
         git_ignored = false,
         dotfiles    = false,
+        custom      = {
+          "^\\.null-ls_.\\+",
+        },
       },
       view = {
         debounce_delay = 100,

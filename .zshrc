@@ -61,7 +61,7 @@ zplug "robbyrussell/oh-my-zsh", as:plugin, use:"oh-my-zsh.sh"
 zplug "plugins/extract", from:oh-my-zsh
 zplug "plugins/sudo", from:oh-my-zsh
 zplug "plugins/history", from:oh-my-zsh
-zplug "plugins/autojump", from:oh-my-zsh
+# zplug "plugins/autojump", from:oh-my-zsh
 zplug "plugins/alias-finder", from:oh-my-zsh
 zplug "plugins/aliases", from:oh-my-zsh
 # zplug "plugins/emacs", from:oh-my-zsh
@@ -75,7 +75,7 @@ zplug "plugins/npm", from:oh-my-zsh
 zplug "plugins/nvm", from:oh-my-zsh, lazy:true
 zplug "plugins/pip", from:oh-my-zsh
 zplug "plugins/pyenv", from:oh-my-zsh
-if [ $commands[docker] ]; then
+if (( $+commands[docker] )); then
     zplug "plugins/docker", from:oh-my-zsh
     zplug "plugins/docker-compose", from:oh-my-zsh
 fi
@@ -110,9 +110,11 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load # --verbose
 
-eval "$(starship init zsh)"
-if [[ -f "$HOME/git/dotfiles/starship.toml" ]]; then
-    export STARSHIP_CONFIG="$HOME/git/dotfiles/starship.toml"
+if (( $+commands[starship] )); then
+    if [[ -f "$HOME/git/dotfiles/starship.toml" ]]; then
+        export STARSHIP_CONFIG="$HOME/git/dotfiles/starship.toml"
+    fi
+    eval "$(starship init zsh)"
 fi
 
 # # Load antigen
@@ -130,9 +132,9 @@ fi
 #     antigen init ~/.antigenrc
 # fi
 
-if [ $commands[nvim] ]; then
+if (( $+commands[nvim] )); then
     export EDITOR=nvim
-elif [ $commands[vim] ]; then
+elif [ $+commands[vim] ]; then
     export EDITOR=vim
 fi
 
@@ -160,7 +162,7 @@ export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
 export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
 # export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
 
-if [[ $commands[go] ]]; then
+if (( $+commands[go] )); then
     export GOBIN=$HOME/goworkspace/bin
     export GOPATH=$HOME/goworkspace
     export GOROOT=`go env GOROOT`
@@ -178,15 +180,18 @@ else
     # plugins=($plugins systemd)
 fi
 
-if [[ $ON_MAC_OS ]]; then
+if (( $ON_MAC_OS )); then
     if [[ -e /usr/local/opt/coreutils ]]; then
         PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
         MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
     fi
-else
-    if [ $commands[yarn] ]; then
-        PATH=$(yarn global bin):$PATH
-    fi
+fi
+if (( $+commands[yarn] )); then
+    PATH=$(yarn global bin):$PATH
+fi
+
+if (( $+commands[zoxide] )); then
+  eval "$(zoxide init zsh --cmd j)"
 fi
 
 if [[ -e "$HOME/.emacs.d" ]]; then
