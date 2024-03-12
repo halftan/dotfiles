@@ -10,6 +10,7 @@ end
 wk.register({
   ['t'] = {
     name = 'Toggles',
+    ['b'] = {'<cmd>GitBlameToggle<cr>', 'Toggle git blame'},
     ['i'] = {'<cmd>IndentLinesToggle<cr>', 'Toggle indent guide'},
     ['u'] = {'<cmd>UndotreeToggle<cr>', 'Toggle Undotree'},
     ['T'] = {'<cmd>TableModeToggle<cr>', 'Toggle table mode'},
