@@ -71,6 +71,7 @@ function M.local_keymaps(client, bufnr)
         ['d'] = {require'telescope.builtin'.lsp_definitions, 'Goto definition'},
         ['D'] = {vim.lsp.buf.declaration, 'Goto declaration'},
         ['r'] = {require'telescope.builtin'.lsp_references, 'Find references'},
+        ['i'] = {require'telescope.builtin'.lsp_implementations, 'Find implementations'},
       },
       ['r'] = {
         name = 'Refactoring',
