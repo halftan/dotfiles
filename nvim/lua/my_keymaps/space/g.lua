@@ -7,6 +7,7 @@ wk.register({
     ['b'] = {'<cmd>G blame<cr>', 'Git Blame'},
     ['s'] = {'<cmd>Git<cr>', 'Git status'},
     ['o'] = {'<cmd>GBrowse<cr>', 'Open in browser'},
+    ['h'] = {'<cmd>0Gclog<cr>', 'Browse history of current file in quickfix'},
   },
 }, { prefix = '<space>' })
 
