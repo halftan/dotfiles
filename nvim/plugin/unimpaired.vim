@@ -3,6 +3,7 @@
 " Version:      2.1
 " GetLatestVimScripts: 1590 1 :AutoInstall: unimpaired.vim
 
+finish
 if exists("g:loaded_unimpaired") || &cp || v:version < 700
   finish
 endif

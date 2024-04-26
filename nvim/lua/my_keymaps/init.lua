@@ -57,7 +57,7 @@ wk.register({
 }, { mode = 'x' })
 
 wk.register({
-  ['<Enter>'] = {'<Plug>(EasyAlign)', 'Live EasyAlign'},
+  -- ['<Enter>'] = {'<Plug>(EasyAlign)', 'Live EasyAlign'},
 }, { mode = 'v' })
 
 local M = {}

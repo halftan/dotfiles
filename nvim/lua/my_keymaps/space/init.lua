@@ -31,7 +31,7 @@ wk.register({
   [':'] = {'<cmd>Telescope commands __hide_previewer=true<cr>', 'List commands'},
   ['`'] = {function() vim.cmd('try | b# | catch | endtry') end, 'Switch last buffer'},
   ['<TAB>'] = {'<cmd>wincmd p<cr>', 'Switch last window'},
-  ['x'] = {'<cmd>bp<bar>sp<bar>bn<bar>bd<cr>', 'Unload buffer'}
+  ['x'] = {function() MiniBufremove.delete(0) end, 'Unload buffer'}
 }, { prefix = '<space>' })
 
 return {}

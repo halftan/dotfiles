@@ -101,22 +101,22 @@ let g:EditorConfig_exclude_patterns=['fugitive://.*', 'scp://.*']
 
 " au BufNewFile,BufRead *.cpp set syntax=cpp11
 
-augroup filetype_indent
-  au!
-  au FileType python,vim,c,cpp setl sw=4 ts=4 sts=4 et
-  au FileType make,mkd,markdown setl sw=4 ts=4 sts=4 noet
-  au FileType ruby,eruby,yaml setl sw=2 ts=2 sts=2 et
-  " au FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-  " au FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-  au FileType coffee,jade setl sw=2 ts=2 sts=2 et
-  au FileType asm setl sw=4 ts=4 sts=4 noet
-  au FileType neosnippet setl noet
-  au FileType java setl sw=4 ts=4 sts=4 et
-  au FileType gotmpl,helm setl sw=2 ts=2 sts=2 et
-  au FileType lua,vim setl sw=2 ts=2 sts=2 et
-  au FileType gitcommit setlocal spell
-  " au BufRead,BufNewFile */playbooks/**/*.yml set filetype=yaml.ansible
-augroup END
+" augroup filetype_indent
+"   au!
+"   au FileType python,vim,c,cpp setl sw=4 ts=4 sts=4 et
+"   au FileType make,mkd,markdown setl sw=4 ts=4 sts=4 noet
+"   au FileType ruby,eruby,yaml setl sw=2 ts=2 sts=2 et
+"   " au FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+"   " au FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+"   au FileType coffee,jade setl sw=2 ts=2 sts=2 et
+"   au FileType asm setl sw=4 ts=4 sts=4 noet
+"   au FileType neosnippet setl noet
+"   au FileType java setl sw=4 ts=4 sts=4 et
+"   au FileType gotmpl,helm setl sw=2 ts=2 sts=2 et
+"   au FileType lua,vim setl sw=2 ts=2 sts=2 et
+"   au FileType gitcommit setlocal spell
+"   " au BufRead,BufNewFile */playbooks/**/*.yml set filetype=yaml.ansible
+" augroup END
 
 " FileType specs End ----------
 
@@ -137,7 +137,8 @@ lua <<EOF
   end
   vim.opt.rtp:prepend(lazypath)
   require("lazy").setup("my_plugins")
-EOF
-colorscheme onedark
 
-lua require 'my_keymaps'
+  vim.cmd.colorscheme('onedark')
+  require 'my_keymaps'
+EOF
+

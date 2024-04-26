@@ -44,8 +44,8 @@ local pluginSpecs = {
       local hover = require('hover')
       hover.setup(opts)
       -- Setup keymaps
-      vim.keymap.set("n", "K", hover.hover, {desc = "hover.nvim"})
-      vim.keymap.set("n", "gK", hover.hover_select, {desc = "hover.nvim (select)"})
+      vim.keymap.set("n", "K", hover.hover, { desc = "hover.nvim" })
+      vim.keymap.set("n", "gK", hover.hover_select, { desc = "hover.nvim (select)" })
     end,
   },
   {
@@ -83,14 +83,14 @@ local pluginSpecs = {
   {
     'akinsho/bufferline.nvim',
     version = "v3.*",
-    dependencies = {'kyazdani42/nvim-web-devicons'},
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
     config = function()
       require('my_configs.bufferline').setup()
     end
   },
   {
     'xolox/vim-session',
-    dependencies = {'xolox/vim-misc'},
+    dependencies = { 'xolox/vim-misc' },
   },
   'jeffkreeftmeijer/vim-numbertoggle',
   {
@@ -98,8 +98,8 @@ local pluginSpecs = {
     config = function()
       require('Comment').setup()
       local ft = require('Comment.ft')
-      ft.Jenkinsfile = {'//%s', '/*%s*/'}
-      ft.jenkinsfile = {'//%s', '/*%s*/'}
+      ft.Jenkinsfile = { '//%s', '/*%s*/' }
+      ft.jenkinsfile = { '//%s', '/*%s*/' }
     end
   },
   'AndrewRadev/splitjoin.vim',
@@ -114,16 +114,19 @@ local pluginSpecs = {
       enabled = false,
     },
   },
-  {'andymass/vim-matchup', event = 'VimEnter'},
+  {
+    'andymass/vim-matchup',
+    event = 'VimEnter'
+  },
   {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       -- {'nvim-treesitter/nvim-treesitter-textobjects'},
-      {'nvim-treesitter/nvim-treesitter-context'},
-      {'nvim-treesitter/nvim-treesitter-refactor'},
-      {'RRethy/nvim-treesitter-endwise'},
-      {'JoosepAlviste/nvim-ts-context-commentstring'},
-      {'windwp/nvim-ts-autotag'},
+      { 'nvim-treesitter/nvim-treesitter-context' },
+      -- { 'nvim-treesitter/nvim-treesitter-refactor' },
+      { 'RRethy/nvim-treesitter-endwise' },
+      { 'JoosepAlviste/nvim-ts-context-commentstring' },
+      { 'windwp/nvim-ts-autotag' },
     },
     config = function()
       require('my_treesitter_config').setup()
@@ -149,9 +152,9 @@ local pluginSpecs = {
   {
     "max397574/better-escape.nvim",
     opts = {
-      mapping = {"jk", "jj"}, -- a table with mappings to use
+      mapping = { "jk", "jj" },   -- a table with mappings to use
       timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
-      clear_empty_lines = false, -- clear line after escaping if there is only whitespace
+      clear_empty_lines = false,  -- clear line after escaping if there is only whitespace
       -- keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
       -- example(recommended)
       keys = function()
@@ -202,7 +205,8 @@ local pluginSpecs = {
     end,
   },
   {
-    'nvim-telescope/telescope.nvim', branch = '0.1.x',
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-live-grep-args.nvim',
@@ -223,13 +227,19 @@ local pluginSpecs = {
       require('leap').set_default_keymaps()
     end
   },
+  -- {
+  --   'smoka7/hop.nvim',
+  --   opts = {
+  --     keys = 'etovxqpdygfblzhckisuran',
+  --   }
+  -- },
   {
-    'smoka7/hop.nvim',
+    "mizlan/iswap.nvim",
+    event = "VeryLazy",
     opts = {
-      keys = 'etovxqpdygfblzhckisuran',
-    }
+      autoswap = true,
+    },
   },
-  'mizlan/iswap.nvim',
   -- 'rhysd/clever-f.vim',
   'bkad/CamelCaseMotion',
   {
@@ -274,21 +284,21 @@ local pluginSpecs = {
   -- },
   -- 'wellle/targets.vim',
   -- 'Yggdroot/indentLine',
-  {
-    'lukas-reineke/indent-blankline.nvim',
-    main = 'ibl',
-    opts = {},
-  },
+  -- {
+  --   'lukas-reineke/indent-blankline.nvim',
+  --   main = 'ibl',
+  --   opts = {},
+  -- },
   'pearofducks/ansible-vim',
   {
     'vim-airline/vim-airline',
     dependencies = { 'vim-airline/vim-airline-themes' },
     config = function()
-      require'my_statusline'
+      require 'my_statusline'
     end
   },
-  {'olimorris/onedarkpro.nvim', lazy = true},
-  {'ellisonleao/gruvbox.nvim', lazy = true},
+  { 'olimorris/onedarkpro.nvim', lazy = true },
+  -- { 'ellisonleao/gruvbox.nvim',  lazy = true },
   'editorconfig/editorconfig-vim',
   {
     'norcalli/nvim-colorizer.lua',
@@ -315,16 +325,28 @@ local pluginSpecs = {
   {
     'fatih/vim-go',
     init = function()
-      vim.g.go_code_completion_enabled = 0
-      vim.g.go_doc_keywordprg_enabled = 1
-      vim.g.go_def_mapping_enabled = 0
-    end
+      vim.g.go_code_completion_enabled = 0 vim.g.go_doc_keywordprg_enabled = 1 vim.g.go_def_mapping_enabled = 0
+    end,
   },
   {
     'rafcamlet/nvim-luapad',
-    cmd = {'Luapad', 'LuaRun'}
+    cmd = { 'Luapad', 'LuaRun' }
   },
-  'junegunn/vim-easy-align'
+  -- 'junegunn/vim-easy-align',
+  {
+    'echasnovski/mini.nvim',
+    version = false,
+    config = function(lazyPlugin, opts)
+      require('mini.bufremove').setup()
+      require('mini.align').setup()
+      require('mini.ai').setup()
+      require('mini.bracketed').setup()
+      require('mini.indentscope').setup()
+      require('mini.trailspace').setup()
+      require('mini.jump').setup()
+      require('mini.jump2d').setup()
+    end
+  },
 }
 
 if vim.g.completion_engine ~= nil then
