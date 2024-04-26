@@ -65,7 +65,7 @@ local M = {}
 function M.local_keymaps(client, bufnr)
   wk.register({
     [','] = {
-      name = 'LSP',
+      name = 'LSP/Main',
       ['g'] = {
         name = 'Goto',
         ['d'] = {require'telescope.builtin'.lsp_definitions, 'Goto definition'},
@@ -95,8 +95,11 @@ function M.local_keymaps(client, bufnr)
 
   wk.register({
     [','] = {
-      name = 'LSP',
-      ['a'] = { vim.lsp.buf.code_action, 'Code action' },
+      name = 'LSP/Main',
+      ['c'] = {
+        name = 'Code',
+        ['a'] = {vim.lsp.buf.code_action, 'Code action'},
+      },
     },
   }, { mode = 'v' })
 
@@ -107,9 +110,13 @@ function M.local_keymaps(client, bufnr)
     ['<C-k>'] = {vim.lsp.buf.signature_help, 'Signature help'},
     ['K'] = {require("hover").hover, 'Hover action'},
     ['gK'] = {require("hover").hover_select, 'Hover action selecte provider'},
-  }, {
-      buffer = bufnr,
-    })
+  }, { buffer = bufnr })
+
+  local ft = vim.api.nvim_get_option_value('filetype', {buf = bufnr})
+  local ok, ftkeymap = pcall(require, 'my_keymaps.filetype.' .. ft)
+  if ok then
+    ftkeymap.setup(client, bufnr)
+  end
 end
 
 return M

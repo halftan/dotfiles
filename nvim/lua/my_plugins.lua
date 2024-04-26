@@ -118,7 +118,7 @@ local pluginSpecs = {
   {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
-      {'nvim-treesitter/nvim-treesitter-textobjects'},
+      -- {'nvim-treesitter/nvim-treesitter-textobjects'},
       {'nvim-treesitter/nvim-treesitter-context'},
       {'nvim-treesitter/nvim-treesitter-refactor'},
       {'RRethy/nvim-treesitter-endwise'},
@@ -129,23 +129,23 @@ local pluginSpecs = {
       require('my_treesitter_config').setup()
     end
   },
-  {
-    'nvim-orgmode/orgmode',
-    config = function()
-      require('orgmode').setup_ts_grammar()
-      require('orgmode').setup {
-        org_agenda_files = {'~/my-orgs/**/*'},
-        org_default_notes_file = '~/my-orgs/notes.org',
-        org_todo_keywords = {
-          'TODO', 'NEXT', 'HOLD', '|', 'DONE', 'ARCHIVED',
-        },
-        org_todo_keyword_faces = {
-          NEXT = ':background #61C6F2 :foreground #EC6238 :weight bold :slant italic',
-          HOLD = ':background #FFFFFF :foreground #F64E59 :underline on',
-        }
-      }
-    end,
-  },
+  -- {
+  --   'nvim-orgmode/orgmode',
+  --   config = function()
+  --     require('orgmode').setup_ts_grammar()
+  --     require('orgmode').setup {
+  --       org_agenda_files = {'~/my-orgs/**/*'},
+  --       org_default_notes_file = '~/my-orgs/notes.org',
+  --       org_todo_keywords = {
+  --         'TODO', 'NEXT', 'HOLD', '|', 'DONE', 'ARCHIVED',
+  --       },
+  --       org_todo_keyword_faces = {
+  --         NEXT = ':background #61C6F2 :foreground #EC6238 :weight bold :slant italic',
+  --         HOLD = ':background #FFFFFF :foreground #F64E59 :underline on',
+  --       }
+  --     }
+  --   end,
+  -- },
   {
     "max397574/better-escape.nvim",
     opts = {
@@ -264,15 +264,15 @@ local pluginSpecs = {
       }
     }
   },
-  {
-    'kana/vim-textobj-user',
-    dependencies = {
-      'kana/vim-textobj-indent',
-      'kana/vim-textobj-entire',
-      'lucapette/vim-textobj-underscore',
-    }
-  },
-  'wellle/targets.vim',
+  -- {
+  --   'kana/vim-textobj-user',
+  --   dependencies = {
+  --     'kana/vim-textobj-indent',
+  --     'kana/vim-textobj-entire',
+  --     'lucapette/vim-textobj-underscore',
+  --   }
+  -- },
+  -- 'wellle/targets.vim',
   -- 'Yggdroot/indentLine',
   {
     'lukas-reineke/indent-blankline.nvim',

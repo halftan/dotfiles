@@ -55,6 +55,7 @@ M.setup = function()
         end,
         method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
       },
+      null_ls.builtins.diagnostics.staticcheck,
 
       -- formatting
       -- null_ls.builtins.formatting.cbfmt,
@@ -65,6 +66,7 @@ M.setup = function()
 
       -- Misc
       null_ls.builtins.code_actions.gitsigns,
+      null_ls.builtins.code_actions.impl,
     },
 
   })
