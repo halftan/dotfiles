@@ -8,6 +8,8 @@ wk.register({
       name = 'Run',
       ['f'] = {'<cmd>SnipRun<cr>', 'Run file'},
     },
+    ['s'] = {'<cmd>ISwap<cr>', 'ISwap'},
+    ['S'] = {'<cmd>ISwapNode<cr>', 'ISwapNode'},
   },
 }, { prefix = '<space>' })
 

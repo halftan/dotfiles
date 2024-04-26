@@ -53,7 +53,7 @@ return {
 
       textobjects = {
         select = {
-          enable = true,
+          enable = false,
 
           -- Automatically jump forward to textobj, similar to targets.vim
           lookahead = true,
@@ -88,7 +88,7 @@ return {
           enable = false,
         },
         smart_rename = {
-          enable = true,
+          enable = false,
           keymaps = {
             smart_rename = "grr",
           },
@@ -110,7 +110,7 @@ return {
       },
 
       incremental_selection = {
-        enable = true,
+        enable = false,
         keymaps = {
           init_selection = "gnn", -- set to `false` to disable one of the mappings
           node_incremental = "grn",
