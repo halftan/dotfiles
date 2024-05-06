@@ -56,6 +56,7 @@ M.setup = function()
         method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
       },
       null_ls.builtins.diagnostics.staticcheck,
+      null_ls.builtins.diagnostics.revive,
 
       -- formatting
       -- null_ls.builtins.formatting.cbfmt,
