@@ -339,7 +339,20 @@ local pluginSpecs = {
     config = function(lazyPlugin, opts)
       require('mini.bufremove').setup()
       require('mini.align').setup()
-      require('mini.ai').setup()
+
+      require('mini.ai').setup({
+        custom_textobjects = {
+          e = function()
+            local from = { line = 1, col = 1 }
+            local to = {
+              line = vim.fn.line('$'),
+              col = math.max(vim.fn.getline('$'):len(), 1)
+            }
+            return { from = from, to = to }
+          end
+        }
+      })
+
       require('mini.bracketed').setup()
       require('mini.indentscope').setup()
       require('mini.trailspace').setup()
