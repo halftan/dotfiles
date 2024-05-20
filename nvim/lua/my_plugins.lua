@@ -10,9 +10,13 @@ local pluginSpecs = {
     end,
     opts = {
       plugins = {
-        spelling = { enabled = true },
+        spelling = {
+          enabled = true
+        },
       },
-      window = { border = 'single' },
+      window = {
+        border = 'single'
+      },
       operators = {
         gc = 'Comments',
         gb = 'BlockComments',
@@ -102,7 +106,13 @@ local pluginSpecs = {
       ft.jenkinsfile = { '//%s', '/*%s*/' }
     end
   },
-  'AndrewRadev/splitjoin.vim',
+  -- {
+  --   'AndrewRadev/splitjoin.vim',
+  --   config = function()
+  --     vim.g["splitjoin_split_mapping"] = ''
+  --     vim.g["splitjoin_join_mapping"] = ''
+  --   end
+  -- },
   {
     'lewis6991/gitsigns.nvim',
     config = true
@@ -330,7 +340,7 @@ local pluginSpecs = {
   },
   {
     'rafcamlet/nvim-luapad',
-    cmd = { 'Luapad', 'LuaRun' }
+    cmd = {'Luapad', 'LuaRun'}
   },
   -- 'junegunn/vim-easy-align',
   {
@@ -358,6 +368,13 @@ local pluginSpecs = {
       require('mini.trailspace').setup()
       require('mini.jump').setup()
       require('mini.jump2d').setup()
+      require('mini.splitjoin').setup({
+        mappings = {
+          toggle = '<leader>a',
+          split = '<leader>s',
+          join = '<leader>j',
+        }
+      })
     end
   },
 }
