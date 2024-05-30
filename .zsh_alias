@@ -1,9 +1,10 @@
 # -*- mode:shell-script; -*-
+BREW_PREFIX="$(brew --prefix)"
 
 if [[ $ON_MAC_OS ]]; then
-  if [[ -e /usr/local/opt/coreutils ]]; then
-    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+  if [[ -e $BREW_PREFIX/opt/coreutils ]]; then
+    PATH="$BREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
+    MANPATH="$BREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
     # unalias ls
     alias ls="ls --color=auto"
     alias find="gfind"
@@ -95,7 +96,7 @@ senv() {
 }
 
 # ca cert
-# alias curl="curl --cacert /usr/local/etc/openssl@1.1/cert.pem"
+# alias curl="curl --cacert $BREW_PREFIX/etc/openssl@1.1/cert.pem"
 
 alias ssh="TERM=xterm-256color ssh"
 alias em="emacs"

@@ -1,12 +1,13 @@
 # Path to your oh-my-zsh configuration.
 # ZSH=$HOME/.oh-my-zsh
 
-export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/opt/go/libexec/bin:/usr/local/sbin
+export PATH=$PATH:$BREW_PREFIX/bin:/usr/bin:/bin:/usr/sbin:/sbin:$BREW_PREFIX/opt/go/libexec/bin:$BREW_PREFIX/sbin
 [[ :$PATH: == *:$HOME/bin:* ]] || PATH=$HOME/bin:$PATH
 
 export ENHANCD_COMMAND=cdd
 
 DEFAULT_USER="halftan"
+BREW_PREFIX=$(brew --prefix)
 
 # Example aliases
 alias zshconfig="${EDITOR} ~/.zshrc"
@@ -41,9 +42,26 @@ COMPLETION_WAITING_DOTS="true"
 # much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+####################
+## fzf-tab config ##
+####################
+# # disable sort when completing `git checkout`
+# zstyle ':completion:*:git-checkout:*' sort false
+# # set descriptions format to enable group support
+# # NOTE: don't use escape sequences here, fzf-tab will ignore them
+# zstyle ':completion:*:descriptions' format '[%d]'
+# # set list-colors to enable filename colorizing
+# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+# zstyle ':completion:*' menu no
+# # preview directory's content with eza when completing cd
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# # switch group using `<` and `>`
+# zstyle ':fzf-tab:*' switch-group '<' '>'
+
 # zplug
-if [[ -e /usr/local/opt/zplug ]]; then
-    export ZPLUG_HOME=/usr/local/opt/zplug
+if [[ -e "$BREW_PREFIX/opt/zplug" ]]; then
+    export ZPLUG_HOME="$BREW_PREFIX/opt/zplug"
 else
     export ZPLUG_HOME=$HOME/.zplug
 fi
@@ -98,6 +116,7 @@ zplug "paulirish/git-open"
 
 # zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 zplug "MichaelAquilina/zsh-you-should-use"
+zplug "Aloxaf/fzf-tab"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -119,8 +138,8 @@ fi
 
 # # Load antigen
 # ANTIGEN_PATH=''
-# if [[ -f  /usr/local/share/antigen/antigen.zsh ]]; then
-#     ANTIGEN_PATH="/usr/local/share/antigen/antigen.zsh"
+# if [[ -f  $BREW_PREFIX/share/antigen/antigen.zsh ]]; then
+#     ANTIGEN_PATH="$BREW_PREFIX/share/antigen/antigen.zsh"
 # elif [[ -f /usr/share/antigen/share/antigen.zsh ]]; then
 #     ANTIGEN_PATH="/usr/share/antigen/share/antigen.zsh"
 # elif [[ -f $HOME/.antigen.zsh ]]; then
@@ -140,9 +159,9 @@ fi
 
 export LANG="en_US.UTF-8"
 export LESS=-Ri
-if [[ -f "/usr/local/etc/openssl@1.1/cert.pem" ]]; then
-    export NODE_EXTRA_CA_CERTS="/usr/local/etc/openssl@1.1/cert.pem"
-    export SSL_CERT_FILE="/usr/local/etc/openssl@1.1/cert.pem"
+if [[ -f "$BREW_PREFIX/etc/openssl@1.1/cert.pem" ]]; then
+    export NODE_EXTRA_CA_CERTS="$BREW_PREFIX/etc/openssl@1.1/cert.pem"
+    export SSL_CERT_FILE="$BREW_PREFIX/etc/openssl@1.1/cert.pem"
 fi
 
 if [[ -n "WSL_DISTRO_NAME" ]]; then
@@ -181,9 +200,9 @@ else
 fi
 
 if (( $ON_MAC_OS )); then
-    if [[ -e /usr/local/opt/coreutils ]]; then
-        PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-        MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+    if [[ -e $BREW_PREFIX/opt/coreutils ]]; then
+        PATH="$BREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
+        MANPATH="$BREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
     fi
 fi
 if (( $+commands[yarn] )); then
@@ -198,8 +217,8 @@ if [[ -e "$HOME/.emacs.d" ]]; then
     PATH="$HOME/.emacs.d/bin":$PATH
 fi
 
-if [[ -e "/usr/local/opt/ansible@2.9/bin" ]]; then
-    PATH="/usr/local/opt/ansible@2.9/bin:$PATH"
+if [[ -e "$BREW_PREFIX/opt/ansible@2.9/bin" ]]; then
+    PATH="$BREW_PREFIX/opt/ansible@2.9/bin:$PATH"
 fi
 
 if [[ -e ~/.zsh_alias ]]; then
