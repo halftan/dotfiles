@@ -154,12 +154,12 @@ M.setup = function(pluginSpecs, ensure_capabilities)
     config = function()
       local configs = require 'lspconfig.configs'
       local lspconf = require 'lspconfig'
-      if vim.fn.executable('appleconnect') == 1 then
-        configs.apple_codelm_ls = require('my_lsp_configs.apple_codelm_ls')
-        lspconf.apple_codelm_ls.setup(
-          ensure_capabilities(add_on_attach({}))
-        )
-      end
+      -- if vim.fn.executable('appleconnect') == 1 then
+      --   configs.apple_codelm_ls = require('my_lsp_configs.apple_codelm_ls')
+      --   lspconf.apple_codelm_ls.setup(
+      --     ensure_capabilities(add_on_attach({}))
+      --   )
+      -- end
       lspconf["sourcekit"].setup(ensure_capabilities(add_on_attach({})))
 
       require("mason-lspconfig").setup_handlers {

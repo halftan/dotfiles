@@ -86,7 +86,7 @@ local pluginSpecs = {
   'dhruvasagar/vim-table-mode',
   {
     'akinsho/bufferline.nvim',
-    version = "v3.*",
+    version = "*",
     dependencies = { 'kyazdani42/nvim-web-devicons' },
     config = function()
       require('my_configs.bufferline').setup()
@@ -182,7 +182,7 @@ local pluginSpecs = {
       local mapping = require("yanky.telescope.mapping")
       require('yanky').setup({
         ring = {
-          history_length = 9999,
+          history_length = 999,
           storage = "sqlite",
         },
         picker = {
@@ -203,9 +203,6 @@ local pluginSpecs = {
                 [']p'] = mapping.special_put('YankyPutIndentAfterLinewise'),
                 ['=p'] = mapping.special_put('YankyPutAfterFilter'),
                 ['=P'] = mapping.special_put('YankyPutBeforeFilter'),
-                ['J'] = mapping.special_put('YankyPutAfterJoined'),
-                ['[J'] = mapping.special_put('YankyPutIndentBeforeJoined'),
-                [']J'] = mapping.special_put('YankyPutIndentAfterJoined'),
               }
             }
           }
