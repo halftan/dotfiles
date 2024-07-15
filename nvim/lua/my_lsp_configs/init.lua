@@ -45,7 +45,6 @@ end
 
 local on_attach_func = function(client, bufnr)
   require 'my_keymaps'.local_keymaps(client, bufnr)
-  require 'my_keymaps.space.d'.local_keymaps(client, bufnr)
 
   if client.server_capabilities.documentSymbolProvider then
     require("nvim-navic").attach(client, bufnr)
