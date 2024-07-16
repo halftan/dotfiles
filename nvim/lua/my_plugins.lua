@@ -288,8 +288,44 @@ local pluginSpecs = {
       require 'my_statusline'
     end
   },
-  { 'olimorris/onedarkpro.nvim', lazy = true },
-  -- { 'ellisonleao/gruvbox.nvim',  lazy = true },
+  {
+    'olimorris/onedarkpro.nvim',
+    priority = 1000,
+    opts = {
+      styles = {
+        types = 'bold',
+        methods = 'italic',
+        functions = 'italic',
+        constants = 'bold',
+        keywords = 'bold',
+      }
+    },
+  },
+  {'ellisonleao/gruvbox.nvim',  priority = 1000},
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    opts = {
+      dim_inactive = {
+        enabled = true,
+      },
+      styles = {
+        comments = { "italic" }, -- Change the style of comments
+        conditionals = { "italic" },
+        loops = {},
+        functions = {'italic'},
+        keywords = {'bold'},
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {'italic'},
+        types = {'bold'},
+        operators = {},
+      }
+    }
+  },
   'editorconfig/editorconfig-vim',
   {
     'norcalli/nvim-colorizer.lua',
@@ -316,7 +352,9 @@ local pluginSpecs = {
   {
     'fatih/vim-go',
     init = function()
-      vim.g.go_code_completion_enabled = 0 vim.g.go_doc_keywordprg_enabled = 1 vim.g.go_def_mapping_enabled = 0
+      vim.g.go_code_completion_enabled = 0
+      vim.g.go_doc_keywordprg_enabled = 1
+      vim.g.go_def_mapping_enabled = 0
     end,
   },
   {
