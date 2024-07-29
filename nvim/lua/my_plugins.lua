@@ -17,7 +17,44 @@ local pluginSpecs = {
     }
   },
   'b0o/SchemaStore.nvim',
-  'folke/trouble.nvim',
+  {
+    'folke/trouble.nvim',
+    opts = {},
+    cmd = 'Trouble',
+    keys = {
+    {
+      "<space>dD",
+      "<cmd>Trouble diagnostics toggle<cr>",
+      desc = "Workspace Diagnostics (Trouble)",
+    },
+    {
+      "<space>dd",
+      "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+      desc = "Buffer Diagnostics (Trouble)",
+    },
+    {
+      "<space>ts",
+      "<cmd>Trouble symbols toggle focus=false<cr>",
+      desc = "Symbols (Trouble)",
+    },
+    {
+      "<space>cl",
+      "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+      desc = "LSP Definitions / references / ... (Trouble)",
+    },
+    {
+      "<space>dl",
+      "<cmd>Trouble loclist toggle<cr>",
+      desc = "Location List (Trouble)",
+    },
+    {
+      "<space>dq",
+      "<cmd>Trouble qflist toggle<cr>",
+      desc = "Quickfix List (Trouble)",
+    },
+  },
+
+  },
   {
     "lewis6991/hover.nvim",
     opts = {
@@ -312,15 +349,15 @@ local pluginSpecs = {
       },
       styles = {
         comments = { "italic" }, -- Change the style of comments
-        conditionals = { "italic" },
+        conditionals = {},
         loops = {},
-        functions = {'italic'},
+        functions = {},
         keywords = {'bold'},
         strings = {},
         variables = {},
         numbers = {},
         booleans = {},
-        properties = {'italic'},
+        properties = {},
         types = {'bold'},
         operators = {},
       }

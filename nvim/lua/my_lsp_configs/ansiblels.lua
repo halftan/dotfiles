@@ -10,6 +10,6 @@ return {
     }
   },
   on_attach = function(client, bufnr)
-    vim.diagnostic.disable(nil, vim.lsp.diagnostic.get_namespace(client.id))
+    vim.diagnostic.enable(false, {ns_id = vim.lsp.diagnostic.get_namespace(client.id)})
   end
 }
