@@ -214,10 +214,8 @@ function M.local_keymaps(client, bufnr)
       buffer = bufnr,
       {'<space>dh', function() vim.diagnostic.hide(nil, bufnr) end, desc = 'Hide diagnostics'},
       {'<space>ds', function() vim.diagnostic.show(nil, bufnr) end, desc = 'Show diagnostics'},
-      {'<space>dD', function() vim.diagnostic.disable(bufnr) end, desc = 'Disable diagnostics'},
-      {'<space>dS', function() vim.diagnostic.enable(bufnr) end, desc = 'Enable diagnostics'},
-      {'<space>dd', "<cmd>Trouble document_diagnostics<cr>", desc = 'Show diagnostics in Trouble'},
-      {'<space>dw', "<cmd>Trouble workspace_diagnostics<cr>", desc = 'Show workspace diagnostics in Trouble'},
+      {'<space>dX', function() vim.diagnostic.enable(false, {bufnr = bufnr}) end, desc = 'Disable diagnostics'},
+      {'<space>dS', function() vim.diagnostic.enable(true, {bufnr = bufnr}) end, desc = 'Enable diagnostics'},
     },
   })
 end

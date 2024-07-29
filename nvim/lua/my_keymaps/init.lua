@@ -46,6 +46,25 @@ wk.add({
   -- end, 'Next tab'},
 
   {',', group = 'LSP/Main'},
+  {',g', group = 'Goto'},
+  {',r', group = 'Refactoring'},
+  {',c', group = 'Code'},
+  {',W', group = 'Workspace'},
+  {
+    mode = 'n',
+    {',X', function() vim.lsp.stop_client(vim.lsp.get_clients()) end, desc = 'Stop LSP clients'},
+    {',gd', require'telescope.builtin'.lsp_definitions, desc = 'Goto definition'},
+    {',gD', vim.lsp.buf.declaration, desc = 'Goto declaration'},
+    {',gr', require'telescope.builtin'.lsp_references, desc = 'Find references'},
+    {',gi', require'telescope.builtin'.lsp_implementations, desc = 'Find implementations'},
+    {',rn', vim.lsp.buf.rename, desc = 'Rename'},
+    {',=', function() vim.lsp.buf.format { async = false } end, desc = 'Format buffer'},
+    {',ca', vim.lsp.buf.code_action, desc = 'Code action'},
+    {',cd', vim.lsp.buf.type_definition, desc = 'Type definition'},
+    {',Wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, desc = 'Print workspace folders'},
+    {',Wa', vim.lsp.buf.add_workspace_folder, desc = 'Add workspace folder'},
+    {',Wr', vim.lsp.buf.remove_workspace_folder, desc = 'Remove workspace folder'},
+  },
 
   {
     mode = 'x',
@@ -62,25 +81,6 @@ local M = {}
 
 function M.local_keymaps(client, bufnr)
   wk.add({
-    {',g', group = 'Goto'},
-    {',r', group = 'Refactoring'},
-    {',c', group = 'Code'},
-    {',W', group = 'Workspace'},
-    {
-      mode = 'n',
-      {',gd', require'telescope.builtin'.lsp_definitions, desc = 'Goto definition'},
-      {',gD', vim.lsp.buf.declaration, desc = 'Goto declaration'},
-      {',gr', require'telescope.builtin'.lsp_references, desc = 'Find references'},
-      {',gi', require'telescope.builtin'.lsp_implementations, desc = 'Find implementations'},
-      {',rn', vim.lsp.buf.rename, desc = 'Rename'},
-      {',=', function() vim.lsp.buf.format { async = false } end, desc = 'Format buffer'},
-      {',ca', vim.lsp.buf.code_action, desc = 'Code action'},
-      {',cd', vim.lsp.buf.type_definition, desc = 'Type definition'},
-      {',WS', function() vim.lsp.stop_client(vim.lsp.get_active_clients()) end, desc = 'Stop LSP client'},
-      {',Wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, desc = 'Print workspace folders'},
-      {',Wa', vim.lsp.buf.add_workspace_folder, desc = 'Add workspace folder'},
-      {',Wr', vim.lsp.buf.remove_workspace_folder, desc = 'Remove workspace folder'},
-    },
     {
       mode = 'v',
       {',ca', vim.lsp.buf.code_action, desc = 'Code action'},

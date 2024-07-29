@@ -55,7 +55,7 @@ M.setup = function()
         end,
         method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
       },
-      null_ls.builtins.diagnostics.staticcheck,
+      -- null_ls.builtins.diagnostics.staticcheck,
       null_ls.builtins.diagnostics.revive,
 
       -- formatting
