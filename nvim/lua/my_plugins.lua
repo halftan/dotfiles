@@ -312,11 +312,13 @@ local pluginSpecs = {
   -- },
   -- 'wellle/targets.vim',
   -- 'Yggdroot/indentLine',
-  -- {
-  --   'lukas-reineke/indent-blankline.nvim',
-  --   main = 'ibl',
-  --   opts = {},
-  -- },
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
+    ---@module "ibl"
+    ---@type ibl.config
+    opts = {},
+  },
   'pearofducks/ansible-vim',
   {
     'vim-airline/vim-airline',
@@ -403,6 +405,7 @@ local pluginSpecs = {
     'echasnovski/mini.nvim',
     version = false,
     config = function(lazyPlugin, opts)
+      vim.g.miniindentscope_disable = true
       require('mini.bufremove').setup()
       require('mini.align').setup()
 
@@ -420,7 +423,11 @@ local pluginSpecs = {
       })
 
       require('mini.bracketed').setup()
-      require('mini.indentscope').setup()
+      require('mini.indentscope').setup({
+        draw = {
+          animation = require('mini.indentscope').gen_animation.none()
+        }
+      })
       require('mini.trailspace').setup()
       require('mini.jump').setup()
       require('mini.jump2d').setup()
