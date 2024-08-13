@@ -235,5 +235,7 @@ if [[ -e "$HOME/.terminfo" ]]; then
     export TERM=xterm-24bits
 fi
 
+export BAT_THEME=OneHalfDark
+
 export -U PATH
 export -U MANPATH
