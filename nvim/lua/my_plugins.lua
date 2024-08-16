@@ -191,7 +191,19 @@ local pluginSpecs = {
   -- },
   {
     "max397574/better-escape.nvim",
-    config = true,
+    config = {
+      timeout = 200,
+      default_mappings = false,
+      mappings = {
+        i = {
+            j = {
+                -- These can all also be functions
+                k = "<Esc>",
+                j = "<Esc>",
+            },
+        },
+      }
+    },
   },
   {
     'gbprod/yanky.nvim',
