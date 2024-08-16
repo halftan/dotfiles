@@ -1,5 +1,7 @@
 # Path to your oh-my-zsh configuration.
 # ZSH=$HOME/.oh-my-zsh
+# zmodload zsh/zprof
+setopt prompt_subst
 
 export PATH=$PATH:$BREW_PREFIX/bin:/usr/bin:/bin:/usr/sbin:/sbin:$BREW_PREFIX/opt/go/libexec/bin:$BREW_PREFIX/sbin
 [[ :$PATH: == *:$HOME/bin:* ]] || PATH=$HOME/bin:$PATH
@@ -45,110 +47,112 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 ####################
 ## fzf-tab config ##
 ####################
-# # disable sort when completing `git checkout`
-# zstyle ':completion:*:git-checkout:*' sort false
-# # set descriptions format to enable group support
-# # NOTE: don't use escape sequences here, fzf-tab will ignore them
-# zstyle ':completion:*:descriptions' format '[%d]'
-# # set list-colors to enable filename colorizing
-# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
-# zstyle ':completion:*' menu no
-# # preview directory's content with eza when completing cd
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-# # switch group using `<` and `>`
-# zstyle ':fzf-tab:*' switch-group '<' '>'
 
-# zplug
-if [[ -e "$BREW_PREFIX/opt/zplug" ]]; then
-    export ZPLUG_HOME="$BREW_PREFIX/opt/zplug"
-else
-    export ZPLUG_HOME=$HOME/.zplug
+if [[ ! -f $HOME/.zi/bin/zi.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{160}Installing (%F{33}z-shell/zi%F{160})…%f"
+    command mkdir -p "$HOME/.zi" && command chmod go-rwX "$HOME/.zi"
+    command git clone -q --depth=1 --branch "main" https://github.com/z-shell/zi "$HOME/.zi/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
-source $ZPLUG_HOME/init.zsh
+source "$HOME/.zi/bin/zi.zsh"
+autoload -Uz _zi
+(( ${+_comps} )) && _comps[zi]=_zi
+# examples here -> https://wiki.zshell.dev/ecosystem/category/-annexes
+zicompinit # <- https://wiki.zshell.dev/docs/guides/commands
 
-zplug "zsh-users/zsh-completions"
-# zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search", defer:2
-zplug "zsh-users/zsh-autosuggestions", defer:2
-# zplug "tysonwolker/iterm-tab-colors", defer:2
-
-zplug "robbyrussell/oh-my-zsh", as:plugin, use:"oh-my-zsh.sh"
-
-zplug "plugins/extract", from:oh-my-zsh
-zplug "plugins/sudo", from:oh-my-zsh
-zplug "plugins/history", from:oh-my-zsh
-# zplug "plugins/autojump", from:oh-my-zsh
-zplug "plugins/alias-finder", from:oh-my-zsh
-zplug "plugins/aliases", from:oh-my-zsh
-# zplug "plugins/emacs", from:oh-my-zsh
-
-zplug "plugins/golang", from:oh-my-zsh
-zplug "plugins/swiftpm", from:oh-my-zsh
-zplug "plugins/tig", from:oh-my-zsh
-zplug "plugins/gitignore", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/npm", from:oh-my-zsh
-zplug "plugins/nvm", from:oh-my-zsh, lazy:true
-zplug "plugins/pip", from:oh-my-zsh
-zplug "plugins/pyenv", from:oh-my-zsh
-if (( $+commands[docker] )); then
-    zplug "plugins/docker", from:oh-my-zsh
-    zplug "plugins/docker-compose", from:oh-my-zsh
+if [[ -r "/Users/andyzhang/.config/zi/init.zsh" ]]; then
+    source "/Users/andyzhang/.config/zi/init.zsh" && zzinit
 fi
 
-# zplug "plugins/kubectl", from:oh-my-zsh
-# zplug "plugins/minikube", from:oh-my-zsh
-# zplug "plugins/helm", from:oh-my-zsh
-# zplug "plugins/urltools", from:oh-my-zsh
-zplug "plugins/fzf", from:oh-my-zsh
 
-zplug "denysdovhan/gitio-zsh"
-# zplug "Tarrasch/zsh-autoenv"
-zplug "paulirish/git-open"
-# zplug "b4b4r07/enhancd", use:init.sh
+# Annexes https://wiki.zshell.dev/ecosystem/annexes/overview
+zi light z-shell/z-a-bin-gem-node
 
-# zplug "b4b4r07/httpstat", \
-#     as:command, \
-#     use:'(*).sh', \
-#     rename-to:'$1'
+zi-turbo '0a' is-snippet for \
+    OMZL::git.zsh \
+    OMZL::completion.zsh \
+    OMZL::directories.zsh \
+    OMZL::history.zsh \
+    OMZL::key-bindings.zsh \
+    OMZL::functions.zsh \
+    OMZL::spectrum.zsh \
+    OMZL::termsupport.zsh \
+    OMZL::vcs_info.zsh \
 
-# zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
-zplug "MichaelAquilina/zsh-you-should-use"
-zplug "Aloxaf/fzf-tab"
+zi ice wait'1' lucid
+zi light z-shell/F-Sy-H
 
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
+zi-turbo '1a' is-snippet for \
+    OMZP::sudo \
+    OMZP::git \
+    OMZP::encode64 \
+    OMZP::extract \
+    OMZP::gitignore \
+    OMZP::urltools
+zi-turbo '1b' for \
+    atload'!_zsh_autosuggest_start' \
+        zsh-users/zsh-autosuggestions \
+    zsh-users/zsh-history-substring-search \
+    atload" \
+        zstyle ':completion:*:git-checkout:*' sort false;
+        zstyle ':completion:*:descriptions' format '[%d]';
+        zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS};
+        zstyle ':completion:*' menu no;
+        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath';
+        zstyle ':fzf-tab:*' switch-group '<' '>';
+        enable-fzf-tab" \
+        Aloxaf/fzf-tab
 
-# Then, source plugins and add commands to $PATH
-zplug load # --verbose
+zi lucid for pick"/dev/null" multisrc"{async,pure}.zsh" \
+atload"!prompt_pure_precmd" nocd \
+  sindresorhus/pure
 
-if (( $+commands[starship] )); then
-    if [[ -f "$HOME/git/dotfiles/starship.toml" ]]; then
-        export STARSHIP_CONFIG="$HOME/git/dotfiles/starship.toml"
-    fi
-    eval "$(starship init zsh)"
-fi
+zi-turbo '3c' is-snippet for \
+    if:'[[ -d ~/.nvm ]]' \
+    OMZP::nvm \
+    has'go' \
+    OMZP::golang \
+    has'swiftc' \
+    OMZP::swiftpm \
+    has'npm' \
+    OMZP::npm \
+    has'pyenv' \
+    OMZP::pyenv \
+    has'pip' \
+    OMZP::pip \
+    has'python' \
+    OMZP::python \
+    has'docker-compose' \
+    OMZP::docker-compose \
+    has'tig' \
+    OMZP::tig \
+    has'fzf' \
+    OMZP::fzf
 
-# # Load antigen
-# ANTIGEN_PATH=''
-# if [[ -f  $BREW_PREFIX/share/antigen/antigen.zsh ]]; then
-#     ANTIGEN_PATH="$BREW_PREFIX/share/antigen/antigen.zsh"
-# elif [[ -f /usr/share/antigen/share/antigen.zsh ]]; then
-#     ANTIGEN_PATH="/usr/share/antigen/share/antigen.zsh"
-# elif [[ -f $HOME/.antigen.zsh ]]; then
-#     ANTIGEN_PATH="$HOME/.antigen.zsh"
-# fi
+zi-turbo '3b' is-snippet as"completion" for \
+    OMZP::extract/_extract \
+    OMZP::golang/_golang \
+    OMZP::swiftpm/_swift \
+    OMZP::pip/_pip \
+    has'docker' as'completion' \
+    https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker \
+    has'docker-compose' \
+    OMZP::docker-compose/_docker-compose
+zi-turbo '3b' as"completion" for \
+    zsh-users/zsh-completions
 
-# if [[ -n "$ANTIGEN_PATH" ]]; then
-#     source "$ANTIGEN_PATH"
-#     antigen init ~/.antigenrc
+zi-turbo '3c' as"null" for \
+    sbin Fakerr/git-recall \
+    sbin paulirish/git-open \
+    sbin paulirish/git-recent \
+    MichaelAquilina/zsh-you-should-use
+
+# if (( $+commands[starship] )); then
+#     if [[ -f "$HOME/git/dotfiles/starship.toml" ]]; then
+#         export STARSHIP_CONFIG="$HOME/git/dotfiles/starship.toml"
+#     fi
+#     eval "$(starship init zsh)"
 # fi
 
 if (( $+commands[nvim] )); then
