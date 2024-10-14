@@ -79,5 +79,6 @@ return {
     ts.load_extension("fzf")
     ts.load_extension("lazy")
     ts.load_extension("ui-select")
+    ts.load_extension("mru_files")
   end
 }

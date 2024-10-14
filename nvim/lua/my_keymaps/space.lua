@@ -89,6 +89,8 @@ function M.setup()
       {'<space>fS', '<cmd>SudaWrite<cr>', desc = 'Sudo save file'},
       {'<space>fp', '<cmd>Telescope lazy<cr>', desc = 'Find packages'},
       {'<space>fo', '<cmd>NvimTreeFindFile<cr>', desc = 'Find current buffer in nvim-tree'},
+      {'<space>fr', '<cmd>Telescope mru_files theme=dropdown<cr>', desc = 'Find recent files (Project)'},
+      {'<space>fR', '<cmd>Telescope oldfiles theme=dropdown<cr>', desc = 'Find recent files (oldfiles)'},
       {'<space>fy', function() require("telescope").extensions.yank_history.yank_history(require('telescope.themes').get_dropdown({
         initial_mode = 'normal',
       })) end, desc = 'Open yank ring'},
