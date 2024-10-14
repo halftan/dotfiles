@@ -59,3 +59,6 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+
+[includeIf "gitdir:~/git/"]
+    path = ~/Library/CloudStorage/Box-Box/Personal/dotfiles/work.gitconfig
