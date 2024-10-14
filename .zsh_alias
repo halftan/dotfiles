@@ -100,7 +100,6 @@ senv() {
 
 alias c="bat"
 alias cP="bat -pp"
-alias cp="bat -p"
 
 alias ssh="TERM=xterm-256color ssh"
 alias em="emacs"

@@ -92,7 +92,7 @@ let g:sneak#use_ic_scs=1
 let g:camelcasemotion_key=','
 
 " vim-fugitive
-let g:github_enterprise_urls = ['***REMOVED***']
+" let g:github_enterprise_urls = []
 
 " editorconfig
 let g:EditorConfig_exclude_patterns=['fugitive://.*', 'scp://.*']

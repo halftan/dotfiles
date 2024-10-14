@@ -87,7 +87,7 @@ g.AutoPairsMapCh = false
 g.camelcasemotion_key = ','
 
 -- vim-fugitive setting
-g.github_enterprise_urls = { '***REMOVED***' }
+g.github_enterprise_urls = {}
 
 -- editorconfig settings
 g.EditorConfig_exclude_patterns = { 'fugitive://.*', 'scp://.*' }
