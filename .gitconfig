@@ -57,6 +57,8 @@
 
 [url "***REMOVED***"]
 	insteadOf = ***REMOVED***
+[url "***REMOVED***"]
+	insteadOf = ***REMOVED***
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
