@@ -80,5 +80,6 @@ return {
     ts.load_extension("lazy")
     ts.load_extension("ui-select")
     ts.load_extension("mru_files")
+    ts.load_extension("luasnip")
   end
 }

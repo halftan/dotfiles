@@ -18,6 +18,11 @@ M.setup = function(client, bufnr)
       {',dd', '<cmd>GoDoc<cr>', desc = 'Show godoc for the symbol under cursor'},
       {',do', '<cmd>GoDoc<cr>', desc = 'Show godoc in browser for the symbol under cursor'},
       {',cr', '<cmd>GoRun<cr>', desc = 'GoRun current file'},
+    },
+    {
+      mode = 'i',
+      buffer = bufnr,
+      {'<F3>', 'if err != nil {<C-o>o}<C-o>O'}
     }
   })
 end

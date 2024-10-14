@@ -259,6 +259,10 @@ local pluginSpecs = {
       'nvim-telescope/telescope-ui-select.nvim',
       'tsakirist/telescope-lazy.nvim',
       'mikemcbride/telescope-mru.nvim',
+      {
+        'benfowler/telescope-luasnip.nvim',
+        main = 'telescope._extensions.luasnip',
+      }
     },
     config = require('my_telescope_config').setup,
   },

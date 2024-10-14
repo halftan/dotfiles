@@ -110,6 +110,11 @@ function M.setup()
       mode = 'n',
       {'<space>h/',  '<cmd>Telescope help_tags<cr>', desc = 'Search for help' },
     },
+    {'<space>i', group = 'Insert'},
+    {
+      mode = 'n',
+      {'<space>is',  '<cmd>Telescope luasnip<cr>', desc = 'Search snippets' },
+    },
     {'<space>o', group = 'Open/Other'},
     {'<space>og', group = 'Git/GitHub'},
     {
