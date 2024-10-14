@@ -2,6 +2,7 @@
 # ZSH=$HOME/.oh-my-zsh
 # zmodload zsh/zprof
 setopt prompt_subst
+setopt interactive_comments
 
 export PATH=$PATH:$BREW_PREFIX/bin:/usr/bin:/bin:/usr/sbin:/sbin:$BREW_PREFIX/opt/go/libexec/bin:$BREW_PREFIX/sbin
 [[ :$PATH: == *:$HOME/bin:* ]] || PATH=$HOME/bin:$PATH
