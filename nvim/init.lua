@@ -86,8 +86,14 @@ g.AutoPairsMapCh = false
 -- camelcasemotion setting
 g.camelcasemotion_key = ','
 
--- vim-fugitive setting
+-- vim-rhubarb setting
 g.github_enterprise_urls = {}
+
+local extra_conf = vim.fn.expand('$HOME/Library/CloudStorage/Box-Box/Personal/dotfiles/nvim.lua')
+if vim.loop.fs_stat(extra_conf) then
+  vim.notify('Loading ' .. extra_conf)
+  vim.cmd.luafile(extra_conf)
+end
 
 -- editorconfig settings
 g.EditorConfig_exclude_patterns = { 'fugitive://.*', 'scp://.*' }

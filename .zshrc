@@ -83,6 +83,8 @@ zi-turbo '0a' is-snippet for \
 
 zi ice wait'1' lucid
 zi light z-shell/F-Sy-H
+zi-turbo light-mode for \
+    MichaelAquilina/zsh-you-should-use
 
 zi-turbo '1a' is-snippet for \
     OMZP::sudo \
@@ -146,8 +148,7 @@ zi-turbo '3b' as"completion" for \
 zi-turbo '3c' as"null" for \
     sbin Fakerr/git-recall \
     sbin paulirish/git-open \
-    sbin paulirish/git-recent \
-    MichaelAquilina/zsh-you-should-use
+    sbin paulirish/git-recent
 
 # if (( $+commands[starship] )); then
 #     if [[ -f "$HOME/git/dotfiles/starship.toml" ]]; then
